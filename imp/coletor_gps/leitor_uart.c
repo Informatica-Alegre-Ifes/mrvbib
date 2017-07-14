@@ -29,29 +29,33 @@ int main()
 			
 	if (uart0_file != -1)
 	{
-		unsigned char rx_buffer[256];
-		int rx_length = -1;
 		while (1)
 		{
-			rx_length = read(uart0_file, (void *) rx_buffer, 256);
-			
-			if (rx_length < 0)
+			unsigned char rx_buffer[256];
+			unsigned char *ptr_buffer = rx_buffer;
+			int rx_length = -1;
+			char serial_data;
+			while (1)
 			{
-				sleep(1);
+				rx_length = read(uart0_file, (void *) &serial_data, 1);
+				
+				if (rx_length < 0)
+				{
+					sleep(1);
+				}
+				else
+				{
+					if (serial_data == '\n')
+					{
+						*ptr_buffer++ = '\0';
+						break;
+					}
+					*ptr_buffer++ = serial_data;
+				}
 			}
-			else if (rx_length == 0)
-			{
-				printf("Sem data para exibicao");	
-			}
-			else
-			{
-				printf("%s\n", rx_buffer);
-			}
+			printf("%s\n", rx_buffer);
 		}
 	}
 
-	 
-	
-	
 	return (0);
 }
