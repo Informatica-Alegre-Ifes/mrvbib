@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <termios.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -13,8 +14,8 @@ int main()
 	if (uart0_file == -1)
 	{
 		printf("ERRO!");
+		exit(1);
 	}
-	printf("%d\n", uart0_file);
 	
 	struct termios options;
 	tcgetattr(uart0_file, &options);
@@ -25,21 +26,27 @@ int main()
 
 	tcflush(uart0_file, TCIFLUSH);
 	tcsetattr(uart0_file, TCSANOW, &options); 
-	
-	unsigned char tx_buffer[20];
-	unsigned char *p_tx_buffer;
-	
-	p_tx_buffer = &tx_buffer[0];
-	*p_tx_buffer++ = 'O';
-	*p_tx_buffer++ = 'i';
-	
+			
 	if (uart0_file != -1)
 	{
-		int contador = write(uart0_file, &tx_buffer[0], (p_tx_buffer-&tx_buffer[0]));
+		unsigned char rx_buffer[512];
+		printf("oi");
+		int rx_length = read(uart0_file, (void*)rx_buffer, 512);
+		printf("%d\n", rx_length);
 		
-		if (contador < 0)
+		if (rx_length < 0)
 		{
 			printf("ERROU\n");
+		}
+		else if(rx_length == 0)
+		{
+			printf("Sem data para exibicao");	
+		}
+		else
+		{	while (1)
+			{
+				printf("%s\n", rx_buffer);
+			}
 		}	
 	}
 
