@@ -7,8 +7,8 @@
 
 int InicializarLeitura();
 void InicializarTermios(int uart0_file);
-unsigned char ObterDados(int uart0_file);
-void QuebrarLinha(unsigned char protocolo);
+unsigned char * obter_dados(int uart0_file);
+void QuebrarLinha(unsigned char * protocolo);
 
 struct horario
 {
@@ -36,13 +36,13 @@ struct gps_data
 
 int main()
 {
-	unsigned char protocolo;
+	unsigned char * protocolo;
 	struct gps_data gps;
 	int leitor_uart0 = InicializarLeitura();
 	InicializarTermios(leitor_uart0);
 	while(1)
 	{
-	 	protocolo = ObterDados(leitor_uart0);
+	 	protocolo = obter_dados(leitor_uart0);
 		QuebrarLinha(protocolo);
 	}
 		 
@@ -79,47 +79,54 @@ void InicializarTermios(int uart0_file)
 }
 
 
-unsigned char ObterDados(int uart0_file)
-{			
-	if (uart0_file != -1)
-	{		
-	 		unsigned char rx_buffer[256];
-			unsigned char *ptr_buffer = rx_buffer;
-			int rx_length = -1;
-			char serial_data;
+unsigned char *
+obter_dados(int uart0_file)
+{	
+	//unsigned char rx_buffer[256];
+	unsigned char *ptr_buffer = NULL;// = rx_buffer;
+	int rx_length = -1;
+	char serial_data;
+	int i;
 
-			while (1)
-			{
-				rx_length = read(uart0_file, (void *) &serial_data, 1);
-				
-				if (rx_length < 0)
-				{
-					sleep(1);
-				}
-				else
-				{
-					if (serial_data == '\n')
-					{
-						*ptr_buffer++ = '\0';
-						break;
-					}
-					*ptr_buffer++ = serial_data;
-				}
-			}
+	if (uart0_file != -1)
+	{
+		ptr_buffer = (unsigned char *) malloc(256 * sizeof(unsigned char));
+		if (!ptr_buffer)
+			exit(1);
+		for (i = 0; ; i++)
+		{
+			rx_length = read(uart0_file, (void *) &serial_data, 1);
 			
-			printf("%s\n", rx_buffer);
-			return rx_buffer;
+			if (rx_length < 0)
+			{
+				sleep(1);
+			}
+			else
+			{
+				if (serial_data == '\n')
+				{
+					ptr_buffer[i] = '\0';
+					break;
+				}
+				ptr_buffer[i] = serial_data;
+			}
+		}
+		
+		printf("%s\n", ptr_buffer);
 	} 
+
+	return ptr_buffer;
 }
 
-void QuebrarLinha(unsigned char protocolo)
+void QuebrarLinha(unsigned char * protocolo)
 {
 	unsigned char *token;
 	unsigned char *coringa = ",";
 
-	token = strtok(protocolo, coringa);
+	//token = strtok(protocolo, coringa);
 	
-	token = strtok(NULL, coringa); 
+	//token = strtok(NULL, coringa);
+	free(protocolo);
 }
 
 
