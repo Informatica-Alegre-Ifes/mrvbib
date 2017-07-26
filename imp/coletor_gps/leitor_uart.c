@@ -85,7 +85,6 @@ definir_configuracoes(int uart0_file)
 	tcsetattr(uart0_file, TCSANOW, &options); 
 }
 
-
 unsigned char *
 obter_dados(int uart0_file)
 {	
@@ -124,7 +123,8 @@ obter_dados(int uart0_file)
 	return (ptr_buffer);
 }
 
-void construir_gps_data(unsigned char *mensagem_gps)
+void
+construir_gps_data(unsigned char *mensagem_gps)
 {
 	// unsigned char *token;
 	// unsigned char *coringa = (unsigned char *) ',';
