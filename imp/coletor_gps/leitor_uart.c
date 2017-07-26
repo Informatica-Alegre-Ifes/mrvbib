@@ -127,7 +127,7 @@ obter_dados(int uart0_file)
 void construir_gps_data(unsigned char *mensagem_gps)
 {
 	// unsigned char *token;
-	// unsigned char *coringa =  (unsigned char *) ',';
+	// unsigned char *coringa = (unsigned char *) ',';
 
 	// token = strtok(mensagem_gps, coringa);
 	
