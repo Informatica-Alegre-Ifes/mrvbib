@@ -5,10 +5,10 @@
 #include <unistd.h>
 #include <string.h>
 
-int InicializarLeitura();
-void InicializarTermios(int uart0_file);
-unsigned char * obter_dados(int uart0_file);
-void QuebrarLinha(unsigned char * protocolo);
+int inicializar_leitura(void);
+void definir_configuracoes(int);
+unsigned char * obter_dados(int);
+void construir_gps_data(unsigned char *);
 
 struct horario
 {
@@ -16,6 +16,7 @@ struct horario
 	short int minuto;
 	short int segundo;
 };
+typedef struct horario horario_t;
 
 struct data
 {
@@ -23,6 +24,8 @@ struct data
 	short int mes;
 	short int ano;
 };
+typedef struct data data_t;
+
 
 struct gps_data
 {
@@ -33,25 +36,32 @@ struct gps_data
 	float angulo;
 	struct data data;	
 };
+typedef struct gps_data gps_data_t;
 
-int main()
+
+int
+main(int argc, char **args)
 {
-	unsigned char * protocolo;
-	struct gps_data gps;
-	int leitor_uart0 = InicializarLeitura();
-	InicializarTermios(leitor_uart0);
-	while(1)
+	unsigned char *dados_gps;
+	// struct gps_data gps;
+	int leitor_uart0;
+
+	leitor_uart0 = inicializar_leitura();
+	definir_configuracoes(leitor_uart0);
+
+	while (1)
 	{
-	 	protocolo = obter_dados(leitor_uart0);
-		QuebrarLinha(protocolo);
+	 	dados_gps = obter_dados(leitor_uart0);
+		construir_gps_data(dados_gps);
 	}
 		 
 	return (0);
 }
 
-int InicializarLeitura()
+int
+inicializar_leitura(void)
 {
-	int uart0_file = -1;
+	int uart0_file;
 	
 	uart0_file = open("/dev/ttyAMA0", O_RDWR | O_NOCTTY | O_NDELAY);
 
@@ -63,7 +73,8 @@ int InicializarLeitura()
 	return uart0_file;
 }
 
-void InicializarTermios(int uart0_file)
+void
+definir_configuracoes(int uart0_file)
 {
 	
 	struct termios options;
@@ -82,8 +93,7 @@ void InicializarTermios(int uart0_file)
 unsigned char *
 obter_dados(int uart0_file)
 {	
-	//unsigned char rx_buffer[256];
-	unsigned char *ptr_buffer = NULL;// = rx_buffer;
+	unsigned char *ptr_buffer = NULL;
 	int rx_length = -1;
 	char serial_data;
 	int i;
@@ -98,9 +108,7 @@ obter_dados(int uart0_file)
 			rx_length = read(uart0_file, (void *) &serial_data, 1);
 			
 			if (rx_length < 0)
-			{
 				sleep(1);
-			}
 			else
 			{
 				if (serial_data == '\n')
@@ -118,50 +126,13 @@ obter_dados(int uart0_file)
 	return ptr_buffer;
 }
 
-void QuebrarLinha(unsigned char * protocolo)
+void construir_gps_data(unsigned char * protocolo)
 {
-	unsigned char *token;
-	unsigned char *coringa = ",";
+	// unsigned char *token;
+	// unsigned char *coringa =  (unsigned char *) ',';
 
-	//token = strtok(protocolo, coringa);
+	// token = strtok(protocolo, coringa);
 	
-	//token = strtok(NULL, coringa);
+	// token = strtok(NULL, coringa);
 	free(protocolo);
 }
-
-
-
-/*
-void ObterDados(int uart0_file)
-{			
-	if (uart0_file != -1)
-	{
-		while (1)
-		{
-			unsigned char rx_buffer[256];
-			unsigned char *ptr_buffer = rx_buffer;
-			int rx_length = -1;
-			char serial_data;
-			while (1)
-			{
-				rx_length = read(uart0_file, (void *) &serial_data, 1);
-				
-				if (rx_length < 0)
-				{
-					sleep(1);
-				}
-				else
-				{
-					if (serial_data == '\n')
-					{
-						*ptr_buffer++ = '\0';
-						break;
-					}
-					*ptr_buffer++ = serial_data;
-				}
-			}
-			printf("%s\n", rx_buffer);
-		}
-	}
-
-}*/
