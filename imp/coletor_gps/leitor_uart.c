@@ -126,16 +126,22 @@ obter_dados(int uart0_file)
 void
 construir_gps_data(unsigned char *mensagem_gps)
 {
-	unsigned char *token;
+	unsigned char *token;	
 	unsigned char *token2;
-	unsigned char *delimitador = (unsigned char *) "$GP";
-	token = strtok(mensagem_gps, "RMC");
-	token2 = strtok(NULL, "RMC");
-	
-	if (token == delimitador && token2 != NULL)
+	unsigned char *delimitador = (unsigned char *) "MC";
+
+	int comparacao=0;
+	char *comparador = "$GPR"; 
+
+	token = strtok(mensagem_gps, delimitador);
+	token2 = strtok(NULL, delimitador);
+	 
+	comparacao = strcmp((char *)token, comparador);   //erro de segmentação.
+
+	if (comparacao == 0 && token2 != NULL)
 	{
-		printf("Aqui esta o token, boa tarde! %s Um bom projeto a vcs\n", token);	
-		printf("token2! %s Boa noite, renoncio falando\n", token2);
+		printf("token1 = (%s)\n", token);	
+		printf("token2 = (%s)\n", token2);
 	}
 
 	free(mensagem_gps);
