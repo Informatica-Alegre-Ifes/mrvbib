@@ -1,44 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <termios.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-
-struct horario
-{
-	short int hora;
-	short int minuto;
-	short int segundo;
-};
-typedef struct horario horario_t;
-
-struct data
-{
-	short int dia;
-	short int mes;
-	short int ano;
-};
-typedef struct data data_t;
-
-struct gps_data
-{
-	char *status;
-	horario_t horario;
-	float latitude;
-	char *latitude_o;
-	float longitude;
-	char *longitude_o;
-	float velocidade;
-	data_t data;	
-};
-typedef struct gps_data gps_data_t;
-
-int inicializar_leitura(void);
-void definir_configuracoes(int);
-char *obter_dados(int);
-char *extrair_gprmc_dados(char *);
-gps_data_t construir_gps_data(char *);
+#include "leitor_uart.h"
 
 int
 main(int argc, char **args)
@@ -58,8 +18,12 @@ main(int argc, char **args)
 		d_gprmc = extrair_gprmc_dados(dados_gps);
 
 		if (d_gprmc)
+		{
 			gps_data = construir_gps_data(d_gprmc);
+			printf("Status: %s\tHora: %d:%d:%d\tLatitude: %f %s\t\tLongitude: %f %s\tVelocidade: %f\tData: %d/%d/%d\n", gps_data.status, gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
+		}
 	}
+	
 	free(d_gprmc);
 		 
 	return (0);
@@ -167,29 +131,48 @@ construir_gps_data(char *dado_gprmc)
 		switch (index)
 		{
 			case 1:
-				
-				gps_data.horario.hora = (int) split_dado_gprmc;
+				{
+					char substring[2];
+
+					strncpy(substring, &split_dado_gprmc[0], 2);
+					gps_data.horario.hora = atoi(substring);
+					strncpy(substring, &split_dado_gprmc[2], 2);
+					gps_data.horario.minuto = atoi(substring);
+					strncpy(substring, &split_dado_gprmc[4], 2);
+					gps_data.horario.segundo = atoi(substring);
+				}
 				break;
 			case 2:
-				gps_data.status = (char *) split_dado_gprmc;
+				gps_data.status = split_dado_gprmc;
 				break;
 			case 3:
 				gps_data.latitude = (float) strtof(split_dado_gprmc, NULL);
 				break;
 			case 4:
-				gps_data.latitude_o = (char *) split_dado_gprmc;
+				gps_data.latitude_o = split_dado_gprmc;
 				break;
 	 		case 5:
+				gps_data.longitude = (float) strtof(split_dado_gprmc, NULL);
 				break;
 			case 6:
+				gps_data.longitude_o = split_dado_gprmc; 
 				break;
 			case 7:
+				gps_data.velocidade = (float) strtof(split_dado_gprmc, NULL);
 				break;
 			case 8:
-				break;
+				{
+					char substring[2];
 
+					strncpy(substring, &split_dado_gprmc[0], 2);
+					gps_data.data.dia = atoi(substring);
+					strncpy(substring, &split_dado_gprmc[2], 2);
+					gps_data.data.mes = atoi(substring);
+					strncpy(substring, &split_dado_gprmc[4], 2);
+					gps_data.data.ano = atoi(substring);
+				}
+				break;
 		}
-	printf("%s %d %f %s\n", gps_data.status, gps_data.horario.hora, gps_data.latitude, gps_data.latitude_o);
 
 	return (gps_data);
 }
