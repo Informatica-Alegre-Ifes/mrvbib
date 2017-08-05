@@ -20,10 +20,10 @@ main(int argc, char **args)
 		if (d_gprmc)
 		{
 			gps_data = construir_gps_data(d_gprmc);
-			printf("Status: %s\tHora: %d:%d:%d\tLatitude: %f %s\t\tLongitude: %f %s\tVelocidade: %f\tData: %d/%d/%d\n", gps_data.status, gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
+			if (strncmp(gps_data.status, STATUS_GPRMC, strlen(STATUS_GPRMC)) == 0)
+				printf("Status: %s\tHora: %d:%d:%d\tLatitude: %lf %s\t\tLongitude: %lf %s\tVelocidade: %f\tData: %d/%d/%d\n", gps_data.status, gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
 		}
-	}
-	
+	}	
 	free(d_gprmc);
 		 
 	return (0);
@@ -113,7 +113,7 @@ extrair_gprmc_dados(char *mensagem_gps)
 			break;
 		}
 	free(mensagem_gps);
-	
+
 	return (dado_gprmc);
 }
 

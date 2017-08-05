@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <string.h>
 
+#define STATUS_GPRMC "A"
+
 struct horario
 {
 	short int hora;
