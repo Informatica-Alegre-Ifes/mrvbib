@@ -19,6 +19,7 @@ main(int argc, char **args)
 
 		if (d_gprmc)
 		{
+			printf("%s\n", d_gprmc);
 			gps_data = construir_gps_data(d_gprmc);
 			if (strncmp(gps_data.status, STATUS_GPRMC, strlen(STATUS_GPRMC)) == 0)
 				printf("Hora: %d:%d:%d\t\tLatitude: %lf %s\t\tLongitude: %lf %s\tVelocidade: %f\t\tData: %d/%d/%d\n", gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
