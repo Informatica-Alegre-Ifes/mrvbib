@@ -27,11 +27,11 @@ struct gps_data
 {
 	char *status;
 	horario_t horario;
-	float latitude;
+	double latitude;
 	char *latitude_o;
-	float longitude;
+	double longitude;
 	char *longitude_o;
-	float velocidade;
+	double velocidade;
 	data_t data;	
 };
 typedef struct gps_data gps_data_t;

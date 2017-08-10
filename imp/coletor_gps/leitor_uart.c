@@ -147,19 +147,28 @@ construir_gps_data(char *dado_gprmc)
 				gps_data.status = split_dado_gprmc;
 				break;
 			case 3:
-				gps_data.latitude = (float) strtof(split_dado_gprmc, NULL);
+				gps_data.latitude = (double) strtod(split_dado_gprmc, NULL);
 				break;
 			case 4:
 				gps_data.latitude_o = split_dado_gprmc;
 				break;
 	 		case 5:
-				gps_data.longitude = (float) strtof(split_dado_gprmc, NULL);
+				if (strlen(split_dado_gprmc) != 11)
+				{
+					printf("\n l1:%s \n", split_dado_gprmc);
+					char longitude[11];
+					strncpy(longitude, split_dado_gprmc + 1, strlen(split_dado_gprmc) - 1);
+					printf("\n l2:%s \n", longitude);
+					gps_data.longitude = (double) strtod(longitude, NULL);
+				}
+				else
+					gps_data.longitude = (double) strtod(split_dado_gprmc, NULL);
 				break;
 			case 6:
 				gps_data.longitude_o = split_dado_gprmc; 
 				break;
 			case 7:
-				gps_data.velocidade = (float) strtof(split_dado_gprmc, NULL);
+				gps_data.velocidade = (double) strtod(split_dado_gprmc, NULL);
 				break;
 			case 8:
 				{
