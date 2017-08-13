@@ -1,0 +1,11 @@
+#################################################################################################
+#												#
+#	Sistema de Monitoramento e Rastreamento de Veículos Baseado em Inferência Bayesiana	#
+#												#
+#################################################################################################
+
+Coletor de dados GPS:
+
+	Este módulo trata-se de uma aplicação ETL (Extract, Transform, Load).
+	O programa é responsável por coletar os dados de posicionamento global, através do protocolo NMEA (National Marine Electronics Association), utilizando um componente eletrônico UART (Universal Asynchronous Receiver / Transmitter) GPS (Global Position System). As mensagens do NMEA (denominadas sentenças) possuem um padrão particular onde cada uma, começando com o carcter '$', possui as letras "GP" como prefixo. A sentença utilizada neste projeto é a GPRMC (Global Position Recommended Minimum) onde, a cada mensagem, é possível obter, dentre outros, os seguintes dados: hora, latitude, longitude, velocidade e data.
+	Após obter estes dados GPS, o módulo fará o tratamento adequado (wrapper) para formatá-los em um padrão específico da aplicação, persistindo-os em um banco de dados.

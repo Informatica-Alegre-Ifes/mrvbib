@@ -1,0 +1,10 @@
+#################################################################################################
+#												#
+#	Sistema de Monitoramento e Rastreamento de Veículos Baseado em Inferência Bayesiana	#
+#												#
+#################################################################################################
+
+Consumidor de Informações:
+
+	Este módulo é um aplicativo desenvolvido para telemóveis inteligente, que possibilitará ao usuário a visualização de informações estatísticas e probabilísticas a respeito dos veículos que estão sendo monitorados pelo sistema.
+	Estas informações serão obtidas pelo web service para que então seja apresentado para o usuário de maneira clara, objetiva e intuitiva, através de textos, gráficos ou mapas dinâmicos.

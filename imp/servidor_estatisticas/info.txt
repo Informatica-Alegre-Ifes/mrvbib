@@ -1,0 +1,10 @@
+#################################################################################################
+#												#
+#	Sistema de Monitoramento e Rastreamento de Veículos Baseado em Inferência Bayesiana	#
+#												#
+#################################################################################################
+
+Servidor de dados Estatísticos e Probabilísticos:
+
+	Este módulo é serviço web (Web Service) que será responsável por fornecer um conjunto de métodos que fornecerão informações estatísticas e probabilísticas a respeito dos veículos de interesse.
+	Estas informações serão geradas através de modelos de inferências estatísticas e lógicas probabilísticas, com os dados obtidos pelo módulo Coletor de Dados GPS.
