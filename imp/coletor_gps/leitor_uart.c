@@ -19,10 +19,9 @@ main(int argc, char **args)
 
 		if (d_gprmc)
 		{
-			printf("%s\n", d_gprmc);
 			gps_data = construir_gps_data(d_gprmc);
 			if (strncmp(gps_data.status, STATUS_GPRMC, strlen(STATUS_GPRMC)) == 0)
-				printf("Hora: %d:%d:%d\t\tLatitude: %lf %s\t\tLongitude: %lf %s\tVelocidade: %lf\t\tData: %d/%d/%d\n", gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
+				printf("Hora: %d:%d:%d\t\tLatitude: %s %s\t\tLongitude: %s %s\tVelocidade: %lf\t\tData: %d/%d/%d\n", gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
 		}
 	}	
 	free(d_gprmc);
@@ -147,22 +146,21 @@ construir_gps_data(char *dado_gprmc)
 				gps_data.status = split_dado_gprmc;
 				break;
 			case 3:
-				gps_data.latitude = (double) strtod(split_dado_gprmc, NULL);
+				gps_data.latitude = split_dado_gprmc;
 				break;
 			case 4:
 				gps_data.latitude_o = split_dado_gprmc;
 				break;
 	 		case 5:
-				if (strlen(split_dado_gprmc) != 11)
 				{
-					printf("\n l1:%s \n", split_dado_gprmc);
-					char longitude[11];
-					strncpy(longitude, split_dado_gprmc + 1, strlen(split_dado_gprmc) - 1);
-					printf("\n l2:%s \n", longitude);
-					gps_data.longitude = (double) strtod(longitude, NULL);
+					if (strlen(split_dado_gprmc) != 11)
+					{
+						gps_data.status = "V";
+						return (gps_data);						
+					}
+					else
+						gps_data.longitude = split_dado_gprmc;
 				}
-				else
-					gps_data.longitude = (double) strtod(split_dado_gprmc, NULL);
 				break;
 			case 6:
 				gps_data.longitude_o = split_dado_gprmc; 

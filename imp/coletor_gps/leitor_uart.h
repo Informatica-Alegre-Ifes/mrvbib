@@ -27,9 +27,9 @@ struct gps_data
 {
 	char *status;
 	horario_t horario;
-	double latitude;
+	char *latitude;
 	char *latitude_o;
-	double longitude;
+	char *longitude;
 	char *longitude_o;
 	double velocidade;
 	data_t data;	
@@ -41,3 +41,4 @@ void definir_configuracoes(int);
 char *obter_dados(int);
 char *extrair_gprmc_dados(char *);
 gps_data_t construir_gps_data(char *);
+char *tratar_excecao_longitude(char *);
