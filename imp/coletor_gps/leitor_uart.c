@@ -1,9 +1,8 @@
 #include "leitor_uart.h"
 
-int
-main(int argc, char **args)
+void
+obter_dado_gps(gps_data_t *gps_data)
 {
-	gps_data_t gps_data;
 	char *dados_gps;
 	char *d_gprmc;
 	int leitor_uart0;
@@ -12,21 +11,16 @@ main(int argc, char **args)
 	leitor_uart0 = inicializar_leitura();
 	definir_configuracoes(leitor_uart0);
 
-	while (1)
+	do
 	{
 	 	dados_gps = obter_dados(leitor_uart0);
 		d_gprmc = extrair_gprmc_dados(dados_gps);
 
 		if (d_gprmc)
-		{
-			gps_data = construir_gps_data(d_gprmc);
-			if (strncmp(gps_data.status, STATUS_GPRMC, strlen(STATUS_GPRMC)) == 0)
-				printf("Hora: %d:%d:%d\t\tLatitude: %s %s\t\tLongitude: %s %s\tVelocidade: %lf\t\tData: %d/%d/%d\n", gps_data.horario.hora, gps_data.horario.minuto, gps_data.horario.segundo, gps_data.latitude, gps_data.latitude_o, gps_data.longitude, gps_data.longitude_o, gps_data.velocidade, gps_data.data.dia, gps_data.data.mes, gps_data.data.ano);
-		}
-	}	
-	free(d_gprmc);
-		 
-	return (0);
+			*gps_data = construir_gps_data(d_gprmc);
+	}
+	while (strncmp(gps_data->status, STATUS_GPRMC, strlen(STATUS_GPRMC)) != 0);
+	//free(d_gprmc);
 }
 
 int

@@ -1,3 +1,6 @@
+#ifndef LEITOR_UART_H
+#define LEITOR_UART_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <termios.h>
@@ -42,3 +45,6 @@ char *obter_dados(int);
 char *extrair_gprmc_dados(char *);
 gps_data_t construir_gps_data(char *);
 char *tratar_excecao_longitude(char *);
+void obter_dado_gps(gps_data_t *);
+
+#endif
