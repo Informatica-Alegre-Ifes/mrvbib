@@ -20,6 +20,7 @@ obter_dado_gps(gps_data_t *gps_data)
 			*gps_data = construir_gps_data(d_gprmc);
 	}
 	while (strncmp(gps_data->status, STATUS_GPRMC, strlen(STATUS_GPRMC)) != 0);
+
 	//free(d_gprmc);
 }
 
