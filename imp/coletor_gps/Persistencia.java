@@ -1,0 +1,16 @@
+package coletor_gps;
+
+class Persistencia
+{
+	public static void main(String[] args)
+	{
+		Serial serial = new Serial("/dev/ttyAMA0", "$GPRMC");
+		
+		while (true)
+		{
+			Dado dado = serial.obterDadoGPS();
+			if (dado != null)
+				dado.imprimir();
+		}
+	}
+}
