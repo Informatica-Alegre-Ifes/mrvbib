@@ -35,7 +35,7 @@ class Util
 		}
 	}
 
-	public static String obterTextoData(Date data)
+	public static String obterTexto(Date data)
 	{
 		return (formatoData.format(data));
 	}

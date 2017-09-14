@@ -21,7 +21,7 @@ class Dado
 	{
 		String strTransacao;
 
-		strTransacao = "INSERT INTO DADO_GPS ";
+		strTransacao = "INSERT INTO MRVBIB.DADO_GPS ";
 		strTransacao += "(";
 		strTransacao += "DADO_VL_LATITUDE, ";
 		strTransacao += "DADO_SG_ORIENTACAO_LATITUDE, ";
@@ -38,11 +38,11 @@ class Dado
 		strTransacao += ", ";
 		strTransacao += longitude;
 		strTransacao += ", ";
-		strTransacao += "'" + orientacaoLatitude + "'";
+		strTransacao += "'" + orientacaoLongitude + "'";
 		strTransacao += ", ";
 		strTransacao += velocidade;
 		strTransacao += ", ";
-		strTransacao += "'" + data + "'";
+		strTransacao += "'" + Util.obterTexto(data) + "'";
 		strTransacao += ")";
 		strTransacao += ";";
 
@@ -53,7 +53,7 @@ class Dado
 	{
 		String strDado;
 
-		strDado = "Data/Hora: " + Util.obterTextoData(data) + "\n";
+		strDado = "Data/Hora: " + Util.obterTexto(data) + "\n";
 		strDado += "Status: " + status + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orinetação latitude: " + orientacaoLatitude + "\n";
