@@ -5,12 +5,17 @@ import java.util.Date;
 class Dado
 {
 	private Date data;
-	private char status;
+	private boolean ehValido;
 	private double latitude;
 	private	char orientacaoLatitude;
 	private double longitude;
 	private char orientacaoLongitude;
 	private double velocidade;
+
+	public boolean getEhValido()
+	{
+		return (ehValido);
+	}
 
 	public Dado(String mensagemGPS)
 	{
@@ -28,8 +33,9 @@ class Dado
 		strTransacao += "DADO_VL_LONGITUDE, ";
 		strTransacao += "DADO_SG_ORIENTACAO_LONGITUDE, ";
 		strTransacao += "DADO_VL_VELOCIDADE, ";
-		strTransacao += "DADO_DT_CAPTURA";
-		strTransacao += ")";
+		strTransacao += "DADO_DT_CAPTURA, ";
+		strTransacao += "DADO_DT_REGISTRO";
+		strTransacao += ") ";
 		strTransacao += "VALUES ";
 		strTransacao += "(";
 		strTransacao += latitude;
@@ -43,10 +49,16 @@ class Dado
 		strTransacao += velocidade;
 		strTransacao += ", ";
 		strTransacao += "'" + Util.obterTexto(data) + "'";
+		strTransacao += ", ";
+		strTransacao += "NOW()";
 		strTransacao += ")";
 		strTransacao += ";";
 
-		return (Persistencia.salvar(strTransacao));
+		System.out.println(strTransacao);
+	
+		return (true);
+
+		//return (Persistencia.salvar(strTransacao));
 	}
 
 	public void imprimir()
@@ -54,7 +66,6 @@ class Dado
 		String strDado;
 
 		strDado = "Data/Hora: " + Util.obterTexto(data) + "\n";
-		strDado += "Status: " + status + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orinetação latitude: " + orientacaoLatitude + "\n";
 		strDado += "Longitude: " + longitude + "\n";
@@ -75,7 +86,7 @@ class Dado
 					data = Util.construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					break;
 				case 2:
-					status = mensagemSegregada[i].charAt(0);
+					ehValido = mensagemSegregada[i].charAt(0) == 'A' ? true : false;
 					break;
 				case 3:
 					latitude = Double.parseDouble(mensagemSegregada[i]);

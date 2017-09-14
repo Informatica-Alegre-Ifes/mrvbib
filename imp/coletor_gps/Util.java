@@ -11,7 +11,7 @@ class Util
 
 	static 
 	{
-		formatoData = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		formatoData = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	}
 
 	public static Date construirData(String strData, String strHora)
@@ -27,7 +27,7 @@ class Util
 		
 		try
 		{
-			return (formatoData.parse(dia + "/" + mes + "/20" + ano + " " + hora + ":" + minuto + ":" + segundo));
+			return (formatoData.parse("20" + ano + "-" + mes + "-" + dia + " " + hora + ":" + minuto + ":" + segundo));
 		}
 		catch (ParseException excecao)
 		{
