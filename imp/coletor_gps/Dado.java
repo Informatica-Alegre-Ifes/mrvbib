@@ -21,7 +21,7 @@ class Dado
 	{
 		String strTransacao;
 
-		strTransacao = "INSERT INTO MRVBIB.DADO_GPS ";
+		strTransacao = "INSERT INTO DADO_GPS ";
 		strTransacao += "(";
 		strTransacao += "DADO_VL_LATITUDE, ";
 		strTransacao += "DADO_SG_ORIENTACAO_LATITUDE, ";

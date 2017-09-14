@@ -22,7 +22,7 @@ class Persistencia
 			Class classe = Class.forName("com.mysql.jdbc.Driver");
 			classe.newInstance();
 
-			conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/gestao_produtos?useSSL=false", propriedades);
+			conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/MRVBIB?useSSL=false", propriedades);
 			Statement transacao = conexao.createStatement();
 
 			transacao.execute(strTransacao);
