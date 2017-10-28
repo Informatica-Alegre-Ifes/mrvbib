@@ -24,9 +24,8 @@ class Serial
 			String linha;
 
 			do
-			{
 				linha = leitor.readLine();
-			} while (linha == null || linha == "" || !linha.startsWith(mensagemNMEA));
+			while (linha == null || linha == "" || !linha.startsWith(mensagemNMEA));
 
 			return (new Dado(linha));
 		}
