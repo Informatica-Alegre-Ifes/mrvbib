@@ -112,13 +112,7 @@ class Dado
 			switch (i)
 			{
 				case 1:
-					try
-					{
-						data = construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
-					}
-					catch (ParseException excecao)
-					{
-					}
+					data = construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					break;
 				case 2:
 					status = mensagemSegregada[i].charAt(0);
@@ -141,13 +135,12 @@ class Dado
 			}
 	}
 
-	private static Date construirData(String strData, String strHora) throws ParseException
+	private static Date construirData(String strData, String strHora)
 	{
 		SimpleDateFormat dataFormat;
 		String dia, mes, ano, hora, minuto, segundo;
-	
-		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		dia = strData.substring(0, 2);
 		mes = strData.substring(2, 4);
 		ano = strData.substring(4, 6);
@@ -155,6 +148,13 @@ class Dado
 		minuto = strHora.substring(2, 4);
 		segundo = strHora.substring(4, 6);
 		
-		return (dataFormat.parse(dia + "/" + mes + "/20" + ano + " " + hora + ":" + minuto + ":" + segundo));
+		try
+		{
+			return (dataFormat.parse(dia + "/" + mes + "/20" + ano + " " + hora + ":" + minuto + ":" + segundo));
+		}
+		catch (ParseException excecao)
+		{
+			return (null);
+		}
 	}
 }
