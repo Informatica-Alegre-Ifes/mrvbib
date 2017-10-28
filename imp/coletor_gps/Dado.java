@@ -2,6 +2,7 @@ package coletor_gps;
 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+
 import java.util.Date;
 
 class Dado
@@ -14,13 +15,8 @@ class Dado
 	private char orientacaoLongitude;
 	private double velocidade;
 
-	private SimpleDateFormat dataFormat;
-
-
 	public Dado(String mensagemGPS)
 	{
-		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
 		construir(mensagemGPS);
 	}
 
@@ -59,16 +55,52 @@ class Dado
 		return (velocidade);
 	}
 
+	public static boolean salvar(Dado dado)
+	{
+		String strTransacao;
+
+		strTransacao = "INSERT INTO DADO_GPS ";
+		strTransacao += "(";
+		strTransacao += "DADO_VL_LATITUDE, ";
+		strTransacao += "DADO_SG_ORIENTACAO_LATITUDE, ";
+		strTransacao += "DADO_VL_LONGITUDE, ";
+		strTransacao += "DADO_SG_ORIENTACAO_LONGITUDE, ";
+		strTransacao += "DADO_VL_VELOCIDADE, ";
+		strTransacao += "DADO_DT_CAPTURA";
+		strTransacao += ")";
+		strTransacao += "VALUES ";
+		strTransacao += "(";
+		strTransacao += dado.latitude;
+		strTransacao += ", ";
+		strTransacao += "'" + dado.orientacaoLatitude + "'";
+		strTransacao += ", ";
+		strTransacao += dado.longitude;
+		strTransacao += ", ";
+		strTransacao += "'" + dado.orientacaoLatitude + "'";
+		strTransacao += ", ";
+		strTransacao += dado.velocidade;
+		strTransacao += ", ";
+		strTransacao += "'" + dado.data + "'";
+		strTransacao += ")";
+		strTransacao += ";";
+
+		return (Persistencia.salvar(strTransacao));
+	}
+
 	public void imprimir()
 	{
-		String strDado = "";
-		strDado += "Data/Hora: " + dataFormat.format(data) + "\n";
+		String strDado;
+		SimpleDateFormat dataFormat;
+	
+		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		strDado = "Data/Hora: " + dataFormat.format(data) + "\n";
 		strDado += "Status: " + status + "\n";
 		strDado += "Latitude: " + latitude + "\n";
-		strDado += "Orinetaçãõ latitude: " + orientacaoLatitude + "\n";
+		strDado += "Orinetação latitude: " + orientacaoLatitude + "\n";
 		strDado += "Longitude: " + longitude + "\n";
-		strDado += "Orinetaçãõ longitude: " + orientacaoLongitude + "\n";
+		strDado += "Orinetação longitude: " + orientacaoLongitude + "\n";
 		strDado += "Velocidade: " + velocidade;
+
 		System.out.println(strDado);
 	}
 
@@ -82,7 +114,7 @@ class Dado
 				case 1:
 					try
 					{
-						construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
+						data = construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					}
 					catch (ParseException excecao)
 					{
@@ -109,16 +141,20 @@ class Dado
 			}
 	}
 
-	private void construirData(String strData, String strHora) throws ParseException
+	private static Date construirData(String strData, String strHora) throws ParseException
 	{
+		SimpleDateFormat dataFormat;
 		String dia, mes, ano, hora, minuto, segundo;
 	
+		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
 		dia = strData.substring(0, 2);
 		mes = strData.substring(2, 4);
 		ano = strData.substring(4, 6);
 		hora = strHora.substring(0, 2);
 		minuto = strHora.substring(2, 4);
 		segundo = strHora.substring(4, 6);
-		data = dataFormat.parse(dia + "/" + mes + "/20" + ano + " " + hora + ":" + minuto + ":" + segundo);
+		
+		return (dataFormat.parse(dia + "/" + mes + "/20" + ano + " " + hora + ":" + minuto + ":" + segundo));
 	}
 }
