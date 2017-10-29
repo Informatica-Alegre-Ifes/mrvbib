@@ -11,7 +11,7 @@ class Coletor
 			Dado dado = serial.obterDadoGPS();
 			if (dado != null)
 				dado.imprimir();
-				//Dado.salvar(dado);
+				//dado.salvar();
 		}
 	}
 }

@@ -1,7 +1,6 @@
 package coletor_gps;
 
 import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 import java.util.Date;
 
@@ -20,42 +19,7 @@ class Dado
 		construir(mensagemGPS);
 	}
 
-	public Date getData()
-	{
-		return (data);
-	}
-	
-	public char getStatus()
-	{
-		return (status);
-	}
-
-	public double getLatitude()
-	{
-		return (latitude);
-	}
-
-	public char getOrientacaoLatitude()
-	{
-		return (orientacaoLatitude);
-	}
-
-	public double getLongitude()
-	{
-		return (longitude);
-	}
-
-	public char getOrientacaoLongitude()
-	{
-		return (orientacaoLongitude);
-	}
-
-	public double getVelocidade()
-	{
-		return (velocidade);
-	}
-
-	public static boolean salvar(Dado dado)
+	public boolean salvar()
 	{
 		String strTransacao;
 
@@ -70,17 +34,17 @@ class Dado
 		strTransacao += ")";
 		strTransacao += "VALUES ";
 		strTransacao += "(";
-		strTransacao += dado.latitude;
+		strTransacao += latitude;
 		strTransacao += ", ";
-		strTransacao += "'" + dado.orientacaoLatitude + "'";
+		strTransacao += "'" + orientacaoLatitude + "'";
 		strTransacao += ", ";
-		strTransacao += dado.longitude;
+		strTransacao += longitude;
 		strTransacao += ", ";
-		strTransacao += "'" + dado.orientacaoLatitude + "'";
+		strTransacao += "'" + orientacaoLatitude + "'";
 		strTransacao += ", ";
-		strTransacao += dado.velocidade;
+		strTransacao += velocidade;
 		strTransacao += ", ";
-		strTransacao += "'" + dado.data + "'";
+		strTransacao += "'" + data + "'";
 		strTransacao += ")";
 		strTransacao += ";";
 
@@ -112,7 +76,7 @@ class Dado
 			switch (i)
 			{
 				case 1:
-					data = construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
+					data = Util.construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					break;
 				case 2:
 					status = mensagemSegregada[i].charAt(0);
@@ -133,28 +97,5 @@ class Dado
 					velocidade = Double.parseDouble(mensagemSegregada[i]);
 					break;
 			}
-	}
-
-	private static Date construirData(String strData, String strHora)
-	{
-		SimpleDateFormat dataFormat;
-		String dia, mes, ano, hora, minuto, segundo;
-
-		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		dia = strData.substring(0, 2);
-		mes = strData.substring(2, 4);
-		ano = strData.substring(4, 6);
-		hora = strHora.substring(0, 2);
-		minuto = strHora.substring(2, 4);
-		segundo = strHora.substring(4, 6);
-		
-		try
-		{
-			return (dataFormat.parse(dia + "/" + mes + "/20" + ano + " " + hora + ":" + minuto + ":" + segundo));
-		}
-		catch (ParseException excecao)
-		{
-			return (null);
-		}
 	}
 }
