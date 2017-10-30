@@ -10,7 +10,6 @@ class Coletor
 		{
 			Dado dado = serial.obterDadoGPS();
 			if (dado != null && dado.getEhValido())
-				//dado.imprimir();
 				dado.salvar();
 		}
 	}

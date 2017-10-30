@@ -26,23 +26,27 @@ class Persistencia
 			Statement transacao = conexao.createStatement();
 
 			transacao.execute(strTransacao);
-
+			
 			return (true);
 		}
 		catch (SQLException excecao)
 		{
+			System.out.println(excecao);
 			return (false);
 		}
 		catch (ClassNotFoundException excecao)
 		{
+			System.out.println(excecao);
 			return (false);
 		}
 		catch (InstantiationException excecao)
 		{
+			System.out.println(excecao);			
 			return (false);
 		}
 		catch (IllegalAccessException excecao)
 		{
+			System.out.println(excecao);
 			return (false);
 		}
 	}

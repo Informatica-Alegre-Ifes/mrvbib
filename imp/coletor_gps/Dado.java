@@ -54,11 +54,7 @@ class Dado
 		strTransacao += ")";
 		strTransacao += ";";
 
-		System.out.println(strTransacao);
-	
-		return (true);
-
-		//return (Persistencia.salvar(strTransacao));
+		return (Persistencia.salvar(strTransacao));
 	}
 
 	public void imprimir()
@@ -67,9 +63,9 @@ class Dado
 
 		strDado = "Data/Hora: " + Util.obterTexto(data) + "\n";
 		strDado += "Latitude: " + latitude + "\n";
-		strDado += "Orinetação latitude: " + orientacaoLatitude + "\n";
+		strDado += "Orientação latitude: " + orientacaoLatitude + "\n";
 		strDado += "Longitude: " + longitude + "\n";
-		strDado += "Orinetação longitude: " + orientacaoLongitude + "\n";
+		strDado += "Orientação longitude: " + orientacaoLongitude + "\n";
 		strDado += "Velocidade: " + velocidade;
 
 		System.out.println(strDado);
