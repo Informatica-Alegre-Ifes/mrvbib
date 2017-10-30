@@ -1,7 +1,5 @@
 package coletor_gps;
 
-import java.text.SimpleDateFormat;
-
 import java.util.Date;
 
 class Dado
@@ -54,10 +52,8 @@ class Dado
 	public void imprimir()
 	{
 		String strDado;
-		SimpleDateFormat dataFormat;
-	
-		dataFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		strDado = "Data/Hora: " + dataFormat.format(data) + "\n";
+
+		strDado = "Data/Hora: " + Util.obterTextoData(data) + "\n";
 		strDado += "Status: " + status + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orinetação latitude: " + orientacaoLatitude + "\n";
