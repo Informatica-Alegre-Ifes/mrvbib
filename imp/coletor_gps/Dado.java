@@ -5,7 +5,7 @@ import java.util.Date;
 class Dado
 {
 	private Date data;
-	private boolean ehValido;
+	private char status;
 	private double latitude;
 	private	char orientacaoLatitude;
 	private double longitude;
@@ -17,9 +17,9 @@ class Dado
 		construir(mensagemGPS);
 	}
 
-	public boolean getEhValido()
+	public boolean ehValido()
 	{
-		return (ehValido);
+		return status == 'A' ? (true) : (false);
 	}
 
 	public boolean salvar()
@@ -82,7 +82,7 @@ class Dado
 					data = Util.construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					break;
 				case 2:
-					ehValido = mensagemSegregada[i].charAt(0) == 'A' ? true : false;
+					status = mensagemSegregada[i].charAt(0);
 					break;
 				case 3:
 					latitude = Double.parseDouble(mensagemSegregada[i]);

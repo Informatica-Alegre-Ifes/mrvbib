@@ -9,7 +9,7 @@ class Coletor
 		while (true)
 		{
 			Dado dado = serial.obterDadoGPS();
-			if (dado != null && dado.getEhValido())
+			if (dado != null && dado.ehValido())
 				dado.salvar();
 		}
 	}
