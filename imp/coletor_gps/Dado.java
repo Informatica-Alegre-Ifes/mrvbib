@@ -12,14 +12,14 @@ class Dado
 	private char orientacaoLongitude;
 	private double velocidade;
 
-	public boolean getEhValido()
-	{
-		return (ehValido);
-	}
-
 	public Dado(String mensagemGPS)
 	{
 		construir(mensagemGPS);
+	}
+
+	public boolean getEhValido()
+	{
+		return (ehValido);
 	}
 
 	public boolean salvar()
