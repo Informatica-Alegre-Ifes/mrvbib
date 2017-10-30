@@ -23,9 +23,10 @@ class Serial
 		{
 			String linha;
 
+			linha = "";
 			do
 				linha = leitor.readLine();
-			while (linha == null || linha == "" || !linha.startsWith(mensagemNMEA));
+			while (linha == null || !linha.startsWith(mensagemNMEA));
 
 			return (new Dado(linha));
 		}
@@ -35,7 +36,7 @@ class Serial
 			return (null);
 		}
 	}
-	
+
 	private void inicializar(String arquivo)
 	{
 		try
