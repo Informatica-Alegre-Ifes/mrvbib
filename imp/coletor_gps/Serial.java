@@ -62,6 +62,7 @@ class Serial
 		try
 		{
 			leitor.close();
+			leitor = null;
 		}
 		catch (IOException excecao)
 		{

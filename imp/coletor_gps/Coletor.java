@@ -8,7 +8,7 @@ class Coletor
 		
 		while (true)
 		{
-			Dado dado = serial.obterDadoGPS(30000);
+			Dado dado = serial.obterDadoGPS(28000);
 			if (dado != null && dado.ehValido())
 				dado.salvar();
 		}
