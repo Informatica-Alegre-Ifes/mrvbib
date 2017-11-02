@@ -1,7 +1,5 @@
 package coletor_gps;
 
-import java.io.IOException;
-
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
@@ -22,7 +20,7 @@ class Coletor
 			if (dado != null && dado.ehValido())
 			{
 				dado.salvar();
-				ledPin.blink(1000, 4000);
+				ledPin.blink(1000, 3000);
 			}
 		}
 	}
