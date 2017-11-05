@@ -7,10 +7,18 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
 
-class Persistencia
+class Persistencia implements IStatusProdutor
 {
-	public static boolean salvar(String strTransacao)
+	private Status status;
+
+	public Persistencia(Status status)
 	{
+		this.status = status;
+	}
+	
+	public boolean salvar(String strTransacao)
+	{
+		boolean estahSalvo = false;
 		Connection conexao = null;
 		Properties propriedades = new Properties();
 
@@ -24,30 +32,45 @@ class Persistencia
 
 			conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/MRVBIB?useSSL=false", propriedades);
 			Statement transacao = conexao.createStatement();
-
 			transacao.execute(strTransacao);
 			
-			return (true);
+			estahSalvo = true;
+			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (SQLException excecao)
 		{
-			System.out.println(excecao);
-			return (false);
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
 		}
 		catch (ClassNotFoundException excecao)
 		{
-			System.out.println(excecao);
-			return (false);
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
 		}
 		catch (InstantiationException excecao)
 		{
-			System.out.println(excecao);			
-			return (false);
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
 		}
 		catch (IllegalAccessException excecao)
 		{
-			System.out.println(excecao);
-			return (false);
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
 		}
+		finally
+		{
+			return (estahSalvo);
+		}
+	}
+
+	public Status getStatus()
+	{
+		return (status);
+	}
+
+	public void statusMudou(Status.Semaforo semaforoStatus)
+	{
+		status.setSemaforo(semaforoStatus);
+		status.notificarGerente(this);
 	}
 }

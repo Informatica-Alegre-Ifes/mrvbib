@@ -12,8 +12,14 @@ class Dado
 	private char orientacaoLongitude;
 	private double velocidade;
 
-	public Dado(String mensagemGPS)
+	private Persistencia persistencia;
+	private Util util;
+
+	public Dado(String mensagemGPS, Persistencia persistencia, Util util)
 	{
+		this.persistencia = persistencia;
+		this.util = util;
+
 		construir(mensagemGPS);
 	}
 
@@ -48,20 +54,20 @@ class Dado
 		strTransacao += ", ";
 		strTransacao += velocidade;
 		strTransacao += ", ";
-		strTransacao += "'" + Util.obterTexto(data) + "'";
+		strTransacao += "'" + util.obterTexto(data) + "'";
 		strTransacao += ", ";
 		strTransacao += "NOW()";
 		strTransacao += ")";
 		strTransacao += ";";
 
-		return (Persistencia.salvar(strTransacao));
+		return (persistencia.salvar(strTransacao));
 	}
 
 	public void imprimir()
 	{
 		String strDado;
 
-		strDado = "Data/Hora: " + Util.obterTexto(data) + "\n";
+		strDado = "Data/Hora: " + util.obterTexto(data) + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orientação latitude: " + orientacaoLatitude + "\n";
 		strDado += "Longitude: " + longitude + "\n";
@@ -79,25 +85,25 @@ class Dado
 			switch (i)
 			{
 				case 1:
-					data = Util.construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
+					data = util.construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					break;
 				case 2:
 					status = mensagemSegregada[i].charAt(0);
 					break;
 				case 3:
-					latitude = Double.parseDouble(mensagemSegregada[i]);
+					latitude = util.alterarTipoParaDouble(mensagemSegregada[i]);
 					break;
 				case 4:
 					orientacaoLatitude = mensagemSegregada[i].charAt(0);
 					break;
 				case 5:
-					longitude = Double.parseDouble(mensagemSegregada[i]);
+					longitude = util.alterarTipoParaDouble(mensagemSegregada[i]);
 					break;
 				case 6:
 					orientacaoLongitude = mensagemSegregada[i].charAt(0);
 					break;
 				case 7:
-					velocidade = Double.parseDouble(mensagemSegregada[i]);
+					velocidade = util.alterarTipoParaDouble(mensagemSegregada[i]);
 					break;
 			}
 	}

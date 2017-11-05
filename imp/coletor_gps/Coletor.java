@@ -9,18 +9,25 @@ class Coletor
 {
 	public static void main(String[] args)
 	{
-		Serial serial = new Serial("/dev/ttyAMA0", "$GPRMC");
+		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();	
+		Serial serial = new Serial("/dev/ttyAMA0", "$GPRMC", new Status(gerenteStatus));
+		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
+		Util util = new Util(new Status(gerenteStatus));
+		
+		gerenteStatus.adicionar(serial);
+		gerenteStatus.adicionar(persistencia);
+		gerenteStatus.adicionar(util);
 	
 		final GpioController gpio = GpioFactory.getInstance();
 		final GpioPinDigitalOutput ledPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02);
 	
 		while (true)
 		{
-			Dado dado = serial.obterDadoGPS(28000);
+			Dado dado = new Dado(serial.obterMensagemGPS(28000), persistencia, util);
 			if (dado != null && dado.ehValido())
 			{
 				dado.salvar();
-				ledPin.blink(1000, 3000);
+				ledPin.blink(1000, 3500);
 			}
 		}
 	}

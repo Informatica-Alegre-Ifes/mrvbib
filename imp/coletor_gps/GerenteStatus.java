@@ -1,0 +1,43 @@
+package coletor_gps;
+
+import java.util.List;
+import java.util.ArrayList;
+
+class GerenteStatus implements IStatusConsumidor
+{
+	private static GerenteStatus gerenteStatus;
+	private List<IStatusProdutor> produtores;
+	private Status.Semaforo semaforoStatusGlobal;
+
+	private GerenteStatus()
+	{
+		produtores = new ArrayList<IStatusProdutor>();
+		semaforoStatusGlobal = Status.Semaforo.Verde;
+	}
+
+	public static GerenteStatus obterInstancia()
+	{
+		if (gerenteStatus == null)
+			return (new GerenteStatus());
+		return (gerenteStatus);
+	}
+
+	public void atualizarStatusGlobal(IStatusProdutor produtor)
+	{
+		if (produtor.getStatus().getSemaforo() != semaforoStatusGlobal)
+			semaforoStatusGlobal = produtor.getStatus().getSemaforo();
+
+		for (IStatusProdutor _produtor : produtores)
+			if (_produtor != produtor && _produtor.getStatus().getSemaforo().getCodigoSemaforo() > produtor.getStatus().getSemaforo().getCodigoSemaforo())
+				semaforoStatusGlobal = _produtor.getStatus().getSemaforo();
+	}
+	
+	public void adicionar(IStatusProdutor produtor)
+	{
+		produtores.add(produtor);
+	}
+
+	public void notificar(Status status)
+	{
+	}
+}
