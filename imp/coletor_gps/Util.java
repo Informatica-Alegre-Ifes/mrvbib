@@ -22,19 +22,24 @@ class Util implements IStatusProdutor
 		String dia, mes, ano, hora, minuto, segundo;
 
 		data = null;
-		dia = strData.substring(0, 2);
-		mes = strData.substring(2, 4);
-		ano = strData.substring(4, 6);
-		hora = strHora.substring(0, 2);
-		minuto = strHora.substring(2, 4);
-		segundo = strHora.substring(4, 6);
-		
 		try
 		{
+			dia = strData.substring(0, 2);
+			mes = strData.substring(2, 4);
+			ano = strData.substring(4, 6);
+			hora = strHora.substring(0, 2);
+			minuto = strHora.substring(2, 4);
+			segundo = strHora.substring(4, 6);
+
 			data = formatoData.parse("20" + ano + "-" + mes + "-" + dia + " " + hora + ":" + minuto + ":" + segundo);
 			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (ParseException excecao)
+		{
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
+		}
+		catch (StringIndexOutOfBoundsException excecao)
 		{
 			statusMudou(Status.Semaforo.Amarelo);
 			Erro.registrar(excecao);

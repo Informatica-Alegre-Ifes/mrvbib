@@ -4,5 +4,5 @@ interface IStatusConsumidor
 {
 	void adicionar(IStatusProdutor produtor);
 
-	void notificar(Status status);
+	void notificar(Status.Semaforo semaforoStatus);
 }
