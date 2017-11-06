@@ -18,10 +18,7 @@ class Coletor
 		{
 			Dado dado = new Dado(serial.obterMensagemGPS(28000), persistencia, util);
 			if (dado != null && dado.ehValido())
-			{
 				dado.salvar();
-				Led.notificar(Status.Semaforo.Verde);
-			}
 		}
 	}
 }
