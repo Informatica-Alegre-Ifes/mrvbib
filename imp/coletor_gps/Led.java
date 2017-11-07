@@ -38,10 +38,10 @@ final class Led
 				ledVerde.high();
 				break;
 			case Amarelo:
-				ledAmarelo.pulse(1000);
+				ledAmarelo.blink(1000, 60500);
 				break;
 			case Vermelho:
-				ledVermelho.pulse(500);
+				ledVermelho.blink(500, 60500);
 				break;
 		}
 	}
