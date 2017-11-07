@@ -12,7 +12,8 @@ class GerenteStatus implements IStatusConsumidor
 	private GerenteStatus()
 	{
 		produtores = new ArrayList<IStatusProdutor>();
-		semaforoStatusGlobal = Status.Semaforo.Verde;
+		semaforoStatusGlobal = Status.Semaforo.Amarelo;
+		notificar(semaforoStatusGlobal);
 	}
 
 	public static GerenteStatus obterInstancia()

@@ -88,6 +88,25 @@ class Util implements IStatusProdutor
 		}
 	}
 
+	public char obterCaractereDeTexto(String texto, int posicao)
+	{
+		char caractere = Character.MIN_VALUE;
+
+		try
+		{
+			caractere = texto.charAt(posicao);
+		}
+		catch (StringIndexOutOfBoundsException excecao)
+		{
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
+		}
+		finally
+		{
+			return (caractere);
+		}
+	}
+
 	public Status getStatus()
 	{
 		return (status);

@@ -88,19 +88,19 @@ class Dado
 					data = util.construirData(mensagemSegregada[i + 8], mensagemSegregada[i]);
 					break;
 				case 2:
-					status = mensagemSegregada[i].charAt(0);
+					status = util.obterCaractereDeTexto(mensagemSegregada[i], 0);
 					break;
 				case 3:
 					latitude = util.alterarTipoParaDouble(mensagemSegregada[i]);
 					break;
 				case 4:
-					orientacaoLatitude = mensagemSegregada[i].charAt(0);
+					orientacaoLatitude = util.obterCaractereDeTexto(mensagemSegregada[i], 0);
 					break;
 				case 5:
 					longitude = util.alterarTipoParaDouble(mensagemSegregada[i]);
 					break;
 				case 6:
-					orientacaoLongitude = mensagemSegregada[i].charAt(0);
+					orientacaoLongitude = util.obterCaractereDeTexto(mensagemSegregada[i], 0);
 					break;
 				case 7:
 					velocidade = util.alterarTipoParaDouble(mensagemSegregada[i]);

@@ -36,6 +36,7 @@ class Persistencia implements IStatusProdutor
 			
 			estahSalvo = true;
 			statusMudou(Status.Semaforo.Verde);
+			Led.piscarLedAzul();
 		}
 		catch (SQLException excecao)
 		{

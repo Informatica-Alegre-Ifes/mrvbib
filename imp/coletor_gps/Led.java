@@ -8,12 +8,18 @@ import com.pi4j.io.gpio.RaspiPin;
 final class Led
 {
 	private static GpioController controlador;
+	private static GpioPinDigitalOutput ledAzul;
 	private static GpioPinDigitalOutput ledVerde;
+	private static GpioPinDigitalOutput ledAmarelo;
+	private static GpioPinDigitalOutput ledVermelho;
 
 	static
 	{
 		controlador = GpioFactory.getInstance();
-		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_02);
+		ledAzul = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_02);
+		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_04);
+		ledAmarelo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_05);
+		ledVermelho = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_06);
 	}
 
 	private Led()
@@ -22,20 +28,27 @@ final class Led
 
 	public static void notificar(Status.Semaforo semaforoStatus)
 	{
+		ledVerde.low();
+		ledAmarelo.low();
+		ledVermelho.low();
+
 		switch (semaforoStatus)
 		{
 			case Verde:
-				piscar(1000, 3500);
+				ledVerde.high();
 				break;
 			case Amarelo:
+				ledAmarelo.pulse(1000);
 				break;
 			case Vermelho:
+				ledVermelho.pulse(500);
 				break;
 		}
 	}
 
-	private static void piscar(int duracao, int periodo)
+	// Método temporário utilizado para notificar testes de inserção de dados
+	public static void piscarLedAzul()
 	{
-		ledVerde.blink(duracao, periodo);
+		ledAzul.blink(1000, 1500);
 	}
 }
