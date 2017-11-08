@@ -32,6 +32,8 @@ final class Led
 		ledVerde.low();
 		ledAmarelo.low();
 		ledVermelho.low();
+		
+		System.out.println(semaforoStatus);
 
 		switch (semaforoStatus)
 		{
@@ -50,6 +52,6 @@ final class Led
 	// Método temporário utilizado para notificar testes de inserção de dados
 	public static void piscarLedAzul()
 	{
-		ledAzul.blink(1000, 1500);
+		ledAzul.pulse(500);
 	}
 }
