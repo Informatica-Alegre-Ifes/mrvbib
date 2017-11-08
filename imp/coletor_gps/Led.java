@@ -16,6 +16,10 @@ final class Led
 		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_02);
 	}
 
+	private Led()
+	{		
+	}
+
 	public static void notificar(Status.Semaforo semaforoStatus)
 	{
 		switch (semaforoStatus)
