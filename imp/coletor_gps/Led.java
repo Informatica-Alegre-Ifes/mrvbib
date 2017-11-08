@@ -3,6 +3,7 @@ package coletor_gps;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
+import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
 final class Led
@@ -38,7 +39,7 @@ final class Led
 				ledVerde.high();
 				break;
 			case Amarelo:
-				ledAmarelo.blink(1000, 60500);
+				ledAmarelo.blink(1000);
 				break;
 			case Vermelho:
 				ledVermelho.blink(500, 60500);

@@ -19,6 +19,7 @@ class Dado
 	{
 		this.persistencia = persistencia;
 		this.util = util;
+		this.status = 'V';
 
 		construir(mensagemGPS);
 	}
