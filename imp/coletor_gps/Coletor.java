@@ -16,7 +16,7 @@ class Coletor
 	
 		while (true)
 		{
-			Dado dado = new Dado(serial.obterMensagemGPS(29000), persistencia, util);
+			Dado dado = new Dado(serial.obterMensagemGPS(28000), persistencia, util);
 			if (dado != null && dado.ehValido())
 				dado.salvar();
 		}
