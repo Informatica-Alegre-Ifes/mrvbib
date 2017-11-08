@@ -31,12 +31,8 @@ class GerenteStatus implements IStatusConsumidor
 			semaforoStatusGlobal = produtor.getStatus().getSemaforo();
 
 		for (IStatusProdutor _produtor : produtores)
-		{
-			System.out.println(_produtor.getClass().getSimpleName() + " - " + _produtor.getStatus().getSemaforo());
-
 			if (_produtor != produtor && _produtor.getStatus().getSemaforo().getCodigoSemaforo() > semaforoStatusGlobal.getCodigoSemaforo())
 				semaforoStatusGlobal = _produtor.getStatus().getSemaforo();
-		}
 
 		if (semaforoAtual != semaforoStatusGlobal)
 			notificar(semaforoStatusGlobal);
