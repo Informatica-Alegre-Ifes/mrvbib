@@ -27,6 +27,7 @@ class Status
 	public Status(GerenteStatus gerenteStatus)
 	{
 		this.gerenteStatus = gerenteStatus;
+		semaforo = Semaforo.Verde;
 	}
 
 	public GerenteStatus getGerenteStatus()

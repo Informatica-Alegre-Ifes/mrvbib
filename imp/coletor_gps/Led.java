@@ -33,8 +33,6 @@ final class Led
 		ledAmarelo.low();
 		ledVermelho.low();
 		
-		System.out.println(semaforoStatus);
-
 		switch (semaforoStatus)
 		{
 			case Verde:
