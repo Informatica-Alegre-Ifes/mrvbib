@@ -23,6 +23,7 @@ final class Erro
 		}
 		catch (IOException excecao)
 		{
+			System.out.println(excecao);
 		}
 		
 		manipuladorArquivo.setFormatter(formatador);

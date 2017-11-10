@@ -26,31 +26,17 @@ class GerenteStatus implements IStatusConsumidor
 
 	public void atualizarStatusGlobal(IStatusProdutor produtor)
 	{
-		try
-		{
-			Process processo = Runtime.getRuntime().exec("clear");
-		}
-		catch (IOException excecao)
-		{
-		}
-		System.out.println(semaforoStatusGlobal + " - " + produtor.getStatus().getSemaforo());
 		Status.Semaforo semaforoAtual = semaforoStatusGlobal;
 
 		if (produtor.getStatus().getSemaforo() != semaforoStatusGlobal)
-		{
 			semaforoStatusGlobal = produtor.getStatus().getSemaforo();
-			System.out.println(semaforoStatusGlobal + " - " + produtor.getStatus().getSemaforo());
-		}
 
 		for (IStatusProdutor _produtor : produtores)
-		{
 			if (_produtor != produtor && _produtor.getStatus().getSemaforo().getCodigoSemaforo() > semaforoStatusGlobal.getCodigoSemaforo())
 				semaforoStatusGlobal = _produtor.getStatus().getSemaforo();
-			System.out.println(semaforoStatusGlobal + " - " + _produtor.getStatus().getSemaforo());
-		}
-		System.out.println("#### " + semaforoStatusGlobal + " - " + semaforoAtual + " ####");
-
-		//if (semaforoAtual != semaforoStatusGlobal)
+		
+		System.out.println("Atual: " + semaforoAtual + " - Novo: " + semaforoStatusGlobal);
+		if (semaforoAtual != semaforoStatusGlobal)
 			notificar(semaforoStatusGlobal);
 	}
 	
