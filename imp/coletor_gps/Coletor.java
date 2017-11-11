@@ -2,6 +2,17 @@ package coletor_gps;
 
 class Coletor
 {
+	static
+	{
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+			public void run()
+			{
+				Led.pararTodos();
+			}
+		});
+	}
+
 	public static void main(String[] args)
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();

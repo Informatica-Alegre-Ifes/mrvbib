@@ -29,13 +29,8 @@ final class Led
 
 	public static void notificar(Status.Semaforo semaforoStatus)
 	{
-		ledVerde.blink(0);
-		ledVerde.low();
-		ledAmarelo.blink(0);
-		ledAmarelo.low();
-		ledVermelho.blink(0);
-		ledVermelho.low();
-		
+		pararTodos();
+
 		switch (semaforoStatus)
 		{
 			case Verde:
@@ -54,5 +49,15 @@ final class Led
 	public static void piscarLedAzul()
 	{
 		ledAzul.pulse(500);
+	}
+	
+	public static void pararTodos()
+	{
+		ledVerde.blink(0);
+		ledVerde.low();
+		ledAmarelo.blink(0);
+		ledAmarelo.low();
+		ledVermelho.blink(0);
+		ledVermelho.low();
 	}
 }
