@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 
 class Serial implements IStatusProdutor
 {
-	private static final String FALHA_GPS = "unknow message";
-	
 	private String mensagemNMEA;
 	private String enderecoArquivo;
 	private BufferedReader leitor;
@@ -28,18 +26,10 @@ class Serial implements IStatusProdutor
 		linha = "";
 		try
 		{
-			int falhas = 0;
 			inicializar();
 			do
-			{
 				linha = leitor.readLine();
-				if (linha.contains(FALHA_GPS))
-				{
-					falhas++;
-					if (falhas > 20)
-						statusMudou(Status.Semaforo.Vermelho);
-				}
-			} while (linha == null || !linha.startsWith(mensagemNMEA));
+			while (linha == null || linha.length() == 0 || !linha.startsWith(mensagemNMEA));
 			finalizar();
 			Thread.sleep(periodo);
 			statusMudou(Status.Semaforo.Verde);
