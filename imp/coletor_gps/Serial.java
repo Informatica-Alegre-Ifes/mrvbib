@@ -32,8 +32,8 @@ class Serial implements IStatusProdutor
 				linha = leitor.readLine();
 			while (linha == null || linha.length() == 0 || !linha.startsWith(mensagemNMEA));
 			finalizar();
-			Thread.sleep(periodo);
 			statusMudou(Status.Semaforo.Verde);
+			Thread.sleep(periodo);
 		}
 		catch (IOException excecao)
 		{
@@ -76,7 +76,6 @@ class Serial implements IStatusProdutor
 				leitor.close();
 				leitor = null;
 			}
-
 			monitor.finalizar();
 		}
 		catch (IOException excecao)
