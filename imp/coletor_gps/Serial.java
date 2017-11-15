@@ -11,6 +11,7 @@ class Serial implements IStatusProdutor
 	private String enderecoArquivo;
 	private BufferedReader leitor;
 	private Status status;
+	private Monitor monitor;
 
 	public Serial(String enderecoArquivo, String mensagemNMEA, Status status)
 	{
@@ -54,7 +55,10 @@ class Serial implements IStatusProdutor
 	{
 		try
 		{
+			monitor = new Monitor(this);
 			leitor = new BufferedReader(new FileReader(enderecoArquivo));
+
+			monitor.monitorar();
 		}
 		catch (FileNotFoundException excecao)
 		{
@@ -72,6 +76,8 @@ class Serial implements IStatusProdutor
 				leitor.close();
 				leitor = null;
 			}
+
+			monitor.finalizar();
 		}
 		catch (IOException excecao)
 		{
@@ -89,5 +95,5 @@ class Serial implements IStatusProdutor
 	{
 		status.setSemaforo(semaforoStatus);
 		status.notificarGerente(this);
-	}	
+	}
 }
