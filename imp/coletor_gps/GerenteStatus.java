@@ -35,7 +35,6 @@ class GerenteStatus implements IStatusConsumidor
 			if (_produtor != produtor && _produtor.getStatus().getSemaforo().getCodigoSemaforo() > semaforoStatusGlobal.getCodigoSemaforo())
 				semaforoStatusGlobal = _produtor.getStatus().getSemaforo();
 		
-		System.out.println("Atual: " + semaforoAtual + " - Novo: " + semaforoStatusGlobal);
 		if (semaforoAtual != semaforoStatusGlobal)
 			notificar(semaforoStatusGlobal);
 	}

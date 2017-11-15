@@ -21,7 +21,7 @@ class Monitor
 			{
 				try
 				{
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					if (emEspera)
 						produtor.statusMudou(Status.Semaforo.Vermelho);
 				}
