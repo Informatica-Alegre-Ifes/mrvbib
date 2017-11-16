@@ -27,13 +27,13 @@ class Serial implements IStatusProdutor
 		linha = "";
 		try
 		{
+			Thread.sleep(periodo);
 			inicializar();
 			do
 				linha = leitor.readLine();
 			while (linha == null || linha.length() == 0 || !linha.startsWith(mensagemNMEA));
 			finalizar();
 			statusMudou(Status.Semaforo.Verde);
-			Thread.sleep(periodo);
 		}
 		catch (IOException excecao)
 		{
