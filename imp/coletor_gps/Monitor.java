@@ -3,7 +3,7 @@ package coletor_gps;
 class Monitor
 {
 	private volatile boolean emEspera;
-	private Thread thread;
+	private Thread processoParalelo;
 	private IStatusProdutor produtor;
 
 	public Monitor(IStatusProdutor produtor)
@@ -14,7 +14,7 @@ class Monitor
 
 	public void monitorar()
 	{
-		thread = new Thread(new Runnable()
+		processoParalelo = new Thread(new Runnable()
 		{
 			@Override
 			public void run()
@@ -33,7 +33,7 @@ class Monitor
 			}
 		});
 		emEspera = true;
-		thread.start();
+		processoParalelo.start();
 	}
 
 	public void finalizar()
@@ -41,7 +41,7 @@ class Monitor
 		try
 		{
 			emEspera = false;
-			thread.join();
+			processoParalelo.join();
 		}
 		catch (InterruptedException excecao)
 		{
