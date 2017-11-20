@@ -34,3 +34,16 @@ Coletor de dados GPS:
 	3. EXECUTAR
 		
  		java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/mysql.jar coletor_gps.Coletor
+
+ 	4. CONFIGURAR EXECUÇÃO AUTOMÁTICA
+
+ 		a) Abra o arquivo ~/.bashrc utilizando o super usuário (sudo);
+
+ 		b) Acrescente, ao final do arquivo, as seguintes linhas:
+ 			- # Inicialização do módulo Coletor GPS (MRVBIB)
+ 			- cd mrvbib/imp/
+ 			- java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/mysql.jar coletor_gps.Coletor
+
+ 		c) Salve as alterações no arquivo ./bashrc
+
+ 		d) Reinicie o sistema operacional para certificar a inicialização automática do módulo;
