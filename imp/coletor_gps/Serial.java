@@ -20,14 +20,13 @@ class Serial implements IStatusProdutor
 		this.status = status;
 	}
 	
-	public String obterMensagemGPS(int periodo)
+	public String obterMensagemGPS()
 	{
 		String linha;
 		
 		linha = "";
 		try
 		{
-			Thread.sleep(periodo);
 			inicializar();
 			do
 				linha = leitor.readLine();
@@ -36,11 +35,6 @@ class Serial implements IStatusProdutor
 			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (IOException excecao)
-		{
-			statusMudou(Status.Semaforo.Vermelho);
-			Erro.registrar(excecao);
-		}
-		catch (InterruptedException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);

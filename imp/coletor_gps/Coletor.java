@@ -13,7 +13,7 @@ class Coletor
 		});
 	}
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 
@@ -27,9 +27,12 @@ class Coletor
 	
 		while (true)
 		{
-			Dado dado = new Dado(serial.obterMensagemGPS(27000), persistencia, util);
+			Dado dado = new Dado(serial.obterMensagemGPS(), persistencia, util);
 			if (dado != null && dado.ehValido())
+			{
 				dado.salvar();
+				Thread.sleep(27000);
+			}
 		}
 	}
 }
