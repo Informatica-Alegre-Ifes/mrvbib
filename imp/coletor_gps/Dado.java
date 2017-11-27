@@ -1,6 +1,8 @@
 package coletor_gps;
 
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 class Dado
 {
@@ -22,6 +24,10 @@ class Dado
 		this.status = 'V';
 
 		construir(mensagemGPS);
+	}
+
+	private Dado()
+	{		
 	}
 
 	public boolean ehValido()
@@ -62,6 +68,69 @@ class Dado
 		strTransacao += ";";
 
 		return (persistencia.salvar(strTransacao));
+	}
+
+	public List<Dado> listar()
+	{
+		List<Dado> dados = new ArrayList<Dado>();
+		Dado dado;
+		List<String> objetos;
+		String sqlConsulta;
+		int quantidadeColunas;
+
+		sqlConsulta = "SELECT ";
+		sqlConsulta += "DADO_VL_LATITUDE, ";
+		quantidadeColunas++:
+		sqlConsulta += "DADO_SG_ORIENTACAO_LATITUDE, ";
+		quantidadeColunas++:
+		sqlConsulta += "DADO_VL_LONGITUDE, ";
+		quantidadeColunas++:
+		sqlConsulta += "DADO_SG_ORIENTACAO_LONGITUDE, ";
+		quantidadeColunas++:
+		sqlConsulta += "DADO_VL_VELOCIDADE, ";
+		quantidadeColunas++:
+		sqlConsulta += "DADO_DT_CAPTURA, ";
+		quantidadeColunas++:
+		sqlConsulta += "DADO_DT_REGISTRO ";
+		quantidadeColunas++:
+		sqlConsulta += "FROM DADO_GPS ";
+
+		objetos = persistencia.listar(sqlConsulta);
+
+		for (int i = 0; i < objetos.length(); ++i)
+		{
+			if (i % (quantidadeColunas - 1) == 0)
+			{
+				dados.add(dado);
+				dado = new Dado();
+			}
+
+			switch (i)
+			{
+				case 0:
+					dado.latitude = util.alterarTipoParaDouble(objetos.get(i));
+					break;
+				case 1:
+					dado.orientacaoLatitude = util.obterCaractereDeTexto(objetos.get(i), 0);
+					break;
+				case 2:
+					dado.longitude = util.alterarTipoParaDouble(objetos.get(i));
+					break;
+				case 3:
+					dado.orientacaoLongitude = util.obterCaractereDeTexto(objetos.get(i), 0);
+					break;
+				case 4:
+					dado.velocidade = util.alterarTipoParaDouble(objetos.get(i));
+					break;
+				case 5:
+					dado.data = util.construirData(objetos.get(i));
+					break;
+				case 6:
+					break;
+			}
+		}
+
+		return (dados);
 	}
 
 	public void imprimir()
