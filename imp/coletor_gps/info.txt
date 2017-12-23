@@ -24,8 +24,26 @@ Coletor de dados GPS:
 				+ CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
 				+ EXPORT CLASSPATH
 
-		c) Pi4J:
+		d) Pi4J:
 			- sudo dpkg -i pi4j-1.1.deb (diretório ~/resources);
+
+		e) VIM (VIsual iMproved):
+			- sudo apt-get install vim;
+
+		f) Network Manager
+			- sudo apt-get install network-manager;
+			- sudo vim /etc/network/interfaces (edite este arquivo, comentando-o exatamente como abaixo):
+				auto lo
+				iface lo inet loopback
+
+				# Managed by NetworkManager
+				#iface eth0 inet manual
+
+				# Managed by NetworkManager
+				#auto wlan0
+				#allow-hotplug wlan0
+				#iface wlan0 inet dhcp
+				#    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 	2. COMPILAR
 
