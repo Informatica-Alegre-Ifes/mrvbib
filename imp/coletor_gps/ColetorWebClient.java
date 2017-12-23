@@ -12,11 +12,4 @@ class ColetorWebService
 	{
 		List<Dado> dados = new Dado().listar();
 	}
-<<<<<<< HEAD
-=======
-
-	public boolean ehIntranet()
-	{
-	}
->>>>>>> c5a7dabd792b6e1dd121d41123ca201bb861b5d2
 }
