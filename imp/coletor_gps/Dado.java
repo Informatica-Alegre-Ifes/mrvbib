@@ -26,7 +26,7 @@ class Dado
 		construir(mensagemGPS);
 	}
 
-	private Dado()
+	public Dado()
 	{		
 	}
 
@@ -80,24 +80,24 @@ class Dado
 
 		sqlConsulta = "SELECT ";
 		sqlConsulta += "DADO_VL_LATITUDE, ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "DADO_SG_ORIENTACAO_LATITUDE, ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "DADO_VL_LONGITUDE, ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "DADO_SG_ORIENTACAO_LONGITUDE, ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "DADO_VL_VELOCIDADE, ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "DADO_DT_CAPTURA, ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "DADO_DT_REGISTRO ";
-		quantidadeColunas++:
+		quantidadeColunas++;
 		sqlConsulta += "FROM DADO_GPS ";
 
 		objetos = persistencia.listar(sqlConsulta);
 
-		for (int i = 0; i < objetos.length(); ++i)
+		for (int i = 0; i < objetos.size(); ++i)
 		{
 			if (i % (quantidadeColunas - 1) == 0)
 			{
@@ -131,6 +131,27 @@ class Dado
 		}
 
 		return (dados);
+	}
+
+	public double calcularDistanciaGeografica2D(Dado dado, char unidade)
+	{
+		double theta;
+		double distancia;
+
+		theta = longitude - dado.longitude;
+		distancia = Math.sin(util.converterGrausEmRadianos(latitude)) * Math.sin(util.converterGrausEmRadianos(dado.latitude)) + Math.cos(util.converterGrausEmRadianos(latitude)) * Math.cos(util.converterGrausEmRadianos(dado.latitude)) * Math.cos(util.converterGrausEmRadianos(theta));
+		distancia = Math.acos(distancia);
+		distancia = util.converterRadianosEmGraus(distancia);
+		distancia = distancia * 60 * 1.1515d;
+		
+		if (unidade == 'K')
+			return (distancia *= 1.609344d);
+		else if (unidade == 'M')
+			return (distancia *= 1609.344d);
+		else if (unidade == 'N')
+			return (distancia *= 0.8684d);
+
+		return (distancia);
 	}
 
 	public void imprimir()

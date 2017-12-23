@@ -58,13 +58,13 @@ class Util implements IStatusProdutor
 		data = null;
 		try
 		{
-			ano = strDataHora.substring(0, 4);
-			mes = strDataHora.substring(4, 6);
-			dia = strDataHora.substring(6, 8);			
+			ano = strMySQLDataHora.substring(0, 4);
+			mes = strMySQLDataHora.substring(4, 6);
+			dia = strMySQLDataHora.substring(6, 8);			
 			
-			hora = strDataHora.substring(9, 11);
-			minuto = strDataHora.substring(11, 13);
-			segundo = strDataHora.substring(13, 15);
+			hora = strMySQLDataHora.substring(9, 11);
+			minuto = strMySQLDataHora.substring(11, 13);
+			segundo = strMySQLDataHora.substring(13, 15);
 
 			data = formatoData.parse(ano + "-" + mes + "-" + dia + " " + hora + ":" + minuto + ":" + segundo);
 			statusMudou(Status.Semaforo.Verde);
@@ -140,6 +140,16 @@ class Util implements IStatusProdutor
 		{
 			return (caractere);
 		}
+	}
+
+	public double converterGrausEmRadianos(double graus)
+	{
+		return (graus * Math.PI / 180.0);
+	}
+
+	public double converterRadianosEmGraus(double radianos)
+	{
+		return (radianos * 180 / Math.PI);
 	}
 
 	public Status getStatus()

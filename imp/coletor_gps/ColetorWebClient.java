@@ -1,4 +1,6 @@
-package coletor_gps
+package coletor_gps;
+
+import java.util.List;
 
 class ColetorWebService
 {
@@ -9,17 +11,5 @@ class ColetorWebService
 	public boolean carregar()
 	{
 		List<Dado> dados = new Dado().listar();
-	}
-
-	public boolean ehIntranet()
-	{
-		ConnectivityManager conectivtyManager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);  
-if (conectivtyManager.getActiveNetworkInfo() != null  
-    && conectivtyManager.getActiveNetworkInfo().isAvailable()  
-    && conectivtyManager.getActiveNetworkInfo().isConnected()) {  
-    isConnected = true;  
-} else {  
-    isConnected= false;  
-}  
 	}
 }

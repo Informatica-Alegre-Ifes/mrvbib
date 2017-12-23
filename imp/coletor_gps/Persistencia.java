@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 
@@ -85,7 +86,7 @@ class Persistencia implements IStatusProdutor
 			Statement consulta = conexao.createStatement();
 			ResultSet conjuntoDados = consulta.executeQuery(sqlConsulta);
 
-			while (consjuntoDados.next())
+			while (conjuntoDados.next())
 				for (int i = 1; i <= conjuntoDados.getMetaData().getColumnCount(); ++i)
 					objetos.add(conjuntoDados.getString(i));
 
