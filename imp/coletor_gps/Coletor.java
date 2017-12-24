@@ -17,7 +17,7 @@ class Coletor
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 
-		Serial serial = new Serial("/dev/ttyAMA0", "$GPRMC", new Status(gerenteStatus));
+		Serial serial = new Serial("/dev/ttyS0", "$GPRMC", new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
 		// Rede rede = new Rede(ssids, new Status(gerenteStatus));

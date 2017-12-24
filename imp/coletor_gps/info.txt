@@ -22,7 +22,7 @@ Coletor de dados GPS:
 			- sudo apt-get install libmysql-java;
 			- Adicionar as seguintes linhas de código no final do arquivo ~/.bashrc:
 				+ CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
-				+ EXPORT CLASSPATH
+				+ export CLASSPATH
 
 		d) Pi4J:
 			- sudo dpkg -i pi4j-1.1.deb (diretório ~/resources);
