@@ -21,7 +21,8 @@ class Rede implements IStatusProdutor
 	private String protecao;
 	private boolean estahAtiva;
 
-	private static final String CONEXAO_SUCESSO = "successfully activated";
+	private static final String MSG_CRIAR_SUCESSO = "created and activated on device";
+	private static final String MSG_CONECTAR_SUCESSO = "successfully activated";
 	private List<String> ssids;
 	private Status status;
 
@@ -42,7 +43,7 @@ class Rede implements IStatusProdutor
 				BufferedReader leitorDados = executarInstrucaoConsole("nmcli dev wifi con XXXXXX password XXXXXX");
 
 				String linhaDado;
-				if (((linhaDado = leitorDados.readLine()) == null) || !linhaDado.contains(CONEXAO_SUCESSO))
+				if (((linhaDado = leitorDados.readLine()) == null) || !linhaDado.contains(MSG_CRIAR_SUCESSO) || !linhaDado.contains(MSG_CONECTAR_SUCESSO))
 					return (false);
 			}
 
