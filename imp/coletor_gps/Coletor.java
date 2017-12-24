@@ -20,10 +20,12 @@ class Coletor
 		Serial serial = new Serial("/dev/ttyAMA0", "$GPRMC", new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
+		// Rede rede = new Rede(ssids, new Status(gerenteStatus));
 		
 		gerenteStatus.adicionar(serial);
 		gerenteStatus.adicionar(persistencia);
 		gerenteStatus.adicionar(util);
+		// gerenteStatus.adicionar(rede);
 	
 		while (true)
 		{
