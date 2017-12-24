@@ -73,10 +73,10 @@ class Dado
 	public List<Dado> listar()
 	{
 		List<Dado> dados = new ArrayList<Dado>();
-		Dado dado;
+		Dado dado = null;
 		List<String> objetos;
 		String sqlConsulta;
-		int quantidadeColunas;
+		int quantidadeColunas = 0;
 
 		sqlConsulta = "SELECT ";
 		sqlConsulta += "DADO_VL_LATITUDE, ";

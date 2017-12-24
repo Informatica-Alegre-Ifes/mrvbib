@@ -17,10 +17,10 @@ final class Led
 	static
 	{
 		controlador = GpioFactory.getInstance();
-		ledAzul = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_02);
+		ledAzul = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_03);
 		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_04);
-		ledAmarelo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_05);
-		ledVermelho = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_06);
+		ledAmarelo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_01);
+		ledVermelho = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_00);
 	}
 
 	private Led()
