@@ -44,25 +44,21 @@ class Persistencia implements IStatusProdutor
 		catch (SQLException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
-			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		catch (ClassNotFoundException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
-			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		catch (InstantiationException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
-			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		catch (IllegalAccessException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
-			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		finally
