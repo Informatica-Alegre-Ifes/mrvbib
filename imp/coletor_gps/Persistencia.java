@@ -79,7 +79,7 @@ class Persistencia implements IStatusProdutor
 		try
 		{
 			Class classe = Class.forName("com.mysql.jdbc.Driver");
-			classe.newInstance();
+			classe.newInstance();			
 
 			conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1/MRVBIB?useSSL=false", propriedades);
 			Statement consulta = conexao.createStatement();

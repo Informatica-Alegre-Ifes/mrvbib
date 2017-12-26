@@ -37,7 +37,7 @@ class Coletor
 		// 	}
 		// }
 
-		Dado dado = new Dado();
+		Dado dado = new Dado(serial.obterMensagemGPS(), persistencia, util);
 		for (Dado _dado : dado.listar())
 		{
 			_dado.imprimir();
