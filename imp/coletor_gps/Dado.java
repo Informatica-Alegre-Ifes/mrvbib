@@ -97,6 +97,8 @@ class Dado
 
 		objetos = persistencia.listar(sqlConsulta);
 
+		System.out.println("Passei!");
+
 		for (int i = 0; i < objetos.size(); ++i)
 		{
 			if (i % (quantidadeColunas - 1) == 0)
@@ -125,7 +127,7 @@ class Dado
 				case 5:
 					dado.data = util.construirData(objetos.get(i));
 					break;
-				case 6:
+				case 6:					
 					break;
 			}
 		}
