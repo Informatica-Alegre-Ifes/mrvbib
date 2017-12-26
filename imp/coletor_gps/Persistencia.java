@@ -69,10 +69,9 @@ class Persistencia implements IStatusProdutor
 
 	public List<String> listar(String sqlConsulta)
 	{
-
+		List<String> objetos = new ArrayList<String>();
 		Connection conexao = null;
 		Properties propriedades = new Properties();
-		List<String> objetos = new ArrayList<String>();
 
 		propriedades.put("user", "coletor");
 		propriedades.put("password", "ifes2017");
@@ -95,21 +94,25 @@ class Persistencia implements IStatusProdutor
 		catch (SQLException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
+			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		catch (ClassNotFoundException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
+			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		catch (InstantiationException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
+			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		catch (IllegalAccessException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
+			System.out.println(excecao);
 			Erro.registrar(excecao);
 		}
 		finally
