@@ -74,7 +74,7 @@ class Dado
 	{
 		List<Dado> dados = new ArrayList<Dado>();
 		Dado dado = null;
-		List<String> objetos;
+		List<String> objetos = new ArrayList<String>();
 		String sqlConsulta;
 		int quantidadeColunas = 0;
 
