@@ -1,9 +1,20 @@
 package coletor_gps;
 
+import java.util.List;
+import java.util.ArrayList;
+
 class Coletor
 {
+	private static List<Conexao> conexoes;
+	private static String enderecoArquivo;
+	private static String mensagemNMEA;
+	private static int intervaloDados;
+	private static double limiteDistanciaDados;
+
 	static
 	{
+		conexoes = new ArrayList<Conexao>();
+
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 			public void run()
@@ -11,37 +22,48 @@ class Coletor
 				Led.pararTodos();
 			}
 		});
+		inicializar();
+	}
+
+	private static void inicializar()
+	{
+		conexoes.add(new Conexao("", ""));
+		conexoes.add(new Conexao("", ""));
+
+		enderecoArquivo = "/dev/ttyS0";
+		mensagemNMEA = "$GPRMC";
+		intervaloDados = 27000;
+		limiteDistanciaDados = 200.0d;
 	}
 
 	public static void main(String[] args) throws InterruptedException
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 
-		Serial serial = new Serial("/dev/ttyS0", "$GPRMC", new Status(gerenteStatus));
+		Serial serial = new Serial(enderecoArquivo, mensagemNMEA, new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
-		// Rede rede = new Rede(ssids, new Status(gerenteStatus));
+		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
+		ColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
 		
 		gerenteStatus.adicionar(serial);
 		gerenteStatus.adicionar(persistencia);
 		gerenteStatus.adicionar(util);
-		// gerenteStatus.adicionar(rede);
+		gerenteStatus.adicionar(rede);
+		gerenteStatus.adicionar(coletorWebClient);
 	
-		// while (true)
-		// {
-		// 	Dado dado = new Dado(serial.obterMensagemGPS(), persistencia, util);
-		// 	if (dado != null && dado.ehValido())
-		// 	{
-		// 		dado.salvar();
-		// 		Thread.sleep(27000);
-		// 	}
-		// }
-
-		Dado dado = new Dado(serial.obterMensagemGPS(), persistencia, util);
-		for (Dado _dado : dado.listar())
+		while (true)
 		{
-			_dado.imprimir();
-			System.out.println("\n-------------------------------------\n");
+			Dado dado = new Dado(serial.obterMensagemGPS(), persistencia, util);
+			if (dado != null && dado.ehValido())
+			{
+				dado.salvar();
+				rede.setDadoReferencia(dado);
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), 'M') > limiteDistanciaDados && rede.conectar())
+					coletorWebClient.carregar(dado.listar());
+
+				Thread.sleep(intervaloDados);
+			}
 		}
 	}
 }

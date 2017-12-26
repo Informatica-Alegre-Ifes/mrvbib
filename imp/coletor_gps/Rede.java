@@ -12,31 +12,23 @@ import java.io.IOException;
 
 class Rede implements IStatusProdutor
 {
-	private String ssid;
-	private String modoOperacao;
-	private int canal;
-	private int sinal;
-	private int taxa;
-	private String unidadeTaxa;
-	private String protecao;
-	private boolean estahAtiva;
-
 	private static final String MSG_CRIAR_SUCESSO = "created and activated on device";
 	private static final String MSG_CONECTAR_SUCESSO = "successfully activated";
-	private List<String> ssids;
+	private List<Conexao> conexoes;
 	private Status status;
+	private Dado dadoReferencia;
 
-	public Rede(List<String> ssids, Status status)
+	public Rede(List<Conexao> conexoes, Status status)
 	{
-		this.ssids = ssids;
+		this.conexoes = conexoes;
 		this.status = status;
 	}
 
 	public boolean conectar()
 	{
-		List<Rede> redes = listar();
+		List<Conexao> conexoesAtivas = listar();
 
-		if (existeRedeSSIDs(redes))
+		if (existeRedeSSIDs(conexoesAtivas))
 		{
 			if (!estahConectado())
 			{
@@ -53,11 +45,22 @@ class Rede implements IStatusProdutor
 		return (false);
 	}
 
-	private boolean existeRedeSSIDs(List<Rede> redes)
+	public Dado getDadoReferencia()
 	{
-		for (Rede rede : redes)
-			for (String ssid : ssids)
-				if (rede.ssid.equals(ssid))
+		return (dadoReferencia);
+	}
+
+	public void setDadoReferencia(Dado dado)
+	{
+		if (dadoReferencia == null)
+			dadoReferencia = dado;
+	}
+
+	private boolean existeRedeSSIDs(List<Conexao> conexoesAtivas)
+	{
+		for (Conexao conexaoAtiva : conexoesAtivas)
+			for (Conexao conexao : conexoes)
+				if (conexaoAtiva.getSSID().equals(conexao.getSSID()))
 					return (true);
 		return (false);
 	}
@@ -77,9 +80,9 @@ class Rede implements IStatusProdutor
 		return (false);
 	}
 
-	private List<Rede> listar()
+	private List<Conexao> listar()
 	{
-		List<Rede> redes = new ArrayList<Rede>();
+		List<Conexao> conexoes = new ArrayList<Conexao>();
 		BufferedReader leitorDados = executarInstrucaoConsole("nmcli --t --f \"SSID, MODE, CHAN, RATE, SIGNAL, SECURITY, ACTIVE\" dev wifi");
 		
 		String linhaDado;
@@ -88,8 +91,9 @@ class Rede implements IStatusProdutor
 		{
 			while ((linhaDado = leitorDados.readLine()) != null)
 			{
-				Rede rede = construir(linhaDado);
-				redes.add(rede);
+				Conexao conexao = new Conexao();
+				conexao.construir(linhaDado);
+				conexoes.add(conexao);
 			}
 			statusMudou(Status.Semaforo.Verde);
 		}
@@ -99,49 +103,7 @@ class Rede implements IStatusProdutor
 			Erro.registrar(excecao);
 		}
 
-		return (redes);
-	}
-
-	private Rede construir(String infoRede)
-	{
-		// ANALISAR A POSSIBILIDADE DE UMA REDE (PONTO DE ACESSO) NÃO SE TORNAR UMA
-		// INNER CLASS CHAMADA PONTOACESSO OU CONEXAO.
-		Rede rede = new Rede(ssids, status);
-		String[] camposInfoRede = infoRede.split(":");
-		int indice = 0;
-
-		for (String campoInfoRede : camposInfoRede)
-		{
-			switch (indice)
-			{
-				case 0:
-					rede.ssid = campoInfoRede;
-					break;
-				case 1:
-					rede.modoOperacao = campoInfoRede;
-					break;
-				case 2:
-					rede.canal = Integer.parseInt(campoInfoRede);
-					break;
-				case 3:
-					String[] strTaxaUnidade = campoInfoRede.split(" ");
-					rede.taxa = Integer.parseInt(strTaxaUnidade[0]);
-					rede.unidadeTaxa = strTaxaUnidade[1];
-					break;
-				case 4:
-					rede.sinal = Integer.parseInt(campoInfoRede);
-					break;
-				case 5:
-					rede.protecao = campoInfoRede;
-					break;
-				case 6:
-					rede.estahAtiva = campoInfoRede.toLowerCase().trim().equals("yes") ? true : false;
-					break;
-			}
-			++indice;
-		}
-
-		return (rede);
+		return (conexoes);
 	}
 
 	private BufferedReader executarInstrucaoConsole(String instrucao)	
