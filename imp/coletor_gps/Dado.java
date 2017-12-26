@@ -95,9 +95,11 @@ class Dado
 		quantidadeColunas++;
 		sqlConsulta += "FROM DADO_GPS ";
 
+		System.out.println("Passei 1!");
+
 		objetos = persistencia.listar(sqlConsulta);
 
-		System.out.println("Passei!");
+		System.out.println("Passei 2!");
 
 		for (int i = 0; i < objetos.size(); ++i)
 		{
