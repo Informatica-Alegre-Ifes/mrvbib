@@ -58,20 +58,13 @@ class Util implements IStatusProdutor
 		data = null;
 		try
 		{
-			System.out.println(strMySQLDataHora);
 			ano = strMySQLDataHora.substring(0, 4);
-			System.out.println(ano);
 			mes = strMySQLDataHora.substring(5, 7);
-			System.out.println(mes);
 			dia = strMySQLDataHora.substring(8, 10);
-			System.out.println(dia);
 			
 			hora = strMySQLDataHora.substring(11, 13);
-			System.out.println(hora);
 			minuto = strMySQLDataHora.substring(14, 16);
-			System.out.println(minuto);
 			segundo = strMySQLDataHora.substring(17, 19);
-			System.out.println(segundo);
 
 			data = formatoData.parse(ano + "-" + mes + "-" + dia + " " + hora + ":" + minuto + ":" + segundo);
 			statusMudou(Status.Semaforo.Verde);

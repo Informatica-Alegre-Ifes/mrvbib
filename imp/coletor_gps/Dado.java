@@ -19,15 +19,16 @@ class Dado
 
 	public Dado(String mensagemGPS, Persistencia persistencia, Util util)
 	{
+		this(util);
 		this.persistencia = persistencia;
-		this.util = util;
-		this.status = 'V';
 
 		construir(mensagemGPS);
 	}
 
-	private Dado()
-	{		
+	private Dado(Util util)
+	{
+		this.util = util;
+		status = 'V';
 	}
 
 	public boolean ehValido()
@@ -99,13 +100,13 @@ class Dado
 
 		for (int i = 0; i < objetos.size(); ++i)
 		{
-			if (i % (quantidadeColunas) == 0)
+			if (i % quantidadeColunas == 0)
 			{
+				dado = new Dado(util);
 				dados.add(dado);
-				dado = new Dado();
 			}
 
-			switch (i)
+			switch (i % quantidadeColunas)
 			{
 				case 0:
 					dado.latitude = util.alterarTipoParaDouble(objetos.get(i));
