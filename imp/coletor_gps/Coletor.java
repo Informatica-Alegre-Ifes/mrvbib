@@ -10,11 +10,10 @@ class Coletor
 	private static String mensagemNMEA;
 	private static int intervaloDados;
 	private static double limiteDistanciaDados;
+	private static char unidadeDistanciaDados;
 
 	static
 	{
-		conexoes = new ArrayList<Conexao>();
-
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
 			public void run()
@@ -27,6 +26,7 @@ class Coletor
 
 	private static void inicializar()
 	{
+		conexoes = new ArrayList<Conexao>();
 		conexoes.add(new Conexao("", ""));
 		conexoes.add(new Conexao("", ""));
 
@@ -34,6 +34,7 @@ class Coletor
 		mensagemNMEA = "$GPRMC";
 		intervaloDados = 27000;
 		limiteDistanciaDados = 200.0d;
+		unidadeDistanciaDados = 'M';
 	}
 
 	public static void main(String[] args) throws InterruptedException
@@ -59,7 +60,7 @@ class Coletor
 			{
 				dado.salvar();
 				rede.setDadoReferencia(dado);
-				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), 'M') > limiteDistanciaDados && rede.conectar())
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) > limiteDistanciaDados && rede.conectar())
 					coletorWebClient.carregar(dado.listar());
 
 				Thread.sleep(intervaloDados);
