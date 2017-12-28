@@ -25,7 +25,7 @@ Coletor de dados GPS:
 				+ export CLASSPATH
 
 		d) Pi4J:
-			- sudo dpkg -i pi4j-1.1.deb (diretório ~/resources);
+			- sudo dpkg -i pi4j-1.1.deb (diretório ~/recursos);
 
 		e) VIM (VIsual iMproved):
 			- sudo apt-get install vim;
