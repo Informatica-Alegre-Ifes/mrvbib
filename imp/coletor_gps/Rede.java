@@ -24,7 +24,7 @@ class Rede implements IStatusProdutor
 		this.status = status;
 	}
 
-	public boolean conectar()
+	public boolean conectar() throws IOException
 	{
 		List<Conexao> conexoesAtivas = listar();
 
@@ -65,7 +65,7 @@ class Rede implements IStatusProdutor
 		return (false);
 	}
 
-	private boolean estahConectado()
+	private boolean estahConectado() throws IOException, SocketException
 	{
 		Enumeration<NetworkInterface> interfacesRede = NetworkInterface.getNetworkInterfaces();
 		
@@ -110,11 +110,11 @@ class Rede implements IStatusProdutor
 	{
 		ProcessBuilder contrutorProcessos = new ProcessBuilder("bash", "-c", instrucao);
 		contrutorProcessos.redirectErrorStream(true);
-		Process processo = contrutorProcessos.start();
-		BufferedReader leitorDados;
+		BufferedReader leitorDados = null;
 
 		try
 		{
+			Process processo = contrutorProcessos.start();
 			leitorDados = new BufferedReader(new InputStreamReader(processo.getInputStream()));
 			statusMudou(Status.Semaforo.Verde);
 		}

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import java.net.URL;
+import java.net.MalformedURLException;
 
 class ColetorWebClient implements IStatusProdutor, IColetorWebClient
 {
@@ -16,15 +17,27 @@ class ColetorWebClient implements IStatusProdutor, IColetorWebClient
 
 	public boolean carregar(List<Dado> dados)
 	{
-		URL url = new URL("http://192.168.0.102:8080/servidor?wsdl");
-		QName qnameServico = new QName("http://servidor/","carregarService");
-		QName qnamePort = new QName("http://servidor/", "carregarPort");
-		Service servico = Service.create(url, qnameServico);
-		IColetorWebClient coletorWebClient = servico.getPort(qnamePort, IColetorWebClient.class);
-		
-		coletorWebClient.carregar(dados);
+		try
+		{
+			URL url = new URL("http://192.168.0.102:8080/servidor?wsdl");
+			QName qnameServico = new QName("http://servidor/","carregarService");
+			QName qnamePort = new QName("http://servidor/", "carregarPort");
+			Service servico = Service.create(url, qnameServico);
+			IColetorWebClient coletorWebClient = servico.getPort(qnamePort, IColetorWebClient.class);
+			
+			coletorWebClient.carregar(dados);
 
-		return (true);
+			statusMudou(Status.Semaforo.Verde);
+		}
+		catch (MalformedURLException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		finally
+		{
+			return (true);
+		}
 	}
 
 	public Status getStatus()
