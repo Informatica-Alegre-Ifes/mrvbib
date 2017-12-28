@@ -147,8 +147,6 @@ class Dado
 		
 		if (unidade == 'K')
 			return (distancia *= 1.609344d);
-		else if (unidade == 'M')
-			return (distancia *= 1609.344d);
 		else if (unidade == 'N')
 			return (distancia *= 0.8684d);
 

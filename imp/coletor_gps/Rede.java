@@ -24,25 +24,55 @@ class Rede implements IStatusProdutor
 		this.status = status;
 	}
 
-	public boolean conectar() throws IOException
+	public boolean conectar()	
 	{
+		boolean conectou = false;
 		List<Conexao> conexoesAtivas = listar();
 
-		if (existeRedeSSIDs(conexoesAtivas))
+		try
 		{
-			if (!estahConectado())
+			if (existeRedeSSIDs(conexoesAtivas))
 			{
-				BufferedReader leitorDados = executarInstrucaoConsole("nmcli dev wifi con XXXXXX password XXXXXX");
+				if (estahConectado())
+				{
+					conectou = true;
+					statusMudou(Status.Semaforo.Verde);
+				}
+				else	
+				{
+					for (Conexao conexao : conexoes)
+					{
+						BufferedReader leitorDados = executarInstrucaoConsole("nmcli dev wifi con " + conexao.getSSID() + " password " + conexao.getSenha());
 
-				String linhaDado;
-				if (((linhaDado = leitorDados.readLine()) == null) || !linhaDado.contains(MSG_CRIAR_SUCESSO) || !linhaDado.contains(MSG_CONECTAR_SUCESSO))
-					return (false);
+						String linhaDado;
+						
+						if (((linhaDado = leitorDados.readLine()) != null) && (linhaDado.contains(MSG_CRIAR_SUCESSO) || linhaDado.contains(MSG_CONECTAR_SUCESSO)))
+						{
+							conectou = true;
+							statusMudou(Status.Semaforo.Verde);
+							break;
+						}
+					}
+				}	
 			}
 
-			return (true);			
+			if (!conectou)
+				statusMudou(Status.Semaforo.Amarelo);
 		}
-
-		return (false);
+		catch (SocketException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		catch (IOException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		finally
+		{
+			return (conectou);
+		}
 	}
 
 	public Dado getDadoReferencia()
@@ -82,7 +112,7 @@ class Rede implements IStatusProdutor
 
 	private List<Conexao> listar()
 	{
-		List<Conexao> conexoes = new ArrayList<Conexao>();
+		List<Conexao> conexoesAtivas = new ArrayList<Conexao>();
 		BufferedReader leitorDados = executarInstrucaoConsole("nmcli --t --f \"SSID, MODE, CHAN, RATE, SIGNAL, SECURITY, ACTIVE\" dev wifi");
 		
 		String linhaDado;
@@ -91,9 +121,9 @@ class Rede implements IStatusProdutor
 		{
 			while ((linhaDado = leitorDados.readLine()) != null)
 			{
-				Conexao conexao = new Conexao();
-				conexao.construir(linhaDado);
-				conexoes.add(conexao);
+				Conexao conexaoAtiva = new Conexao();
+				conexaoAtiva.construir(linhaDado);
+				conexoesAtivas.add(conexaoAtiva);
 			}
 			statusMudou(Status.Semaforo.Verde);
 		}
@@ -103,7 +133,7 @@ class Rede implements IStatusProdutor
 			Erro.registrar(excecao);
 		}
 
-		return (conexoes);
+		return (conexoesAtivas);
 	}
 
 	private BufferedReader executarInstrucaoConsole(String instrucao)	

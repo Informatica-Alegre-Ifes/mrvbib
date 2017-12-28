@@ -33,6 +33,11 @@ class Conexao
 		return (ssid);
 	}
 
+	public String getSenha()
+	{
+		return (senha);
+	}
+
 	public Conexao construir(String infoConexao)
 	{
 		Conexao conexao = new Conexao();

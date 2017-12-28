@@ -47,7 +47,7 @@ Coletor de dados GPS:
 
 	2. COMPILAR
 
-		javac coletor_gps/Coletor.Java -classpath .:/classes:/opt/pi4j/lib/'*'
+		javac coletor_gps/Coletor.java -classpath .:/classes:/opt/pi4j/lib/'*'
 
 	3. EXECUTAR
 		

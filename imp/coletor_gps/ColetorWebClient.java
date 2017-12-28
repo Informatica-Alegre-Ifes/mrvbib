@@ -17,6 +17,8 @@ class ColetorWebClient implements IStatusProdutor, IColetorWebClient
 
 	public boolean carregar(List<Dado> dados)
 	{
+		boolean carregou = false;
+
 		try
 		{
 			URL url = new URL("http://192.168.0.102:8080/servidor?wsdl");
@@ -27,6 +29,7 @@ class ColetorWebClient implements IStatusProdutor, IColetorWebClient
 			
 			coletorWebClient.carregar(dados);
 
+			carregou = true;
 			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (MalformedURLException excecao)
@@ -36,7 +39,7 @@ class ColetorWebClient implements IStatusProdutor, IColetorWebClient
 		}
 		finally
 		{
-			return (true);
+			return (carregou);
 		}
 	}
 
