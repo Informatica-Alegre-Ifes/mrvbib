@@ -44,8 +44,7 @@ class Rede implements IStatusProdutor
 					{
 						BufferedReader leitorDados = executarInstrucaoConsole("nmcli dev wifi con " + conexao.getSSID() + " password " + conexao.getSenha());
 
-						String linhaDado;
-						
+						String linhaDado;						
 						if (((linhaDado = leitorDados.readLine()) != null) && (linhaDado.contains(MSG_CRIAR_SUCESSO) || linhaDado.contains(MSG_CONECTAR_SUCESSO)))
 						{
 							conectou = true;
