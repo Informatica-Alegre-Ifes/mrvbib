@@ -19,7 +19,7 @@ final class Led
 	{
 		controlador = GpioFactory.getInstance();
 		ledAzul = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_03);
-		ledBranco = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_06);
+		ledBranco = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_02);
 		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_04);
 		ledAmarelo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_01);
 		ledVermelho = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_00);
