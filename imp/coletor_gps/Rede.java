@@ -36,7 +36,7 @@ class Rede implements IStatusProdutor
 				if (estahConectado())
 				{
 					conectou = true;
-					statusMudou(Status.Semaforo.Verde);
+					Led.acenderLedBranco();
 				}
 				else	
 				{

@@ -10,6 +10,7 @@ final class Led
 {
 	private static GpioController controlador;
 	private static GpioPinDigitalOutput ledAzul;
+	private static GpioPinDigitalOutput ledBranco;
 	private static GpioPinDigitalOutput ledVerde;
 	private static GpioPinDigitalOutput ledAmarelo;
 	private static GpioPinDigitalOutput ledVermelho;
@@ -18,6 +19,7 @@ final class Led
 	{
 		controlador = GpioFactory.getInstance();
 		ledAzul = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_03);
+		ledBranco = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_06);
 		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_04);
 		ledAmarelo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_01);
 		ledVermelho = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_00);
@@ -49,6 +51,12 @@ final class Led
 	public static void piscarLedAzul()
 	{
 		ledAzul.pulse(500);
+	}
+
+	// Método temporário utilizado para notificar conexão com a rede
+	public static void acenderLedBranco()
+	{
+		ledBranco.high();
 	}
 	
 	public static void pararTodos()

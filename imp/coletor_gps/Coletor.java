@@ -59,9 +59,9 @@ class Coletor
 			if (dado != null && dado.ehValido())
 			{
 				dado.salvar();
-				//rede.setDadoReferencia(dado);
-				//if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) < limiteDistanciaDados && rede.conectar())
-				//	coletorWebClient.carregar(dado.listar());
+				rede.setDadoReferencia(dado);
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) < limiteDistanciaDados && rede.conectar())
+					coletorWebClient.carregar(dado.listar());
 
 				Thread.sleep(intervaloDados);
 			}
