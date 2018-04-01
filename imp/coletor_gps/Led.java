@@ -61,6 +61,8 @@ final class Led
 	
 	public static void pararTodos()
 	{
+		ledBranco.blink(0);
+		ledBranco.low();
 		ledAzul.blink(0);
 		ledAzul.low();
 		ledVerde.blink(0);
