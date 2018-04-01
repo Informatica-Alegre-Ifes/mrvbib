@@ -16,7 +16,7 @@ class Conexao
 	private String protecao;
 	private boolean estahAtiva;
 
-	public Conexao(String ssid, String Senha)
+	public Conexao(String ssid, String senha)
 	{
 		this();
 		this.ssid = ssid;
@@ -38,9 +38,8 @@ class Conexao
 		return (senha);
 	}
 
-	public Conexao construir(String infoConexao)
+	public void construir(String infoConexao)
 	{
-		Conexao conexao = new Conexao();
 		String[] camposInfoConexao = infoConexao.split(":");
 		int indice = 0;
 
@@ -49,32 +48,30 @@ class Conexao
 			switch (indice)
 			{
 				case 0:
-					conexao.ssid = campoInfoConexao;
+					ssid = campoInfoConexao;
 					break;
 				case 1:
-					conexao.modoOperacao = campoInfoConexao;
+					modoOperacao = campoInfoConexao;
 					break;
 				case 2:
-					conexao.canal = Integer.parseInt(campoInfoConexao);
+					canal = Integer.parseInt(campoInfoConexao);
 					break;
 				case 3:
 					String[] strTaxaUnidade = campoInfoConexao.split(" ");
-					conexao.taxa = Integer.parseInt(strTaxaUnidade[0]);
-					conexao.unidadeTaxa = strTaxaUnidade[1];
+					taxa = Integer.parseInt(strTaxaUnidade[0]);
+					unidadeTaxa = strTaxaUnidade[1];
 					break;
 				case 4:
-					conexao.sinal = Integer.parseInt(campoInfoConexao);
+					sinal = Integer.parseInt(campoInfoConexao);
 					break;
 				case 5:
-					conexao.protecao = campoInfoConexao;
+					protecao = campoInfoConexao;
 					break;
 				case 6:
-					conexao.estahAtiva = campoInfoConexao.toLowerCase().trim().equals("yes") ? true : false;
+					estahAtiva = campoInfoConexao.toLowerCase().trim().equals("yes") ? true : false;
 					break;
 			}
 			++indice;
 		}
-
-		return (conexao);
 	}
 }

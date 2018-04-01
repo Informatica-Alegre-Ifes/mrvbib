@@ -27,13 +27,13 @@ class Coletor
 	private static void inicializar()
 	{
 		conexoes = new ArrayList<Conexao>();
-		conexoes.add(new Conexao("", ""));
-		conexoes.add(new Conexao("", ""));
+		conexoes.add(new Conexao("nucleo", "nucleo#123."));
+		conexoes.add(new Conexao("CAYO", "cayo220383"));
 
 		enderecoArquivo = "/dev/ttyS0";
 		mensagemNMEA = "$GPRMC";
 		intervaloDados = 27000;
-		limiteDistanciaDados = 0.3d;
+		limiteDistanciaDados = 0.5d;
 		unidadeDistanciaDados = 'K';
 	}
 
@@ -61,7 +61,8 @@ class Coletor
 				dado.salvar();
 				rede.setDadoReferencia(dado);
 				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) < limiteDistanciaDados && rede.conectar())
-					coletorWebClient.carregar(dado.listar());
+					System.out.println("Descarregar dados para a base central!");
+				//	coletorWebClient.carregar(dado.listar());
 
 				Thread.sleep(intervaloDados);
 			}
