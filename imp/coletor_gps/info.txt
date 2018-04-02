@@ -60,7 +60,7 @@ Coletor de dados GPS:
  		b) Acrescente, ao final do arquivo, as seguintes linhas:
  			- # Inicialização do módulo Coletor GPS (MRVBIB)
  			- cd mrvbib/imp/
- 			- java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/mysql.jar coletor_gps.Coletor
+ 			- sudo java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/mysql.jar coletor_gps.Coletor
 
  		c) Salve as alterações no arquivo ./bashrc
 
