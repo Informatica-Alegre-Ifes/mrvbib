@@ -15,6 +15,7 @@ class Rede implements IStatusProdutor
 	private static final String MSG_CRIAR_SUCESSO = "created and activated on device";
 	private static final String MSG_CONECTAR_SUCESSO = "successfully activated";
 	private List<Conexao> conexoes;
+	private Conexao conexaoAtiva;
 	private Status status;
 	private Dado dadoReferencia;
 
@@ -48,7 +49,9 @@ class Rede implements IStatusProdutor
 						if (((linhaDado = leitorDados.readLine()) != null) && (linhaDado.contains(MSG_CRIAR_SUCESSO) || linhaDado.contains(MSG_CONECTAR_SUCESSO)))
 						{
 							conectou = true;
+							conexaoAtiva = conexao;
 							statusMudou(Status.Semaforo.Verde);
+							Led.acenderLedBranco();
 							break;
 						}
 					}
@@ -72,6 +75,29 @@ class Rede implements IStatusProdutor
 		{
 			return (conectou);
 		}
+	}
+
+	public void desconectar()
+	{
+		BufferedReader leitorDados = executarInstrucaoConsole("nmcli --t --f \"CONNECTION\" dev");
+		
+		String linhaDado;
+
+		try
+		{
+			if ((linhaDado = leitorDados.readLine()) != null)
+			{
+				executarInstrucaoConsole("nmcli con down id " + linhaDado);
+				statusMudou(Status.Semaforo.Verde);
+			}
+		}
+		catch (IOException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+
+		Led.apagarLedBranco();
 	}
 
 	public Dado getDadoReferencia()

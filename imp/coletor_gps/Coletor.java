@@ -61,9 +61,12 @@ class Coletor
 				dado.salvar();
 				rede.setDadoReferencia(dado);
 				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) < limiteDistanciaDados && rede.conectar())
+				{
 					System.out.println("Descarregar dados para a base central!");
+					Thread.sleep(2000);
+					rede.desconectar();
 				//	coletorWebClient.carregar(dado.listar());
-
+				}
 				Thread.sleep(intervaloDados);
 			}
 		}

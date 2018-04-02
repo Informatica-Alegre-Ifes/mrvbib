@@ -59,6 +59,12 @@ final class Led
 		ledBranco.high();
 	}
 	
+	// Método temporário utilizado para notificar desconexão com a rede
+	public static void apagarLedBranco()
+	{
+		ledBranco.low();
+	}
+
 	public static void pararTodos()
 	{
 		ledBranco.blink(0);
