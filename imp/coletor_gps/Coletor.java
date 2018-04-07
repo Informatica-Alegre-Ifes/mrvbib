@@ -27,13 +27,13 @@ class Coletor
 	private static void inicializar()
 	{
 		conexoes = new ArrayList<Conexao>();
-		conexoes.add(new Conexao("nucleo", "nucleo#123."));
+		conexoes.add(new Conexao("NUCLEO", "nucleo#123."));
 		conexoes.add(new Conexao("CAYO", "cayo220383"));
 
 		enderecoArquivo = "/dev/ttyS0";
 		mensagemNMEA = "$GPRMC";
 		intervaloDados = 27000;
-		limiteDistanciaDados = 0.5d;
+		limiteDistanciaDados = 0.3d;
 		unidadeDistanciaDados = 'K';
 	}
 
