@@ -15,7 +15,6 @@ class Rede implements IStatusProdutor
 	private static final String MSG_CRIAR_SUCESSO = "created and activated on device";
 	private static final String MSG_CONECTAR_SUCESSO = "successfully activated";
 	private List<Conexao> conexoes;
-	private Conexao conexaoAtiva;
 	private Status status;
 	private Dado dadoReferencia;
 
@@ -49,7 +48,6 @@ class Rede implements IStatusProdutor
 						if (((linhaDado = leitorDados.readLine()) != null) && (linhaDado.contains(MSG_CRIAR_SUCESSO) || linhaDado.contains(MSG_CONECTAR_SUCESSO)))
 						{
 							conectou = true;
-							conexaoAtiva = conexao;
 							statusMudou(Status.Semaforo.Verde);
 							Led.acenderLedBranco();
 							break;
