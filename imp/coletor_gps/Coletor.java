@@ -28,7 +28,7 @@ class Coletor
 	{
 		conexoes = new ArrayList<Conexao>();
 		conexoes.add(new Conexao("NUCLEO", "nucleo#123."));
-		conexoes.add(new Conexao("CAYO", "cayo220383"));
+		conexoes.add(new Conexao("CAYO", "abc@123."));
 
 		enderecoArquivo = "/dev/ttyS0";
 		mensagemNMEA = "$GPRMC";
