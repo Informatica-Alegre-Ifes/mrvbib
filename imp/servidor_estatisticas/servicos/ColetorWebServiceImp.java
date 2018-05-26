@@ -1,13 +1,25 @@
 package servidor_estatisticas.servicos;
 
+import servidor_estatisticas.modelo.Dado;
+
 import javax.jws.WebService;
-import java.util.List;
 
 @WebService(endpointInterface = "servidor_estatisticas.IColetorWebService")
 public class ColetorWebServiceImp implements IColetorWebService
 {
-	public boolean carregar(List<Dado> dados)
+	public boolean carregar(Dado[] dados)
 	{
+		try
+		{
+			for (Dado dado : dados)
+				dado.salvar();
 
+			return (true);
+		}
+		catch (Exception excecao)
+		{
+			// TRATAMENTO DE ERRO
+			return (false);
+		}
 	}
 }
