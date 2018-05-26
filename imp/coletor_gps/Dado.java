@@ -37,18 +37,18 @@ class Dado
 		this(null);
 	}
 
+	private Dado(Util util)
+	{
+		this.util = util;
+		status = 'V';
+	}
+
 	public Dado(String mensagemGPS, Persistencia persistencia, Util util)
 	{
 		this(util);
 		this.persistencia = persistencia;
 
 		construir(mensagemGPS);
-	}
-
-	private Dado(Util util)
-	{
-		this.util = util;
-		status = 'V';
 	}
 
 	public boolean ehValido()

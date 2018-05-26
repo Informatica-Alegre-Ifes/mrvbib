@@ -23,7 +23,7 @@ class ColetorWebClient implements IStatusProdutor
 
 		try
 		{
-			URL url = new URL("http://192.168.0.102:8080/servidor?wsdl");
+			URL url = new URL("http://192.168.0.102:3128/servidor?wsdl");
 			QName qnameServico = new QName("http://servidor/","carregarService");
 			QName qnamePort = new QName("http://servidor/", "carregarPort");
 			Service servico = Service.create(url, qnameServico);

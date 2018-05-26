@@ -9,5 +9,6 @@ import javax.jws.soap.SOAPBinding.Style;
 @SOAPBinding(style = Style.RPC)
 public interface IColetorWebClient
 {
-	@WebMethod boolean carregar(Dado[] dados);
+	@WebMethod
+	boolean carregar(Dado[] dados);
 }
