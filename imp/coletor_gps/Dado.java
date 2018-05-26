@@ -4,18 +4,38 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="dado")
+@XmlAccessorType(XmlAccessType.NONE)
 class Dado
 {
+	@XmlAttribute
 	private Date data;
+	@XmlAttribute
 	private char status;
+	@XmlAttribute
 	private double latitude;
+	@XmlAttribute
 	private	char orientacaoLatitude;
+	@XmlAttribute
 	private double longitude;
+	@XmlAttribute
 	private char orientacaoLongitude;
+	@XmlAttribute
 	private double velocidade;
 
 	private Persistencia persistencia;
 	private Util util;
+
+	@SuppressWarnings("unused")
+	public Dado()
+	{
+		this(null);
+	}
 
 	public Dado(String mensagemGPS, Persistencia persistencia, Util util)
 	{
