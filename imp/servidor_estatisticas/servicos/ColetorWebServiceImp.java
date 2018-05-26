@@ -4,7 +4,7 @@ import servidor_estatisticas.modelo.Dado;
 
 import javax.jws.WebService;
 
-@WebService(endpointInterface = "servidor_estatisticas.IColetorWebService")
+@WebService(endpointInterface = "servidor_estatisticas.servicos.IColetorWebService")
 public class ColetorWebServiceImp implements IColetorWebService
 {
 	public boolean carregar(Dado[] dados)
