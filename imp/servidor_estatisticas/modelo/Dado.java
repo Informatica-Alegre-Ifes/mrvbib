@@ -33,12 +33,11 @@ public class Dado
 
 	private Persistencia persistencia;
 	private Util util;
-
-	@SuppressWarnings("unused")
+	
 	public Dado()
 	{
-		util = new Util();
 		persistencia = new Persistencia();
+		util = new Util();
 	}
 
 	public boolean salvar()
