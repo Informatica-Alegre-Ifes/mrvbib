@@ -45,7 +45,7 @@ class Coletor
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
 		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
-		IColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
+		ColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
 		
 		gerenteStatus.adicionar(serial);
 		gerenteStatus.adicionar(persistencia);
