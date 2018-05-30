@@ -62,8 +62,7 @@ class Coletor
 				rede.setDadoReferencia(dado);
 				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) < limiteDistanciaDados && rede.conectar())
 				{
-					// coletorWebClient.carregar(dado.listar());	
-					Thread.sleep(2000);
+					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();
 				}
 				Thread.sleep(intervaloDados);
