@@ -11,8 +11,10 @@ public class ColetorWebServiceImp implements IColetorWebService
 	{
 		try
 		{
+			System.out.println("Chegaram " + dados.length + " dados GPS.");
 			for (Dado dado : dados)
-				dado.salvar();
+				//dado.salvar();
+				dado.imprimir();
 
 			return (true);
 		}
