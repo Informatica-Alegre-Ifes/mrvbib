@@ -27,9 +27,9 @@ class ColetorWebClient implements IStatusProdutor
 			QName qnameServico = new QName("http://servidor_estatisticas/","ColetorWebServiceImpService");
 			QName qnamePort = new QName("http://servidor_estatisticas/", "ColetorWebServiceImpPort");
 			Service servico = Service.create(url, qnameServico);
-			IColetorWebClient coletorWebClient = servico.getPort(qnamePort, IColetorWebClient.class);
+			this = servico.getPort(qnamePort, IColetorWebClient.class);
 			
-			coletorWebClient.carregar(dados.toArray(new Dado[dados.size()]));
+			this.carregar(dados.toArray(new Dado[dados.size()]));
 
 			carregou = true;
 			statusMudou(Status.Semaforo.Verde);
