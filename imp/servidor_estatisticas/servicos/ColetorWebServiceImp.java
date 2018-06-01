@@ -12,7 +12,7 @@ public class ColetorWebServiceImp implements IColetorWebService
 		try
 		{
 			for (Dado dado : dados)
-				dado.imprimir();
+				dado.salvar();
 
 			return (true);
 		}
