@@ -19,8 +19,6 @@ class ColetorWebClient implements IStatusProdutor
 
 	public boolean carregar(List<Dado> dados)
 	{
-		boolean carregou = false;
-
 		try
 		{
 			URL url = new URL("http://192.168.0.102:3128/servidor_estatisticas?wsdl");
@@ -29,19 +27,23 @@ class ColetorWebClient implements IStatusProdutor
 			Service servico = Service.create(url, qnameServico);
 			IColetorWebClient coletorWebClient = servico.getPort(qnamePort, IColetorWebClient.class);
 			
-			coletorWebClient.carregar(dados.toArray(new Dado[dados.size()]));
+			if (coletorWebClient.carregar(dados.toArray(new Dado[dados.size()])))
+			{
+				statusMudou(Status.Semaforo.Verde);
+				
+				return (true);
+			}
 
-			carregou = true;
-			statusMudou(Status.Semaforo.Verde);
+			statusMudou(Status.Semaforo.Amarelo);
+
+			return (false);
 		}
 		catch (MalformedURLException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
-		}
-		finally
-		{
-			return (carregou);
+
+			return (false);
 		}
 	}
 
@@ -55,4 +57,4 @@ class ColetorWebClient implements IStatusProdutor
 		status.setSemaforo(semaforoStatus);
 		status.notificarGerente(this);
 	}
-}
+}  
