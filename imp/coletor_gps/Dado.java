@@ -75,7 +75,8 @@ class Dado
 		strTransacao += "DADO_DT_REGISTRO";
 		strTransacao += ") ";
 		strTransacao += "VALUES ";
-		strTransacao += "(";
+		strTransacao += "('" + codigoVeiculo + "'";
+		strTransacao += ", ";
 		strTransacao += latitude;
 		strTransacao += ", ";
 		strTransacao += "'" + orientacaoLatitude + "'";
