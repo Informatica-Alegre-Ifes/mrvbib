@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 class Dado
 {
 	@XmlAttribute
+	private String codigoVeiculo;
+	@XmlAttribute
 	private Date data;
 	@XmlAttribute
 	private char status;
@@ -49,6 +51,7 @@ class Dado
 	{
 		this.util = util;
 		status = 'V';
+		codigoVeiculo = util.obterPropriedade("CODIGO_VEICULO");
 	}
 
 	public boolean ehValido()
@@ -62,6 +65,7 @@ class Dado
 
 		strTransacao = "INSERT INTO DADO_GPS ";
 		strTransacao += "(";
+		strTransacao += "DADO_CD_VEICULO, ";
 		strTransacao += "DADO_VL_LATITUDE, ";
 		strTransacao += "DADO_SG_ORIENTACAO_LATITUDE, ";
 		strTransacao += "DADO_VL_LONGITUDE, ";
@@ -100,6 +104,8 @@ class Dado
 		int quantidadeColunas = 0;
 
 		sqlConsulta = "SELECT ";
+		sqlConsulta += "DADO_CD_VEICULO, ";
+		quantidadeColunas++;
 		sqlConsulta += "DADO_VL_LATITUDE, ";
 		quantidadeColunas++;
 		sqlConsulta += "DADO_SG_ORIENTACAO_LATITUDE, ";
@@ -129,24 +135,27 @@ class Dado
 			switch (i % quantidadeColunas)
 			{
 				case 0:
-					dado.latitude = util.alterarTipoParaDouble(objetos.get(i));
+					dado.codigoVeiculo = objetos.get(i);
 					break;
 				case 1:
-					dado.orientacaoLatitude = util.obterCaractereDeTexto(objetos.get(i), 0);
+					dado.latitude = util.alterarTipoParaDouble(objetos.get(i));
 					break;
 				case 2:
-					dado.longitude = util.alterarTipoParaDouble(objetos.get(i));
+					dado.orientacaoLatitude = util.obterCaractereDeTexto(objetos.get(i), 0);
 					break;
 				case 3:
-					dado.orientacaoLongitude = util.obterCaractereDeTexto(objetos.get(i), 0);
+					dado.longitude = util.alterarTipoParaDouble(objetos.get(i));
 					break;
 				case 4:
-					dado.velocidade = util.alterarTipoParaDouble(objetos.get(i));
+					dado.orientacaoLongitude = util.obterCaractereDeTexto(objetos.get(i), 0);
 					break;
 				case 5:
+					dado.velocidade = util.alterarTipoParaDouble(objetos.get(i));
+					break;
+				case 6:
 					dado.data = util.construirData(objetos.get(i));
 					break;
-				case 6:					
+				case 7:					
 					break;
 			}
 		}
@@ -177,7 +186,8 @@ class Dado
 	{
 		String strDado;
 
-		strDado = "Data/Hora: " + util.obterTexto(data) + "\n";
+		strDado = "Veículo: " + codigoVeiculo + "\n";
+		strDado += "Data/Hora: " + util.obterTexto(data) + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orientação latitude: " + orientacaoLatitude + "\n";
 		strDado += "Longitude: " + longitude + "\n";

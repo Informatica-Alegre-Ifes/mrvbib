@@ -1,9 +1,14 @@
 package coletor_gps;
 
-import java.text.SimpleDateFormat;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.IOException;
+
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.Properties;
 
 class Util implements IStatusProdutor
 {
@@ -140,6 +145,31 @@ class Util implements IStatusProdutor
 		{
 			return (caractere);
 		}
+	}
+
+	public String obterPropriedade(String nomePropriedade)
+	{
+		String propriedade = null;		
+		Properties propriedades = new Properties();
+
+		try
+		{
+			InputStream streamEntrada = Functions.class.getClassLoader().getResourceAsStream("recursos/config.properties");
+			propriedades.load(streamEntrada);
+			propriedade = propriedades.getProperty(nomePropriedade);
+		}
+		catch (FileNotFoundException excecao)
+		{
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
+		}
+		catch (IOException excecao)
+		{
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
+		}
+		
+		return (propriedade);
 	}
 
 	public double converterGrausEmRadianos(double graus)
