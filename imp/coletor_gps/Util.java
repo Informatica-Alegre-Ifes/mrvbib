@@ -154,7 +154,7 @@ class Util implements IStatusProdutor
 
 		try
 		{
-			InputStream streamEntrada = Util.class.getClassLoader().getResourceAsStream("recursos/config.properties");
+			InputStream streamEntrada = Util.class.getClassLoader().getResourceAsStream("coletor_gps/recursos/config.properties");
 			propriedades.load(streamEntrada);
 			propriedade = propriedades.getProperty(nomePropriedade);
 		}
