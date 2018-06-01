@@ -154,7 +154,7 @@ class Util implements IStatusProdutor
 
 		try
 		{
-			InputStream streamEntrada = Functions.class.getClassLoader().getResourceAsStream("recursos/config.properties");
+			InputStream streamEntrada = Utils.class.getClassLoader().getResourceAsStream("recursos/config.properties");
 			propriedades.load(streamEntrada);
 			propriedade = propriedades.getProperty(nomePropriedade);
 		}
