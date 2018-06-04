@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
+import javax.xml.ws.WebServiceException;
 
 import java.net.URL;
 import java.net.MalformedURLException;
@@ -19,6 +20,8 @@ class ColetorWebClient implements IStatusProdutor
 
 	public boolean carregar(List<Dado> dados)
 	{
+		boolean carregou = false;
+
 		try
 		{
 			URL url = new URL("http://192.168.0.102:3128/servidor_estatisticas?wsdl");
@@ -29,21 +32,25 @@ class ColetorWebClient implements IStatusProdutor
 			
 			if (coletorWebClient.carregar(dados.toArray(new Dado[dados.size()])))
 			{
-				statusMudou(Status.Semaforo.Verde);
-				
-				return (true);
+				carregou = !carregou;
+				statusMudou(Status.Semaforo.Verde);				
 			}
-
-			statusMudou(Status.Semaforo.Amarelo);
-
-			return (false);
+			else
+				statusMudou(Status.Semaforo.Amarelo);
 		}
 		catch (MalformedURLException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
-
-			return (false);
+		}
+		catch (WebServiceException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		finally
+		{
+			return (carregou);
 		}
 	}
 
