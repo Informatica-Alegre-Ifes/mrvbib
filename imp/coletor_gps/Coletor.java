@@ -9,8 +9,7 @@ class Coletor
 	private static String enderecoArquivo;
 	private static String mensagemNMEA;
 	private static int intervaloDados;
-	private static double limiteDistanciaDados;
-	private static char unidadeDistanciaDados;
+	private static int limiteDistanciaDados;
 
 	static
 	{
@@ -33,8 +32,7 @@ class Coletor
 		enderecoArquivo = "/dev/ttyS0";
 		mensagemNMEA = "$GPRMC";
 		intervaloDados = 27000;
-		limiteDistanciaDados = 0.3d;
-		unidadeDistanciaDados = 'K';
+		limiteDistanciaDados = 300;
 	}
 
 	public static void main(String[] args) throws InterruptedException
@@ -60,7 +58,7 @@ class Coletor
 			{
 				dado.salvar();
 				rede.setDadoReferencia(dado);
-				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia(), unidadeDistanciaDados) < limiteDistanciaDados && rede.conectar())
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < limiteDistanciaDados && rede.conectar())
 				{
 					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();

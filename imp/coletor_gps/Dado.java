@@ -164,7 +164,7 @@ class Dado
 		return (dados);
 	}
 
-	public double calcularDistanciaGeografica2D(Dado dado, char unidade)
+	public double calcularDistanciaGeografica2D(Dado dado)
 	{
 		double theta;
 		double distancia;
@@ -173,14 +173,8 @@ class Dado
 		distancia = Math.sin(util.converterGrausEmRadianos(latitude)) * Math.sin(util.converterGrausEmRadianos(dado.latitude)) + Math.cos(util.converterGrausEmRadianos(latitude)) * Math.cos(util.converterGrausEmRadianos(dado.latitude)) * Math.cos(util.converterGrausEmRadianos(theta));
 		distancia = Math.acos(distancia);
 		distancia = util.converterRadianosEmGraus(distancia);
-		distancia = distancia * 60 * 1.1515d;
-		
-		if (unidade == 'K')
-			return (distancia *= 1.609344d);
-		else if (unidade == 'N')
-			return (distancia *= 0.8684d);
 
-		return (distancia);
+		return (distancia * 60 * 1.1515d * 1609.344d);
 	}
 
 	public void imprimir()
