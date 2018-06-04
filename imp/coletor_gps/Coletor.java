@@ -6,10 +6,10 @@ import java.util.ArrayList;
 class Coletor
 {
 	private static List<Conexao> conexoes;
-	private static String enderecoArquivo;
-	private static String mensagemNMEA;
-	private static int intervaloDados;
-	private static int limiteDistanciaDados;
+	private static String portaSerial;
+	private static String sentencaNMEA;
+	private static int intervaloMedicao;
+	private static int minimaDistanciaCoordenadas;
 
 	static
 	{
@@ -29,17 +29,17 @@ class Coletor
 		conexoes.add(new Conexao("NUCLEO", "nucleo#123."));
 		conexoes.add(new Conexao("CAYO", "abc@123."));
 
-		enderecoArquivo = "/dev/ttyS0";
-		mensagemNMEA = "$GPRMC";
-		intervaloDados = 27000;
-		limiteDistanciaDados = 300;
+		portaSerial = "/dev/ttyS0";
+		sentencaNMEA = "$GPRMC";
+		intervaloMedicao = 27000;
+		minimaDistanciaCoordenadas = 300;
 	}
 
 	public static void main(String[] args) throws InterruptedException
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 
-		Serial serial = new Serial(enderecoArquivo, mensagemNMEA, new Status(gerenteStatus));
+		Serial serial = new Serial(portaSerial, sentencaNMEA, new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
 		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
@@ -58,12 +58,12 @@ class Coletor
 			{
 				dado.salvar();
 				rede.setDadoReferencia(dado);
-				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < limiteDistanciaDados && rede.conectar())
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < minimaDistanciaCoordenadas && rede.conectar())
 				{
 					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();
 				}
-				Thread.sleep(intervaloDados);
+				Thread.sleep(intervaloMedicao);
 			}
 		}
 	}
