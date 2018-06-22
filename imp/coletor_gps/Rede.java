@@ -150,6 +150,11 @@ class Rede implements IStatusProdutor
 			}
 			statusMudou(Status.Semaforo.Verde);
 		}
+		catch (NumberFormatException excecao)
+		{
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
+		}
 		catch (IOException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);

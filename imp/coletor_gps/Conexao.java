@@ -38,7 +38,7 @@ class Conexao
 		return (senha);
 	}
 
-	public void construir(String infoConexao)
+	public void construir(String infoConexao) throws NumberFormatException
 	{
 		String[] camposInfoConexao = infoConexao.split(":");
 		int indice = 0;

@@ -39,6 +39,11 @@ class Serial implements IStatusProdutor
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
 		}
+		catch (Exception excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
 		finally
 		{
 			return (linha);
