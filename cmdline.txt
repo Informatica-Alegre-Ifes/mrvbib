@@ -1,2 +1,0 @@
-dwc_otg.lpm_enable=0 root=PARTUUID=10f59406-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait enable_uart=1 console=ttyS0,9600
-#dwc_otg.lpm_enable=0 console=tty1 root=PARTUUID=10f59406-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
