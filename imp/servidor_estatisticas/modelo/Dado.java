@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Dado
 {
 	@XmlAttribute
-	private String codigoVeiculo;
+	private String codigoMACDispositivo;
 	@XmlAttribute
 	private Date data;
 	@XmlAttribute
@@ -48,7 +48,7 @@ public class Dado
 
 		strTransacao = "INSERT INTO DADO_GPS ";
 		strTransacao += "(";
-		strTransacao += "DADO_CD_VEICULO, ";
+		strTransacao += "DADO_CD_MAC_DISPOSITIVO, ";
 		strTransacao += "DADO_VL_LATITUDE, ";
 		strTransacao += "DADO_SG_ORIENTACAO_LATITUDE, ";
 		strTransacao += "DADO_VL_LONGITUDE, ";
@@ -58,7 +58,7 @@ public class Dado
 		strTransacao += "DADO_DT_REGISTRO";
 		strTransacao += ") ";
 		strTransacao += "VALUES ";
-		strTransacao += "('" + codigoVeiculo + "'";
+		strTransacao += "('" + codigoMACDispositivo + "'";
 		strTransacao += ", ";
 		strTransacao += latitude;
 		strTransacao += ", ";
@@ -88,7 +88,7 @@ public class Dado
 		int quantidadeColunas = 0;
 
 		sqlConsulta = "SELECT ";
-		sqlConsulta += "DADO_CD_VEICULO, ";
+		sqlConsulta += "DADO_CD_MAC_DISPOSITIVO, ";
 		quantidadeColunas++;
 		sqlConsulta += "DADO_VL_LATITUDE, ";
 		quantidadeColunas++;
@@ -119,7 +119,7 @@ public class Dado
 			switch (i % quantidadeColunas)
 			{
 				case 0:
-					dado.codigoVeiculo = objetos.get(i);
+					dado.codigoMACDispositivo = objetos.get(i);
 					break;
 				case 1:
 					dado.latitude = util.alterarTipoParaDouble(objetos.get(i));
@@ -151,7 +151,7 @@ public class Dado
 	{
 		String strDado;
 
-		strDado = "Veículo: " + codigoVeiculo + "\n";
+		strDado = "Dispositivo: " + codigoMACDispositivo + "\n";
 		strDado += "Data/Hora: " + util.obterTexto(data) + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orientação latitude: " + orientacaoLatitude + "\n";
@@ -161,5 +161,4 @@ public class Dado
 
 		System.out.println(strDado);
 	}
-
 }

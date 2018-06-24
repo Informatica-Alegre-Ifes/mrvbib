@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 class Dado
 {
 	@XmlAttribute
-	private String codigoVeiculo;
+	private String codigoMACDispositivo;
 	@XmlAttribute
 	private Date data;
 	@XmlAttribute
@@ -51,7 +51,7 @@ class Dado
 	{
 		this.util = util;
 		status = 'V';
-		codigoVeiculo = util.obterPropriedade("CODIGO_VEICULO");
+		codigoMACDispositivo = util.obterEnderecoMAC();
 	}
 
 	public boolean ehValido()
@@ -65,7 +65,7 @@ class Dado
 
 		strTransacao = "INSERT INTO DADO_GPS ";
 		strTransacao += "(";
-		strTransacao += "DADO_CD_VEICULO, ";
+		strTransacao += "DADO_CD_MAC_DISPOSITIVO, ";
 		strTransacao += "DADO_VL_LATITUDE, ";
 		strTransacao += "DADO_SG_ORIENTACAO_LATITUDE, ";
 		strTransacao += "DADO_VL_LONGITUDE, ";
@@ -75,7 +75,7 @@ class Dado
 		strTransacao += "DADO_DT_REGISTRO";
 		strTransacao += ") ";
 		strTransacao += "VALUES ";
-		strTransacao += "('" + codigoVeiculo + "'";
+		strTransacao += "('" + codigoMACDispositivo + "'";
 		strTransacao += ", ";
 		strTransacao += latitude;
 		strTransacao += ", ";
@@ -105,7 +105,7 @@ class Dado
 		int quantidadeColunas = 0;
 
 		sqlConsulta = "SELECT ";
-		sqlConsulta += "DADO_CD_VEICULO, ";
+		sqlConsulta += "DADO_CD_MAC_DISPOSITIVO, ";
 		quantidadeColunas++;
 		sqlConsulta += "DADO_VL_LATITUDE, ";
 		quantidadeColunas++;
@@ -136,7 +136,7 @@ class Dado
 			switch (i % quantidadeColunas)
 			{
 				case 0:
-					dado.codigoVeiculo = objetos.get(i);
+					dado.codigoMACDispositivo = objetos.get(i);
 					break;
 				case 1:
 					dado.latitude = util.alterarTipoParaDouble(objetos.get(i));
@@ -181,7 +181,7 @@ class Dado
 	{
 		String strDado;
 
-		strDado = "Veículo: " + codigoVeiculo + "\n";
+		strDado = "Dispositivo: " + codigoMACDispositivo + "\n";
 		strDado += "Data/Hora: " + util.obterTexto(data) + "\n";
 		strDado += "Latitude: " + latitude + "\n";
 		strDado += "Orientação latitude: " + orientacaoLatitude + "\n";

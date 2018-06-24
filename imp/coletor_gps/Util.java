@@ -4,10 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.IOException;
 
+import java.net.NetworkInterface;
+import java.net.SocketException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Properties;
 
 class Util implements IStatusProdutor
@@ -180,6 +184,37 @@ class Util implements IStatusProdutor
 	public double converterRadianosEmGraus(double radianos)
 	{
 		return (radianos * 180 / Math.PI);
+	}
+
+	public String obterEnderecoMAC()
+	{
+		String enderecoMAC = "";
+
+		try
+		{
+			Enumeration<NetworkInterface> interfacesRede = NetworkInterface.getNetworkInterfaces();
+
+			while (interfacesRede.hasMoreElements())
+			{
+				NetworkInterface rede = interfacesRede.nextElement();
+				byte[] bytesEnderecoMAC = rede.getHardwareAddress();
+
+				if (bytesEnderecoMAC != null)
+					for (int i = 0; i < bytesEnderecoMAC.length; ++i)
+						enderecoMAC += String.format("%02X%s", bytesEnderecoMAC[i], (i < bytesEnderecoMAC.length - 1) ? "-" : "");
+			}
+
+			statusMudou(Status.Semaforo.Verde);
+		}
+		catch (SocketException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		finally
+		{
+			return (enderecoMAC);
+		}
 	}
 
 	public Status getStatus()
