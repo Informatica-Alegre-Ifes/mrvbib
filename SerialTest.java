@@ -97,7 +97,7 @@ public class SerialTest
                         break;
                     memoria[tam++] = (byte) dado;
                 }
-                System.out.print(new String(memoria, 0, tam));
+                System.out.println(new String(memoria, 0, tam));
             }
             catch ( IOException e )
             {
