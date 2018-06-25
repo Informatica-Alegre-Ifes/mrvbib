@@ -9,8 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * This version of the TwoWaySerialComm example makes use of the 
- * SerialPortEventListener to avoid polling.
+ INSTALAR
  *
  */
 public class SerialTest
@@ -20,88 +19,87 @@ public class SerialTest
         super();
     }
     
-    void connect ( String portName ) throws Exception
+    public void conectar(String portName) throws Exception
     {
-        CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
-        if ( portIdentifier.isCurrentlyOwned() )
+        CommPortIdentifier identificadorPorta = CommPortIdentifier.getPortIdentifier(portName);
+
+        if (identificadorPorta.isCurrentlyOwned())
         {
-            System.out.println("Error: Port is currently in use");
+            System.out.println("Porta em uso.");
         }
         else
         {
-            CommPort commPort = portIdentifier.open(this.getClass().getName(), 1000);
+            CommPort portaComunicacao = identificadorPorta.open(this.getClass().getName(), 1000);
             
-            if ( commPort instanceof SerialPort )
+            if (portaComunicacao instanceof SerialPort)
             {
-                SerialPort serialPort = (SerialPort) commPort;
-                serialPort.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+                SerialPort portaSerial = (SerialPort) portaComunicacao;
+                portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
                 
-                //InputStream in = serialPort.getInputStream();
-                OutputStream out = serialPort.getOutputStream();
-                String content;
+                InputStream streamEntrada = portaSerial.getInputStream();
+                portaSerial.addEventListener(new SerialReader(streamEntrada));
+                portaSerial.notifyOnDataAvailable(true);
+
+                OutputStream streamSaida = portaSerial.getOutputStream();
+                String conteudo;
                 byte[] bytes;
 
-                content = "AT" + "\r\n";
-                bytes = content.getBytes();                
-                out.write(bytes);
+                conteudo = "AT" + "\r\n";
+                bytes = conteudo.getBytes();                
+                streamSaida.write(bytes);
                 Thread.sleep(1000);
-                content = "ATE0" + "\r\n";
-                bytes = content.getBytes();                
-                out.write(bytes);
+                conteudo = "ATE0" + "\r\n";
+                bytes = conteudo.getBytes();                
+                streamSaida.write(bytes);
                 Thread.sleep(1000);
-                content = "AT+CMGF=1" + "\r\n";
-                bytes = content.getBytes();                
-                out.write(bytes);
+                conteudo = "AT+CMGF=1" + "\r\n";
+                bytes = conteudo.getBytes();                
+                streamSaida.write(bytes);
                 Thread.sleep(1000);
-                content = "AT+CMGS=\"+5527999150088\"" + "\r\n";
-                bytes = content.getBytes();                
-                out.write(bytes);
+                conteudo = "AT+CMGS=\"+5527999150088\"" + "\r\n";
+                bytes = conteudo.getBytes();                
+                streamSaida.write(bytes);
                 Thread.sleep(1000);
-                content = "MRVBIB Test" + "\r\n";
-                bytes = content.getBytes();                
-                out.write(bytes);
+                conteudo = "MRVBIB Test" + "\r\n";
+                bytes = conteudo.getBytes();                
+                streamSaida.write(bytes);
                                
-                //(new Thread(new SerialWriter(out))).start();
-                
-                //serialPort.addEventListener(new SerialReader(in));
-                //serialPort.notifyOnDataAvailable(true);
-
+                //(new Thread(new SerialWriter(streamSaida))).start();
             }
             else
             {
-                System.out.println("Error: Only serial ports are handled by this example.");
+                System.out.println("Apenas portas seriais são tratadas.");
             }
         }     
     }
     
     /**
-     * Handles the input coming from the serial port. A new line character
-     * is treated as the end of a block in this example. 
+     * Trata a entrada vinda da porta serial. No final de cada bloco é adicionado o caractere de nova linha.
      */
     public static class SerialReader implements SerialPortEventListener 
     {
-        private InputStream in;
-        private byte[] buffer = new byte[1024];
+        private InputStream streamEntrada;
+        private byte[] memoria = new byte[1024];
         
-        public SerialReader ( InputStream in )
+        public SerialReader(InputStream streamEntrada)
         {
-            this.in = in;
+            this.streamEntrada = streamEntrada;
         }
         
-        public void serialEvent(SerialPortEvent arg0) {
-            int data;
+        public void serialEvent(SerialPortEvent arg0)
+        {
+            int dado;
           
             try
             {
-                int len = 0;
-                while ( ( data = in.read()) > -1 )
+                int tam = 0;
+                while ((dado = streamEntrada.read()) > -1)
                 {
-                    if ( data == '\n' ) {
+                    if (dado == '\n')
                         break;
-                    }
-                    buffer[len++] = (byte) data;
+                    memoria[tam++] = (byte) dado;
                 }
-                System.out.print(new String(buffer,0,len));
+                System.out.print(new String(memoria, 0, tam));
             }
             catch ( IOException e )
             {
@@ -115,22 +113,20 @@ public class SerialTest
     /** */
     public static class SerialWriter implements Runnable 
     {
-        OutputStream out;
+        OutputStream streamSaida;
         
-        public SerialWriter ( OutputStream out )
+        public SerialWriter(OutputStream streamSaida)
         {
-            this.out = out;
+            this.streamSaida = streamSaida;
         }
         
-        public void run ()
+        public void run()
         {
             try
             {                
-                int c = 0;
-                while ( ( c = System.in.read()) > -1 )
-                {
-                    this.out.write(c);
-                }                
+                int letra = 0;
+                while ((letra = System.in.read()) > -1)
+                    streamSaida.write(letra);   
             }
             catch ( IOException e )
             {
@@ -140,17 +136,14 @@ public class SerialTest
         }
     }
     
-
-    
-    public static void main ( String[] args )
+    public static void main(String[] args)
     {
         try
         {
-            (new SerialTest()).connect("/dev/ttyS0");
+            (new SerialTest()).conectar("/dev/ttyS0");
         }
         catch ( Exception e )
         {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
