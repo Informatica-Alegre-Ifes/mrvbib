@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- INSTALAR
+ INSTALAR: sudo apt-get install librxtx-java
+ COMPILAR: javac SerialTest.java -classpath .:/usr/share/java/RXTXcomm.jar
+ EXECUTAR: sudo java -Djava.library.path=/usr/lib/jni -cp .:/usr/share/java/RXTXcomm.jar SerialTest
  *
  */
 public class SerialTest
@@ -45,26 +47,22 @@ public class SerialTest
                 byte[] bytes;
 
                 conteudo = "AT" + "\r\n";
-                bytes = conteudo.getBytes();                
-                streamSaida.write(bytes);
+                streamSaida.write(conteudo.getBytes());
                 Thread.sleep(1000);
                 conteudo = "ATE0" + "\r\n";
-                bytes = conteudo.getBytes();                
-                streamSaida.write(bytes);
+                streamSaida.write(conteudo.getBytes());
                 Thread.sleep(1000);
                 conteudo = "AT+CMGF=1" + "\r\n";
-                bytes = conteudo.getBytes();                
-                streamSaida.write(bytes);
+                streamSaida.write(conteudo.getBytes());
                 Thread.sleep(1000);
                 conteudo = "AT+CMGS=\"+5527999150088\"" + "\r\n";
-                bytes = conteudo.getBytes();                
-                streamSaida.write(bytes);
+                streamSaida.write(conteudo.getBytes());
                 Thread.sleep(1000);
                 conteudo = "MRVBIB Test" + "\r\n";
-                bytes = conteudo.getBytes();                
-                streamSaida.write(bytes);
+                streamSaida.write(conteudo.getBytes());
                                
                 //(new Thread(new SerialWriter(streamSaida))).start();
+                portaSerial.close();
             }
             else
             {
