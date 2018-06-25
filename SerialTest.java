@@ -31,7 +31,7 @@ public class SerialTest
         }
         else
         {
-            CommPort portaComunicacao = identificadorPorta.open(this.getClass().getName(), 1000);
+            CommPort portaComunicacao = identificadorPorta.open(this.getClass().getName(), 2000);
             
             if (portaComunicacao instanceof SerialPort)
             {
@@ -46,21 +46,28 @@ public class SerialTest
                 String conteudo;
                 byte[] bytes;
 
-                conteudo = "AT" + "\r\n";
+                conteudo = "AT" + "\r";
                 streamSaida.write(conteudo.getBytes());
+		streamSaida.flush();
                 Thread.sleep(1000);
-                conteudo = "ATE0" + "\r\n";
+                conteudo = "ATE0" + "\r";
                 streamSaida.write(conteudo.getBytes());
+		streamSaida.flush();
                 Thread.sleep(1000);
-                conteudo = "AT+CMGF=1" + "\r\n";
+		//conteudo = "AT+CPIN=\"7078\"" + "\r\n";
+                //streamSaida.write(conteudo.getBytes());
+                //Thread.sleep(1000);
+                conteudo = "AT+CMGF=1" + "\r";
                 streamSaida.write(conteudo.getBytes());
+		streamSaida.flush();
                 Thread.sleep(1000);
-                conteudo = "AT+CMGS=\"+5527999150088\"" + "\r\n";
+                conteudo = "AT+CMGS=\"+5527999150088\"" + "\r";
                 streamSaida.write(conteudo.getBytes());
+		streamSaida.flush();
                 Thread.sleep(1000);
-                conteudo = "MRVBIB Test" + "\r\n";
+                conteudo = "MRVBIB Test" + "\r";
                 streamSaida.write(conteudo.getBytes());
-                               
+		streamSaida.flush();                               
                 //(new Thread(new SerialWriter(streamSaida))).start();
                 portaSerial.close();
             }
