@@ -80,7 +80,7 @@ class SMS
 		}
 	}
 
-	public void main(String[] args) throws InterruptedException
+	public static void main(String[] args) throws InterruptedException
 	{
 		SMS sms = new SMS();
 		sms.enviar("MRVBIB Test");
