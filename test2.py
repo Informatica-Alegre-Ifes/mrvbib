@@ -32,7 +32,7 @@ time.sleep(1)
  
 # Sending a message to a particular Number
  
-port.write('AT+CMGW="+5528999312807"'+'\r')
+port.write('AT+CMGW="+5527999150088"'+'\r')
 rcv = port.read(10)
 print rcv
 time.sleep(1)
