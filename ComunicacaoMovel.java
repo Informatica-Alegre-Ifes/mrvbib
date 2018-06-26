@@ -88,6 +88,6 @@ class ComunicacaoMovel
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel();
-		ComunicacaoMovel.enviarMensagemSMS("MRVBIB Test");
+		comunicacaoMovel.enviarMensagemSMS("MRVBIB Test");
 	}
 }
