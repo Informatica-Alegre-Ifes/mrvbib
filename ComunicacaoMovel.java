@@ -91,13 +91,14 @@ class ComunicacaoMovel
 		String mensagem1 = "AT";
 		String mensagem2 = "AT+CGATT=1";
 		String mensagem3 = "AT+CGDCONT=1,\"IP\",\"zap.vivo.com.br\"";
-		String mensagem4 = "AT+CSTT=\"zap.vivo.com.br\",\"vivo\",\"vivo\"";
-		String mensagem5 = "AT+CIICR";
-		String mensagem6 = "AT+CIFSR";
-		String mensagem7 = "AT+CIPSTATUS";
-		String mensagem8 = "AT+CIPSTART=\"TCP\",\"uproc.com.br\",\"80\"";
-		String mensagem9 = "AT+CIPCLOSE";
-		String mensagem10 = "AT+CIPSHUT";
+		String mensagem4 = "AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"";
+		String mensagem5 = "AT+CSTT=\"zap.vivo.com.br\",\"vivo\",\"vivo\"";
+		String mensagem6 = "AT+CIICR";
+		String mensagem7 = "AT+CIFSR";
+		String mensagem8 = "AT+CIPSTATUS";
+		String mensagem9 = "AT+CIPSTART=\"TCP\",\"uproc.com.br\",\"80\"";
+		String mensagem10 = "AT+CIPCLOSE";
+		String mensagem11 = "AT+CIPSHUT";
 		char enter = 13;
 		char ctrlz = 26;
 
@@ -157,9 +158,13 @@ class ComunicacaoMovel
 			streamSaida.write((mensagem10 + enter).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
+			streamSaida.write((mensagem11 + enter).getBytes());
+			Thread.sleep(500);
+			streamSaida.flush();
+			fim = !fim;
+			
 			streamSaida.close();
 			portaSerial.close();
-			fim = !fim;
 		}
 		catch (PortInUseException excecao)
 		{
