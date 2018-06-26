@@ -12,9 +12,22 @@ import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
 
+/*
+*
+	INSTALAR: sudo apt-get install librxtx-java
+	COMPILAR: javac ComunicacaoMovel.java -classpath .:/usr/share/java/RXTXcomm.jar
+	EXECUTAR: sudo java -Djava.library.path=/usr/lib/jni -cp .:/usr/share/java/RXTXcomm.jar ComunicacaoMovel
+*
+*/
+
 class ComunicacaoMovel
 {
-	private boolean fim = false;
+	private boolean fim;
+
+	public ComunicacaoMovel()
+	{
+		fim = false;
+	}
 
 	private CommPortIdentifier obterPortaCommSerial()
 	{
@@ -227,40 +240,40 @@ class ComunicacaoMovel
 			threadLeituraStream.start();
 
 			streamSaida.write((mensagem1 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem2 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem3 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem4 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem5 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem6 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem7 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem8 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem9 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem10 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem11 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem12 + ctrlz).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			fim = !fim;
 
