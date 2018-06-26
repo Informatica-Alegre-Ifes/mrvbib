@@ -108,25 +108,25 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			final Thread ioThread = new Thread()
+			final Thread threadLeituraStream = new Thread()
 			{
 				@Override
 				public void run()
 				{
 					try {
-						final BufferedReader reader = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
-						String line = null;
-						while ((line = reader.readLine()) != null && !fim)
-							System.out.println(line);
-						reader.close();
+						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
+						String linha = null;
+						while ((linha = leitor.readLine()) != null && !fim)
+							System.out.println(linha);
+						leitor.close();
 					}
-					catch (final Exception e)
+					catch (final Exception excecao)
 					{
-						e.printStackTrace();
+						excecao.printStackTrace();
 					}
 				}
 			};
-			ioThread.start();
+			threadLeituraStream.start();
 
 			// streamSaida.write((mensagem1 + enter).getBytes());
 			// Thread.sleep(500);
@@ -185,18 +185,17 @@ class ComunicacaoMovel
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		String mensagem1 = "AT";
-		String mensagem2 = "AT+CGATT=1";
-		String mensagem3 = "AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"";
-		String mensagem4 = "AT+SAPBR=3,1,\"APN\",\"zap.vivo.com.br\"";
-		String mensagem5 = "AT+SAPBR=3,1,\"USER\",\"vivo\"";
-		String mensagem6 = "AT+SAPBR=3,1,\"PWD\",\"vivo\"";
-		String mensagem7 = "AT+SAPBR=1,1";
+		String mensagem2 = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
+		String mensagem3 = "AT+SAPBR=3,1,\"APN\",\"zap.vivo.com.br\"";
+		String mensagem4 = "AT+SAPBR=3,1,\"USER\",\"vivo\"";
+		String mensagem5 = "AT+SAPBR=3,1,\"PWD\",\"vivo\"";
+		String mensagem6 = "AT+SAPBR=1,1";
+		String mensagem7 = "AT+SAPBR=2,1";
 		String mensagem8 = "AT+HTTPINIT";
 		String mensagem9 = "AT+HTTPPARA=\"CID\",1";
-		String mensagem10 = "AT+HTTPPARA=\"URL\",\"www.uproc.com.br/page.php?dat=788868856775757467484648464874\"";
+		String mensagem10 = "AT+HTTPPARA=\"URL\",\"http://www.uproc.com.br\"";
 		String mensagem11 = "AT+HTTPACTION=0";
-		String mensagem12 = "AT+HTTPTERM";
-		String mensagem13 = "AT+SAPBR=0,1";
+		String mensagem12 = "AT+HTTPREAD";
 		char enter = 13;
 		char ctrlz = 26;
 
@@ -207,25 +206,25 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			final Thread ioThread = new Thread()
+			final Thread threadLeituraStream = new Thread()
 			{
 				@Override
 				public void run()
 				{
 					try {
-						final BufferedReader reader = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
-						String line = null;
-						while ((line = reader.readLine()) != null && !fim)
-							System.out.println(line);
-						reader.close();
+						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
+						String linha = null;
+						while ((linha = leitor.readLine()) != null && !fim)
+							System.out.println(linha);
+						leitor.close();
 					}
-					catch (final Exception e)
+					catch (final Exception excecao)
 					{
-						e.printStackTrace();
+						excecao.printStackTrace();
 					}
 				}
 			};
-			ioThread.start();
+			threadLeituraStream.start();
 
 			streamSaida.write((mensagem1 + enter).getBytes());
 			Thread.sleep(500);
@@ -260,10 +259,7 @@ class ComunicacaoMovel
 			streamSaida.write((mensagem11 + enter).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
-			streamSaida.write((mensagem12 + enter).getBytes());
-			Thread.sleep(500);
-			streamSaida.flush();
-			streamSaida.write((mensagem13 + ctrlz).getBytes());
+			streamSaida.write((mensagem12 + ctrlz).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
 			fim = !fim;
