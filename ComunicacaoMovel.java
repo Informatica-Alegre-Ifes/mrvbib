@@ -250,10 +250,10 @@ class ComunicacaoMovel
 			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem4 + enter).getBytes());
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			streamSaida.flush();
 			streamSaida.write((mensagem5 + enter).getBytes());
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			streamSaida.flush();
 			streamSaida.write((mensagem6 + enter).getBytes());
 			Thread.sleep(2000);
@@ -271,10 +271,10 @@ class ComunicacaoMovel
 			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem11 + enter).getBytes());
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			streamSaida.flush();
 			streamSaida.write((mensagem12 + ctrlz).getBytes());
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			streamSaida.flush();
 			fim = !fim;
 
