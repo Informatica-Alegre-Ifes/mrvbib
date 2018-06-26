@@ -144,6 +144,6 @@ class ComunicacaoMovel
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel();
-		comunicacaoMovel.enviarMensagemSMS("MRVBIB Test");
+		comunicacaoMovel.enviarMensagemHTTP("MRVBIB Test");
 	}
 }
