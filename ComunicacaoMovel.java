@@ -99,7 +99,26 @@ class ComunicacaoMovel
 			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
-			InputStream streamEntrada = portaSerial.getInputStream();
+
+			final Thread ioThread = new Thread()
+			{
+				@Override
+				public void run()
+				{
+					try {
+						final BufferedReader reader = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
+						String line = null;
+						while ((line = reader.readLine()) != null)
+							System.out.println(line);
+						reader.close();
+					}
+					catch (final Exception e)
+					{
+						e.printStackTrace();
+					}
+				}
+			};
+			ioThread.start();
 
 			streamSaida.write((mensagem1 + enter).getBytes());
 			Thread.sleep(500);
