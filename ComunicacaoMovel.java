@@ -103,27 +103,21 @@ class ComunicacaoMovel
 
 			streamSaida.write((mensagem1 + enter).getBytes());
 			Thread.sleep(500);
-			streamEntrada.read();
 			streamSaida.flush();
 			streamSaida.write((mensagem2 + enter).getBytes());
 			Thread.sleep(500);
-			streamEntrada.read();
 			streamSaida.flush();
 			streamSaida.write((mensagem3 + enter).getBytes());
 			Thread.sleep(500);
-			streamEntrada.read();
 			streamSaida.flush();
 			streamSaida.write((mensagem4 + enter).getBytes());
 			Thread.sleep(500);
-			streamEntrada.read();
 			streamSaida.flush();
 			streamSaida.write((mensagem5 + enter).getBytes());
 			Thread.sleep(500);
-			streamEntrada.read();
 			streamSaida.flush();
 			streamSaida.write((mensagem6 + enter).getBytes());
 			Thread.sleep(500);
-			streamEntrada.read();
 			streamSaida.flush();
 			// streamSaida.write((mensagem + ctrlz).getBytes());  
 			// streamSaida.flush(); 
