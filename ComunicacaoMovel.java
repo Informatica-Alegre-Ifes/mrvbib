@@ -255,9 +255,9 @@ class ComunicacaoMovel
 			streamSaida.write((mensagem5 + enter).getBytes());
 			Thread.sleep(5000);
 			streamSaida.flush();
-			streamSaida.write((mensagem6 + enter).getBytes());
-			Thread.sleep(5000);
-			streamSaida.flush();
+			// streamSaida.write((mensagem6 + enter).getBytes());
+			// Thread.sleep(5000);
+			// streamSaida.flush();
 			streamSaida.write((mensagem7 + enter).getBytes());
 			Thread.sleep(5000);
 			streamSaida.flush();
