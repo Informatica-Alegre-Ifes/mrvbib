@@ -95,7 +95,7 @@ class ComunicacaoMovel
 		String mensagem5 = "AT+CIICR";
 		String mensagem6 = "AT+CIFSR";
 		String mensagem7 = "AT+CIPSTATUS";
-		String mensagem8 = "AT+CIPSTART=\"HTTP\",\"uproc.com.br\",\"80\"";
+		String mensagem8 = "AT+CIPSTART=\"TCP\",\"uproc.com.br\",\"80\"";
 		String mensagem9 = "AT+CIPCLOSE";
 		String mensagem10 = "AT+CIPSHUT";
 		char enter = 13;
@@ -116,7 +116,7 @@ class ComunicacaoMovel
 					try {
 						final BufferedReader reader = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
 						String line = null;
-						while ((line = reader.readLine()) != null || fim)
+						while ((line = reader.readLine()) != null && !fim)
 							System.out.println(line);
 						reader.close();
 					}
