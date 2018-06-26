@@ -288,6 +288,6 @@ class ComunicacaoMovel
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel();
-		comunicacaoMovel.enviarMensagemHTTP("");
+		comunicacaoMovel.enviarMensagemHTTP();
 	}
 }
