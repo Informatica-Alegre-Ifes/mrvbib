@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.InputStream;
 
 import java.util.Enumeration;
 
@@ -98,24 +99,31 @@ class ComunicacaoMovel
 			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
+			InputStream streamEntrada = portaSerial.getInputStream();
 
 			streamSaida.write((mensagem1 + enter).getBytes());
-			Thread.sleep(100); 
+			Thread.sleep(500);
+			streamEntrada.read();
 			streamSaida.flush();
-			streamSaida.write((mensagem2 + enter).getBytes()); 
-			Thread.sleep(100); 
+			streamSaida.write((mensagem2 + enter).getBytes());
+			Thread.sleep(500);
+			streamEntrada.read();
 			streamSaida.flush();
 			streamSaida.write((mensagem3 + enter).getBytes());
-			Thread.sleep(100); 
-			streamSaida.flush(); 
-			streamSaida.write((mensagem4 + enter).getBytes()); 
-			Thread.sleep(100);  
+			Thread.sleep(500);
+			streamEntrada.read();
 			streamSaida.flush();
-			streamSaida.write((mensagem5 + enter).getBytes()); 
-			Thread.sleep(100);  
+			streamSaida.write((mensagem4 + enter).getBytes());
+			Thread.sleep(500);
+			streamEntrada.read();
 			streamSaida.flush();
-			streamSaida.write((mensagem6 + enter).getBytes()); 
-			Thread.sleep(100);  
+			streamSaida.write((mensagem5 + enter).getBytes());
+			Thread.sleep(500);
+			streamEntrada.read();
+			streamSaida.flush();
+			streamSaida.write((mensagem6 + enter).getBytes());
+			Thread.sleep(500);
+			streamEntrada.read();
 			streamSaida.flush();
 			// streamSaida.write((mensagem + ctrlz).getBytes());  
 			// streamSaida.flush(); 
