@@ -30,12 +30,12 @@ class ComunicacaoMovel
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 
-		String messageString1 = "AT";
-		String messageString2 = "AT+CPIN=\"7078\"";
-		String messageString3 = "AT+CMGF=1"; 
-		String messageString4 = "AT+CMGS=\"+27999150088\"";
+		String mensagem1 = "AT";
+		String mensagem2 = "AT+CPIN=\"7078\"";
+		String mensagem3 = "AT+CMGF=1"; 
+		String mensagem4 = "AT+CMGS=\"+27999150088\"";
 		char enter = 13;
-		char CTRLZ = 26;
+		char ctrlz = 26;
 
 		try
 		{
@@ -44,19 +44,19 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			streamSaida.write((messageString1 + enter).getBytes());
+			streamSaida.write((mensagem1 + enter).getBytes());
 			Thread.sleep(100); 
 			streamSaida.flush();
-			streamSaida.write((messageString2 + enter).getBytes()); 
+			streamSaida.write((mensagem2 + enter).getBytes()); 
 			Thread.sleep(100); 
 			streamSaida.flush();
-			streamSaida.write((messageString3 + enter).getBytes());
+			streamSaida.write((mensagem3 + enter).getBytes());
 			Thread.sleep(100); 
 			streamSaida.flush(); 
-			streamSaida.write((messageString4 + enter).getBytes()); 
+			streamSaida.write((mensagem4 + enter).getBytes()); 
 			Thread.sleep(100);  
 			streamSaida.flush();
-			streamSaida.write((mensagem + CTRLZ).getBytes());  
+			streamSaida.write((mensagem + ctrlz).getBytes());  
 			streamSaida.flush(); 
 			Thread.sleep(500); 
 			streamSaida.close();
