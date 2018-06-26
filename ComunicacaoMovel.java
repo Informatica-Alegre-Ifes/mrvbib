@@ -128,35 +128,35 @@ class ComunicacaoMovel
 			};
 			threadLeituraStream.start();
 
-			// streamSaida.write((mensagem1 + enter).getBytes());
-			// Thread.sleep(500);
-			// streamSaida.flush();
-			streamSaida.write((mensagem2 + enter).getBytes());
-			Thread.sleep(500);
+			streamSaida.write((mensagem1 + enter).getBytes());
+			Thread.sleep(2000);
 			streamSaida.flush();
-			// streamSaida.write((mensagem3 + enter).getBytes());
-			// Thread.sleep(500);
-			// streamSaida.flush();
+			streamSaida.write((mensagem2 + enter).getBytes());
+			Thread.sleep(2000);
+			streamSaida.flush();
+			streamSaida.write((mensagem3 + enter).getBytes());
+			Thread.sleep(2000);
+			streamSaida.flush();
 			streamSaida.write((mensagem4 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem5 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem6 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
-			// streamSaida.write((mensagem7 + enter).getBytes());
-			// Thread.sleep(500);
-			// streamSaida.flush();
+			streamSaida.write((mensagem7 + enter).getBytes());
+			Thread.sleep(2000);
+			streamSaida.flush();
 			streamSaida.write((mensagem8 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem9 + enter).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			streamSaida.write((mensagem10 + ctrlz).getBytes());
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			streamSaida.flush();
 			fim = !fim;
 
@@ -288,6 +288,6 @@ class ComunicacaoMovel
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel();
-		comunicacaoMovel.enviarMensagemHTTP();
+		comunicacaoMovel.enviarMensagemHTTP("");
 	}
 }
