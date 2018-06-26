@@ -95,7 +95,7 @@ class ComunicacaoMovel
 		String mensagem5 = "AT+CIICR";
 		String mensagem6 = "AT+CIFSR";
 		String mensagem7 = "AT+CIPSTATUS";
-		String mensagem8 = "AT+CIPSTART=\"TCP\",\"google.com\",\"80\"";
+		String mensagem8 = "AT+CIPSTART=\"TCP\",\"uproc.com.br\",\"80\"";
 		String mensagem9 = "AT+CIPCLOSE";
 		String mensagem10 = "AT+CIPSHUT";
 		char enter = 13;
