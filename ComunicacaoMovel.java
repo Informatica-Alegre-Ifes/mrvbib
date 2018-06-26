@@ -203,7 +203,7 @@ class ComunicacaoMovel
 		String mensagem4 = "AT+CSQ";
 		String mensagem5 = "AT+CIICR";
 		String mensagem6 = "AT+CIPSHUT";
-		String mensagem7 = "AT+SAPBR=3,1,\"APN\",\"HSUPA\"";
+		String mensagem7 = "AT+SAPBR=3,1,\"APN\",\"SUPL\"";
 		String mensagem8 = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
 		String mensagem9 = "AT+SAPBR=1,1";
 		String mensagem10 = "AT+HTTPINIT=?";
