@@ -197,19 +197,33 @@ class ComunicacaoMovel
 	public void enviarMensagemHTTP()
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
-		String mensagem1 = "AT+CREG?";
-		String mensagem2 = "AT+CGATT?";
-		String mensagem3 = "AT+CSTT=\"zap.vivo.com.br\",\"vivo\",\"vivo\"";
-		String mensagem4 = "AT+CSQ";
-		String mensagem5 = "AT+CIICR";
-		String mensagem6 = "AT+CIPSHUT";
-		String mensagem7 = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
-		String mensagem8 = "AT+SAPBR=3,1,\"APN\",\"zap.vivo.com.br\"";
-		String mensagem9 = "AT+SAPBR=1,1";
-		String mensagem10 = "AT+HTTPINIT=?";
-		String mensagem11 = "AT+HTTPPARA=\"URL\",\"www.uproc.com.br\"";
-		String mensagem12 = "AT+HTTPACTION=0";
-		String mensagem13 = "AT+HTTPREAD";
+		// String mensagem1 = "AT+CREG?";
+		// String mensagem2 = "AT+CGATT?";
+		// String mensagem3 = "AT+CSTT=\"zap.vivo.com.br\",\"vivo\",\"vivo\"";
+		// String mensagem4 = "AT+CSQ";
+		// String mensagem5 = "AT+CIICR";
+		// String mensagem6 = "AT+CIPSHUT";
+		// String mensagem7 = "AT+SAPBR=3,1,\"Contype\",\"GPRS\"";
+		// String mensagem8 = "AT+SAPBR=3,1,\"APN\",\"zap.vivo.com.br\"";
+		// String mensagem9 = "AT+SAPBR=1,1";
+		// String mensagem10 = "AT+HTTPINIT=?";
+		// String mensagem11 = "AT+HTTPPARA=\"URL\",\"www.uproc.com.br\"";
+		// String mensagem12 = "AT+HTTPACTION=0";
+		// String mensagem13 = "AT+HTTPREAD";
+
+		String mensagem1 = "AT";
+		String mensagem2 = "AT+CFUN=0";
+		String mensagem3 = "AT+IPR=57600";
+		String mensagem4 = "ATE0";
+		String mensagem5 = "ATE0";
+		String mensagem6 = "AT+CMEE=1";
+		String mensagem7 = "AT+CFUN=1";
+		String mensagem8 = "AT+CPIN?";
+		String mensagem9 = "AT+CIPSHUT";
+		String mensagem10 = "AT+CSTT=\"zap.vivo.com.br\"";
+		String mensagem11 = "AT+CIICR";
+		String mensagem12 = "AT+CIFSR";
+		String mensagem13 = "AT+CIPSPRT=2";
 		char enter = 13;
 		char ctrlz = 26;
 
