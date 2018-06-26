@@ -90,8 +90,8 @@ class ComunicacaoMovel
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		String mensagem1 = "AT";
 		String mensagem2 = "AT+CGATT=1";
-		String mensagem3 = "AT+CGDCONT=1,\"IP\",\"zap.vivo.com.br\"";
-		String mensagem4 = "AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"";
+		String mensagem3 = "AT+CSNS=4";
+		String mensagem4 = "AT+CGDCONT=1,\"IP\",\"zap.vivo.com.br\"";
 		String mensagem5 = "AT+CSTT=\"zap.vivo.com.br\",\"vivo\",\"vivo\"";
 		String mensagem6 = "AT+CIICR";
 		String mensagem7 = "AT+CIFSR";
@@ -144,25 +144,26 @@ class ComunicacaoMovel
 			streamSaida.write((mensagem5 + enter).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
-			streamSaida.write((mensagem6 + enter).getBytes());
-			Thread.sleep(500);
-			streamSaida.flush();
+			// streamSaida.write((mensagem6 + enter).getBytes());
+			// Thread.sleep(500);
+			// streamSaida.flush();
 			streamSaida.write((mensagem7 + enter).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
 			streamSaida.write((mensagem8 + enter).getBytes());
 			Thread.sleep(500);
+			streamSaida.flush();
 			streamSaida.write((mensagem9 + enter).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
 			streamSaida.write((mensagem10 + enter).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
-			streamSaida.write((mensagem11 + enter).getBytes());
+			streamSaida.write((mensagem10 + ctrlz).getBytes());
 			Thread.sleep(500);
 			streamSaida.flush();
 			fim = !fim;
-			
+
 			streamSaida.close();
 			portaSerial.close();
 		}
