@@ -14,6 +14,8 @@ import gnu.io.UnsupportedCommOperationException;
 
 class ComunicacaoMovel
 {
+	private boolean fim = false;
+
 	private CommPortIdentifier obterPortaCommSerial()
 	{
 		Enumeration portasComm = CommPortIdentifier.getPortIdentifiers();
@@ -87,13 +89,15 @@ class ComunicacaoMovel
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		String mensagem1 = "AT";
-		String mensagem2 = "AT+CGATT=1";
+		String mensagem2 = "AT+CGATT?"; //"AT+CGATT=1";
 		String mensagem3 = "AT+CGDCONT=1,\"IP\",\"zap.vivo.com.br\"";
 		String mensagem4 = "AT+CSTT=\"zap.vivo.com.br\",\"vivo\",\"vivo\"";
 		String mensagem5 = "AT+CIICR";
 		String mensagem6 = "AT+CIFSR";
 		String mensagem7 = "AT+CIPSTATUS";
 		String mensagem8 = "AT+CIPSTART=\"TCP\",\"google.com\",\"80\"";
+		String mensagem9 = "AT+CIPCLOSE";
+		String mensagem10 = "AT+CIPSHUT";
 		char enter = 13;
 		char ctrlz = 26;
 
@@ -112,7 +116,7 @@ class ComunicacaoMovel
 					try {
 						final BufferedReader reader = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
 						String line = null;
-						while ((line = reader.readLine()) != null)
+						while ((line = reader.readLine()) != null || fim)
 							System.out.println(line);
 						reader.close();
 					}
@@ -147,9 +151,15 @@ class ComunicacaoMovel
 			streamSaida.flush();
 			streamSaida.write((mensagem8 + enter).getBytes());
 			Thread.sleep(500);
+			streamSaida.write((mensagem9 + enter).getBytes());
+			Thread.sleep(500);
+			streamSaida.flush();
+			streamSaida.write((mensagem10 + enter).getBytes());
+			Thread.sleep(500);
 			streamSaida.flush();
 			streamSaida.close();
 			portaSerial.close();
+			fim = !fim;
 		}
 		catch (PortInUseException excecao)
 		{
