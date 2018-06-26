@@ -82,7 +82,63 @@ class ComunicacaoMovel
 
 	public void enviarMensagemHTTP(String mensagem)
 	{
+		CommPortIdentifier portaComm = obterPortaCommSerial();
+		String mensagem1 = "AT";
+		String mensagem2 = "AT+CPIN=\"7078\"";
+		String mensagem3 = "AT+CGATT=1";
+		String mensagem4 = "AT+CGDCONT=1,\"IP\",\"zap.vivo.com.br\"";
+		String mensagem5 = "AT+CIICR";
+		String mensagem6 = "AT+CIPSTATUS";
+		char enter = 13;
+		char ctrlz = 26;
 
+		try
+		{
+			SerialPort portaSerial = (SerialPort) portaComm.open("/dev/ttyS0", 2000);
+			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
+
+			OutputStream streamSaida = portaSerial.getOutputStream();
+
+			streamSaida.write((mensagem1 + enter).getBytes());
+			Thread.sleep(100); 
+			streamSaida.flush();
+			streamSaida.write((mensagem2 + enter).getBytes()); 
+			Thread.sleep(100); 
+			streamSaida.flush();
+			streamSaida.write((mensagem3 + enter).getBytes());
+			Thread.sleep(100); 
+			streamSaida.flush(); 
+			streamSaida.write((mensagem4 + enter).getBytes()); 
+			Thread.sleep(100);  
+			streamSaida.flush();
+			streamSaida.write((mensagem5 + enter).getBytes()); 
+			Thread.sleep(100);  
+			streamSaida.flush();
+			streamSaida.write((mensagem6 + enter).getBytes()); 
+			Thread.sleep(100);  
+			streamSaida.flush();
+			// streamSaida.write((mensagem + ctrlz).getBytes());  
+			// streamSaida.flush(); 
+			// Thread.sleep(500);
+			streamSaida.close();
+			portaSerial.close();
+		}
+		catch (PortInUseException excecao)
+		{
+			excecao.printStackTrace();
+		}
+		catch (IOException excecao)
+		{
+			excecao.printStackTrace();
+		}
+		catch (UnsupportedCommOperationException excecao)
+		{
+			excecao.printStackTrace();
+		}
+		catch (InterruptedException excecao)
+		{
+			excecao.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args)
