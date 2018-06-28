@@ -54,10 +54,10 @@ class ComunicacaoMovel
 		List<String> mensagensSIM = new ArrayList<String>();
 		// mensagensSIM.add("AT&F");
 		mensagensSIM.add("AT");
-		mensagensSIM.add("AT+CMEE=2");
-		mensagensSIM.add("AT+CSCS=\"GSM\"");
-		mensagensSIM.add("AT+CMGF?");
-		mensagensSIM.add("AT+CMGF=?");
+		// mensagensSIM.add("AT+CMEE=2");
+		// mensagensSIM.add("AT+CSCS=\"GSM\"");
+		// mensagensSIM.add("AT+CMGF?");
+		// mensagensSIM.add("AT+CMGF=?");
 		mensagensSIM.add("AT+CMGF=1");
 		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
 		mensagensSIM.add(mensagem);
