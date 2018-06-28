@@ -59,7 +59,7 @@ class ComunicacaoMovel
 		// mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
 
 		String mensagem1 = "AT";
-		String mensagem2 = "AT+CMEE=1";
+		String mensagem2 = "AT+CMEE=2";
 		String mensagem3 = "AT+CPIN=\"7078\"";
 		String mensagem4 = "AT+CMGF=1"; 
 		String mensagem5 = "AT+CMGS=\"+27999150088\"";
