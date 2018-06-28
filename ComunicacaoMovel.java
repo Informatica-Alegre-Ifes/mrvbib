@@ -51,17 +51,17 @@ class ComunicacaoMovel
 	public void enviarMensagemSMS(String numeroCelular, String mensagem)
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
-		List<String> mensagensSIM = new ArrayList<String>();
+		// List<String> mensagensSIM = new ArrayList<String>();
 
-		mensagensSIM.add("AT");
-		mensagensSIM.add("AT+CPIN=\"7078\"");
-		mensagensSIM.add("AT+CMGF=1");
-		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
+		// mensagensSIM.add("AT");
+		// mensagensSIM.add("AT+CPIN=\"7078\"");
+		// mensagensSIM.add("AT+CMGF=1");
+		// mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
 
-		// String mensagem1 = "AT";
-		// String mensagem2 = "AT+CPIN=\"7078\"";
-		// String mensagem3 = "AT+CMGF=1"; 
-		// String mensagem4 = "AT+CMGS=\"+27999150088\"";
+		String mensagem1 = "AT";
+		String mensagem2 = "AT+CPIN=\"7078\"";
+		String mensagem3 = "AT+CMGF=1"; 
+		String mensagem4 = "AT+CMGS=\"+27999150088\"";
 
 		try
 		{
@@ -70,39 +70,39 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			for (int i = 0; i < mensagensSIM.size(); ++i)
-			{
-				if (i < (mensagensSIM.size() - 1))
-				{
-					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
-					System.out.println(mensagensSIM.get(i) + enter);
-					Thread.sleep(100);
-					streamSaida.flush();
-				}
-				else
-				{
-					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
-					System.out.println(mensagensSIM.get(i) + ctrlz);
-					streamSaida.flush();
-					Thread.sleep(500);
-				}
-			}
+			// for (int i = 0; i < mensagensSIM.size(); ++i)
+			// {
+			// 	if (i < (mensagensSIM.size() - 1))
+			// 	{
+			// 		streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
+			// 		System.out.println(mensagensSIM.get(i) + enter);
+			// 		Thread.sleep(100);
+			// 		streamSaida.flush();
+			// 	}
+			// 	else
+			// 	{
+			// 		streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
+			// 		System.out.println(mensagensSIM.get(i) + ctrlz);
+			// 		streamSaida.flush();
+			// 		Thread.sleep(500);
+			// 	}
+			// }
 
-			// streamSaida.write((mensagem1 + enter).getBytes());
-			// Thread.sleep(100); 
-			// streamSaida.flush();
-			// streamSaida.write((mensagem2 + enter).getBytes()); 
-			// Thread.sleep(100); 
-			// streamSaida.flush();
-			// streamSaida.write((mensagem3 + enter).getBytes());
-			// Thread.sleep(100); 
-			// streamSaida.flush(); 
-			// streamSaida.write((mensagem4 + enter).getBytes()); 
-			// Thread.sleep(100);  
-			// streamSaida.flush();
-			// streamSaida.write((mensagem + ctrlz).getBytes());  
-			// streamSaida.flush(); 
-			// Thread.sleep(500); 
+			streamSaida.write((mensagem1 + enter).getBytes());
+			Thread.sleep(100); 
+			streamSaida.flush();
+			streamSaida.write((mensagem2 + enter).getBytes()); 
+			Thread.sleep(100); 
+			streamSaida.flush();
+			streamSaida.write((mensagem3 + enter).getBytes());
+			Thread.sleep(100); 
+			streamSaida.flush(); 
+			streamSaida.write((mensagem4 + enter).getBytes()); 
+			Thread.sleep(100);  
+			streamSaida.flush();
+			streamSaida.write((mensagem + ctrlz).getBytes());  
+			streamSaida.flush(); 
+			Thread.sleep(500); 
 
 			streamSaida.close();
 			portaSerial.close();
