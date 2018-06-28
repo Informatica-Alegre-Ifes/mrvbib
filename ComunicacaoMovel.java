@@ -63,6 +63,7 @@ class ComunicacaoMovel
 		mensagensSIM.add("AT+CPIN=\"1234\"");
 		mensagensSIM.add("AT+CMGF=1");
 		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
+		mensagensSIM.add(mensagem);
 
 		// String mensagem1 = "AT";
 		// String mensagem2 = "AT+CMEE=2";
