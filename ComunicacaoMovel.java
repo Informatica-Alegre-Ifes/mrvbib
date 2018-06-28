@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import java.util.Enumeration;
+import java.util.List;
+import java.util.ArrayList;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -22,6 +24,8 @@ import gnu.io.UnsupportedCommOperationException;
 
 class ComunicacaoMovel
 {
+	private static final char enter = 13;
+	private static final char ctrlz = 26;
 	private boolean fim;
 
 	public ComunicacaoMovel()
@@ -44,16 +48,20 @@ class ComunicacaoMovel
 		return (null);
 	}
 
-	public void enviarMensagemSMS(String mensagem)
+	public void enviarMensagemSMS(String numeroCelular, String mensagem)
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
+		List<String> mensagensSIM = new ArrayList<String>();
 
-		String mensagem1 = "AT";
-		String mensagem2 = "AT+CPIN=\"7078\"";
-		String mensagem3 = "AT+CMGF=1"; 
-		String mensagem4 = "AT+CMGS=\"+27999150088\"";
-		char enter = 13;
-		char ctrlz = 26;
+		mensagensSIM.add("AT");
+		mensagensSIM.add("AT+CPIN=\"7078\"");
+		mensagensSIM.add("AT+CMGF=1");
+		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
+
+		// String mensagem1 = "AT";
+		// String mensagem2 = "AT+CPIN=\"7078\"";
+		// String mensagem3 = "AT+CMGF=1"; 
+		// String mensagem4 = "AT+CMGS=\"+27999150088\"";
 
 		try
 		{
@@ -62,21 +70,32 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			streamSaida.write((mensagem1 + enter).getBytes());
-			Thread.sleep(100); 
-			streamSaida.flush();
-			streamSaida.write((mensagem2 + enter).getBytes()); 
-			Thread.sleep(100); 
-			streamSaida.flush();
-			streamSaida.write((mensagem3 + enter).getBytes());
-			Thread.sleep(100); 
-			streamSaida.flush(); 
-			streamSaida.write((mensagem4 + enter).getBytes()); 
-			Thread.sleep(100);  
-			streamSaida.flush();
-			streamSaida.write((mensagem + ctrlz).getBytes());  
-			streamSaida.flush(); 
-			Thread.sleep(500); 
+			for (int i = 0; i < mensagensSIM.size(); ++i)
+			{
+				if (i < (mensagensSIM.size() - 1))
+					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
+				else
+					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
+				Thread.sleep(100);
+				streamSaida.flush();
+			}
+
+			// streamSaida.write((mensagem1 + enter).getBytes());
+			// Thread.sleep(100); 
+			// streamSaida.flush();
+			// streamSaida.write((mensagem2 + enter).getBytes()); 
+			// Thread.sleep(100); 
+			// streamSaida.flush();
+			// streamSaida.write((mensagem3 + enter).getBytes());
+			// Thread.sleep(100); 
+			// streamSaida.flush(); 
+			// streamSaida.write((mensagem4 + enter).getBytes()); 
+			// Thread.sleep(100);  
+			// streamSaida.flush();
+			// streamSaida.write((mensagem + ctrlz).getBytes());  
+			// streamSaida.flush(); 
+			// Thread.sleep(500); 
+
 			streamSaida.close();
 			portaSerial.close();
 		}
@@ -126,7 +145,8 @@ class ComunicacaoMovel
 				@Override
 				public void run()
 				{
-					try {
+					try
+					{
 						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
 						String linha = null;
 						while ((linha = leitor.readLine()) != null && !fim)
@@ -239,7 +259,8 @@ class ComunicacaoMovel
 				@Override
 				public void run()
 				{
-					try {
+					try
+					{
 						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
 						String linha = null;
 						while ((linha = leitor.readLine()) != null && !fim)
@@ -319,6 +340,6 @@ class ComunicacaoMovel
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel();
-		comunicacaoMovel.enviarMensagemHTTP();
+		comunicacaoMovel.enviarMensagemSMS("27999150088", "MRVBIB Test");
 	}
 }
