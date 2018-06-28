@@ -59,9 +59,10 @@ class ComunicacaoMovel
 		// mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
 
 		String mensagem1 = "AT";
-		String mensagem2 = "AT+CPIN=\"7078\"";
-		String mensagem3 = "AT+CMGF=1"; 
-		String mensagem4 = "AT+CMGS=\"+27999150088\"";
+		String mensagem2 = "AT+CMEE=1";
+		String mensagem3 = "AT+CPIN=\"7078\"";
+		String mensagem4 = "AT+CMGF=1"; 
+		String mensagem5 = "AT+CMGS=\"+27999150088\"";
 		char enter = 13;
 		char ctrlz = 26;
 
@@ -121,6 +122,9 @@ class ComunicacaoMovel
 			Thread.sleep(2000); 
 			streamSaida.flush(); 
 			streamSaida.write((mensagem4 + enter).getBytes()); 
+			Thread.sleep(2000);  
+			streamSaida.flush();
+			streamSaida.write((mensagem5 + enter).getBytes()); 
 			Thread.sleep(2000);  
 			streamSaida.flush();
 			streamSaida.write((mensagem + ctrlz).getBytes());  
