@@ -53,14 +53,12 @@ class ComunicacaoMovel
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		List<String> mensagensSIM = new ArrayList<String>();
 
+		mensagensSIM.add("ATZ");
+		mensagensSIM.add("AT&F");
 		mensagensSIM.add("AT");
+		mensagensSIM.add("AT+CMEE=2");
 		mensagensSIM.add("AT+CPIN?");
-		mensagensSIM.add("AT+CLCK=\"SC\",2");
-		mensagensSIM.add("AT+CLCK=\"SC\",1,\"1234\"");
-		mensagensSIM.add("AT+CFUN=1,1");
-		mensagensSIM.add("WAIT=15");
-		mensagensSIM.add("AT+CPIN?");
-		mensagensSIM.add("AT+CPIN=\"1234\"");
+		mensagensSIM.add("AT+CPIN=\"7078\"");
 		mensagensSIM.add("AT+CMGF=1");
 		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
 		mensagensSIM.add(mensagem);
