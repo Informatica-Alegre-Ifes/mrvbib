@@ -73,13 +73,20 @@ class ComunicacaoMovel
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
 				if (i < (mensagensSIM.size() - 1))
+				{
 					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
+					System.out.println(mensagensSIM.get(i) + enter);
+					Thread.sleep(100);
+					streamSaida.flush();
+				}
 				else
+				{
 					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
-				Thread.sleep(100);
-				streamSaida.flush();
+					System.out.println(mensagensSIM.get(i) + ctrlz);
+					streamSaida.flush();
+					Thread.sleep(500);
+				}
 			}
-			Thread.sleep(500);
 
 			// streamSaida.write((mensagem1 + enter).getBytes());
 			// Thread.sleep(100); 
