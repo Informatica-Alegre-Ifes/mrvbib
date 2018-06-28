@@ -102,8 +102,8 @@ class ComunicacaoMovel
 				if (i < (mensagensSIM.size() - 1))
 					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
 				else
-					streamSaida.write((mensagensSIM.get(i) + ctrlz + enter).getBytes());
-				Thread.sleep(100);
+					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
+				Thread.sleep(1000);
 				streamSaida.flush();
 			}
 
