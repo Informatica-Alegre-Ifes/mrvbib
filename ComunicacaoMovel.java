@@ -51,22 +51,22 @@ class ComunicacaoMovel
 	public void enviarMensagemSMS(String numeroCelular, String mensagem)
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
-		List<String> mensagensSIM = new ArrayList<String>();
+		// List<String> mensagensSIM = new ArrayList<String>();
 		// mensagensSIM.add("AT&F");
-		mensagensSIM.add("AT");
+		// mensagensSIM.add("AT");
 		// mensagensSIM.add("AT+CMEE=2");
 		// mensagensSIM.add("AT+CSCS=\"GSM\"");
 		// mensagensSIM.add("AT+CMGF?");
 		// mensagensSIM.add("AT+CMGF=?");
 		// mensagensSIM.add("AT+CPIN=\"1983\"");
-		mensagensSIM.add("AT+CMGF=1");
-		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
-		mensagensSIM.add(mensagem);
+		// mensagensSIM.add("AT+CMGF=1");
+		// mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
+		// mensagensSIM.add(mensagem);
 
-		// String mensagem1 = "AT";
-		// String mensagem3 = "AT+CPIN=\"7078\"";
-		// String mensagem4 = "AT+CMGF=1"; 
-		// String mensagem5 = "AT+CMGS=\"+27999150088\"";
+		String mensagem1 = "AT";
+		// String mensagem2 = "AT+CPIN=\"7078\"";
+		String mensagem3 = "AT+CMGF=1"; 
+		String mensagem4 = "AT+CMGS=\"+27999150088\"";
 		char enter = 13;
 		char ctrlz = 26;
 
@@ -77,56 +77,53 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			final Thread threadLeituraStream = new Thread()
-			{
-				@Override
-				public void run()
-				{
-					try
-					{
-						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
-						String linha = null;
-						while ((linha = leitor.readLine()) != null && !fim)
-							System.out.println(linha);
-						leitor.close();
-					}
-					catch (final Exception excecao)
-					{
-						excecao.printStackTrace();
-					}
-				}
-			};
-			//threadLeituraStream.start();
+			// final Thread threadLeituraStream = new Thread()
+			// {
+			// 	@Override
+			// 	public void run()
+			// 	{
+			// 		try
+			// 		{
+			// 			final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
+			// 			String linha = null;
+			// 			while ((linha = leitor.readLine()) != null && !fim)
+			// 				System.out.println(linha);
+			// 			leitor.close();
+			// 		}
+			// 		catch (final Exception excecao)
+			// 		{
+			// 			excecao.printStackTrace();
+			// 		}
+			// 	}
+			// };
+			// threadLeituraStream.start();
 
-			for (int i = 0; i < mensagensSIM.size(); ++i)
-			{
-				if (i < (mensagensSIM.size() - 1))
-					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
-				else
-					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
-				Thread.sleep(1000);
-				streamSaida.flush();
-			}
+			// for (int i = 0; i < mensagensSIM.size(); ++i)
+			// {
+			// 	if (i < (mensagensSIM.size() - 1))
+			// 		streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
+			// 	else
+			// 		streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
+			// 	Thread.sleep(1000);
+			// 	streamSaida.flush();
+			// }
 
-			// streamSaida.write((mensagem1 + enter).getBytes());
-			// Thread.sleep(2000); 
-			// streamSaida.flush();
+			streamSaida.write((mensagem1 + enter).getBytes());
+			Thread.sleep(2000); 
+			streamSaida.flush();
 			// streamSaida.write((mensagem2 + enter).getBytes()); 
 			// Thread.sleep(2000); 
 			// streamSaida.flush();
-			// streamSaida.write((mensagem3 + enter).getBytes());
-			// Thread.sleep(2000); 
-			// streamSaida.flush(); 
-			// streamSaida.write((mensagem4 + enter).getBytes()); 
-			// Thread.sleep(2000);  
-			// streamSaida.flush();
-			// streamSaida.write((mensagem5 + enter).getBytes()); 
-			// Thread.sleep(2000);  
-			// streamSaida.flush();
-			// streamSaida.write((mensagem + ctrlz).getBytes());  
-			// streamSaida.flush(); 
-			// Thread.sleep(2000); 
-			// fim = !fim;
+			streamSaida.write((mensagem3 + enter).getBytes());
+			Thread.sleep(2000); 
+			streamSaida.flush(); 
+			streamSaida.write((mensagem4 + enter).getBytes()); 
+			Thread.sleep(2000);  
+			streamSaida.flush();
+			streamSaida.write((mensagem + ctrlz).getBytes());  
+			streamSaida.flush(); 
+			Thread.sleep(2000); 
+			//fim = !fim;
 
 			streamSaida.close();
 			portaSerial.close();
