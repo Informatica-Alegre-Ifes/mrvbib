@@ -24,8 +24,8 @@ import gnu.io.UnsupportedCommOperationException;
 
 class ComunicacaoMovel
 {
-	private static final char enter = 13;
-	private static final char ctrlz = 26;
+	// private static final char enter = 13;
+	// private static final char ctrlz = 26;
 	private boolean fim;
 
 	public ComunicacaoMovel()
@@ -62,6 +62,8 @@ class ComunicacaoMovel
 		String mensagem2 = "AT+CPIN=\"7078\"";
 		String mensagem3 = "AT+CMGF=1"; 
 		String mensagem4 = "AT+CMGS=\"+27999150088\"";
+		char enter = 13;
+		char ctrlz = 26;
 
 		try
 		{
