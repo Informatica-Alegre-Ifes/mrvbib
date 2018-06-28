@@ -79,6 +79,7 @@ class ComunicacaoMovel
 				Thread.sleep(100);
 				streamSaida.flush();
 			}
+			Thread.sleep(500);
 
 			// streamSaida.write((mensagem1 + enter).getBytes());
 			// Thread.sleep(100); 
