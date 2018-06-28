@@ -58,6 +58,7 @@ class ComunicacaoMovel
 		// mensagensSIM.add("AT+CSCS=\"GSM\"");
 		// mensagensSIM.add("AT+CMGF?");
 		// mensagensSIM.add("AT+CMGF=?");
+		// mensagensSIM.add("AT+CPIN=\"1983\"");
 		mensagensSIM.add("AT+CMGF=1");
 		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
 		mensagensSIM.add(mensagem);
@@ -95,7 +96,7 @@ class ComunicacaoMovel
 					}
 				}
 			};
-			threadLeituraStream.start();
+			//threadLeituraStream.start();
 
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
