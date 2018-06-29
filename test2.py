@@ -15,6 +15,11 @@ rcv = port.read(10)
 print rcv
 time.sleep(1)
 
+port.write('AT+CSQ'+'\r\n')
+rcv = port.read(10)
+print rcv
+time.sleep(1)
+
 port.write('ATE0'+'\r\n')      # Disable the Echo
 rcv = port.read(10)
 print rcv
