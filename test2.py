@@ -20,12 +20,17 @@ rcv = port.read(10)
 print rcv
 time.sleep(1)
 
+port.write('AT+CSQ=?'+'\r\n')
+rcv = port.read(10)
+print rcv
+time.sleep(1)
+
 port.write('AT+CMGF=1'+'\r\n')  # Select Message format as Text mode 
 rcv = port.read(10)
 print rcv
 time.sleep(1)
 
-port.write('AT+CSQ=?'+'\r\n')
+port.write('AT+CSQ'+'\r\n')
 rcv = port.read(10)
 print rcv
 time.sleep(1)
