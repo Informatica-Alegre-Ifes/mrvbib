@@ -15,17 +15,17 @@ rcv = port.read(10)
 print rcv
 time.sleep(1)
 
-port.write('AT+CSQ'+'\r\n')
-rcv = port.read(10)
-print rcv
-time.sleep(1)
-
 port.write('ATE0'+'\r\n')      # Disable the Echo
 rcv = port.read(10)
 print rcv
 time.sleep(1)
 
 port.write('AT+CMGF=1'+'\r\n')  # Select Message format as Text mode 
+rcv = port.read(10)
+print rcv
+time.sleep(1)
+
+port.write('AT+CSQ=?'+'\r\n')
 rcv = port.read(10)
 print rcv
 time.sleep(1)
@@ -42,7 +42,7 @@ rcv = port.read(10)
 print rcv
 time.sleep(1)
 
-port.write('MRVBIB Test'+'\r\n')  # Message
+port.write('MRVBIB Test'+'\r')  # Message
 rcv = port.read(10)
 
 port.write("\x1A")
