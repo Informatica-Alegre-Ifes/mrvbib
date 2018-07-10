@@ -369,6 +369,6 @@ class ComunicacaoMovel
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel();
-		comunicacaoMovel.enviarMensagemSMS("27999150088", "MRVBIB Test");
+		comunicacaoMovel.enviarMensagemSMS("+5527999150088", "MRVBIB Test");
 	}
 }
