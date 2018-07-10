@@ -24,6 +24,9 @@ Coletor de dados GPS:
 				+ CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
 				+ export CLASSPATH
 
+		d) RXTX Library:
+			- sudo apt-get install librxtx-java
+
 		d) Pi4J:
 			- sudo dpkg -i pi4j-1.1.deb (diretório ~/recursos);
 
@@ -43,15 +46,15 @@ Coletor de dados GPS:
 				#auto wlan0
 				#allow-hotplug wlan0
 				#iface wlan0 inet dhcp
-				#    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+				#wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 	2. COMPILAR
 
-		javac coletor_gps/Coletor.java -classpath .:/classes:/opt/pi4j/lib/'*'
+		javac coletor_gps/Coletor.java -classpath .:/classes:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar
 
 	3. EXECUTAR
 		
- 		java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/mysql.jar coletor_gps.Coletor
+ 		java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar:/usr/share/java/mysql.jar coletor_gps.Coletor
 
  	4. CONFIGURAR EXECUÇÃO AUTOMÁTICA
 
@@ -60,7 +63,7 @@ Coletor de dados GPS:
  		b) Acrescente, ao final do arquivo, as seguintes linhas:
  			- # Inicialização do módulo Coletor GPS (MRVBIB)
  			- cd mrvbib/imp/
- 			- sudo java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/mysql.jar coletor_gps.Coletor
+ 			- sudo java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar:/usr/share/java/mysql.jar coletor_gps.Coletor
 
  		c) Salve as alterações no arquivo ./bashrc
 
