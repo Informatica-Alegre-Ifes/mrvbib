@@ -71,7 +71,7 @@ class ComunicacaoMovel implements IStatusProdutor
 			streamSaida.close();
 			portaSerial.close();
 
-			statusMudou(Status.Semaforo.Amarelo);
+			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (PortInUseException excecao)
 		{
