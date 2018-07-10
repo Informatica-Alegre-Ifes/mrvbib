@@ -44,6 +44,7 @@ class Coletor
 		Util util = new Util(new Status(gerenteStatus));
 		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
 		ColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
+		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(new Status(gerenteStatus));
 		
 		gerenteStatus.adicionar(serial);
 		gerenteStatus.adicionar(persistencia);
@@ -62,6 +63,7 @@ class Coletor
 				{
 					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();
+					comunicacaoMovel.enviarMensagemSMS("+5527999150088", dado.obterInformacoes());
 				}
 				Thread.sleep(intervaloMedicao);
 			}

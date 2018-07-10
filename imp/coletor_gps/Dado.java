@@ -177,7 +177,7 @@ class Dado
 		return (distancia * 60 * 1.1515d * 1609.344d);
 	}
 
-	public void imprimir()
+	public String obterInformacoes()
 	{
 		String strDado;
 
@@ -189,7 +189,7 @@ class Dado
 		strDado += "Orientação longitude: " + orientacaoLongitude + "\n";
 		strDado += "Velocidade: " + velocidade;
 
-		System.out.println(strDado);
+		return (strDado);
 	}
 
 	private void construir(String mensagemGPS)
