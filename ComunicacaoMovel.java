@@ -67,7 +67,7 @@ class ComunicacaoMovel
 
 		try
 		{
-			SerialPort portaSerial = (SerialPort) portaComm.open("/dev/ttyS0", 2000);
+			SerialPort portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
 			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
@@ -96,9 +96,9 @@ class ComunicacaoMovel
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
 				if (i < (mensagensSIM.size() - 1))
-					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
+					streamSaida.write((mensagensSIM.get(i) + "\r\n").getBytes());
 				else
-					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
+					streamSaida.write((mensagensSIM.get(i) + '\032').getBytes());
 				Thread.sleep(1000);
 				streamSaida.flush();
 			}
