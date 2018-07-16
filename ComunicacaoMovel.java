@@ -57,6 +57,7 @@ class ComunicacaoMovel
 		mensagensSIM.add("AT+CMGF=1" + "\r\n");
 		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + "\r\n");
 		mensagensSIM.add(mensagem + "\r");
+		mensagensSIM.add("\\\\x1a");
 
 		// String mensagem1 = "AT";
 		// String mensagem2 = "ATE0";
