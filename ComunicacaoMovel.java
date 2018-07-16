@@ -53,7 +53,7 @@ class ComunicacaoMovel
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		List<String> mensagensSIM = new ArrayList<String>();
 
-		mensagensSIM.add("AT" + "\r\n");
+		mensagensSIM.add("AT" + "\r");
 		mensagensSIM.add("ATE0" + "\r\n");
 		mensagensSIM.add("AT+CMGF=1" + "\r\n");
 		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + ",145\r\n");
@@ -94,7 +94,6 @@ class ComunicacaoMovel
 				Thread.sleep(1000);
 			}
 			fim = !fim;
-			Thread.sleep(20000);
 
 			streamSaida.close();
 			portaSerial.close();
