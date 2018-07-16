@@ -52,11 +52,11 @@ class ComunicacaoMovel
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		List<String> mensagensSIM = new ArrayList<String>();
-		mensagensSIM.add("AT");
-		mensagensSIM.add("ATE0");
-		mensagensSIM.add("AT+CMGF=1");
-		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
-		mensagensSIM.add(mensagem);
+		mensagensSIM.add("AT\r\n");
+		mensagensSIM.add("ATE0\r\n");
+		mensagensSIM.add("AT+CMGF=1\r\n");
+		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"\r\n");
+		mensagensSIM.add(mensagem + "\r");
 
 		// String mensagem1 = "AT";
 		// String mensagem2 = "ATE0";
@@ -95,11 +95,8 @@ class ComunicacaoMovel
 
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
-				if (i < (mensagensSIM.size() - 1))
-					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
-				else
-					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
-				Thread.sleep(2000);
+				streamSaida.write((mensagensSIM.get(i)).getBytes());
+				Thread.sleep(1000);
 				streamSaida.flush();
 			}
 
