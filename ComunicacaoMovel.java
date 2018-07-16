@@ -1,9 +1,6 @@
 import java.io.IOException;
 import java.io.OutputStream;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,23 +11,13 @@ import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
 
-/*
-*
-	INSTALAR: sudo apt-get install librxtx-java
-	COMPILAR: javac ComunicacaoMovel.java -classpath .:/usr/share/java/RXTXcomm.jar
-	EXECUTAR: sudo java -Djava.library.path=/usr/lib/jni -cp .:/usr/share/java/RXTXcomm.jar ComunicacaoMovel
-*
-*/
-
 class ComunicacaoMovel
 {
 	private String porta;
-	private boolean fim;
 
 	public ComunicacaoMovel(String porta)
 	{
 		this.porta = porta;
-		fim = false;
 	}
 
 	private CommPortIdentifier obterPortaCommSerial()
@@ -66,34 +53,12 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			final Thread threadLeituraStream = new Thread()
-			{
-				@Override
-				public void run()
-				{
-					try
-					{
-						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
-						String linha = null;
-						while ((linha = leitor.readLine()) != null && !fim)
-							System.out.println(linha);
-						leitor.close();
-					}
-					catch (final Exception excecao)
-					{
-						excecao.printStackTrace();
-					}
-				}
-			};
-			threadLeituraStream.start();
-
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
 				streamSaida.write((mensagensSIM.get(i)).getBytes());
 				streamSaida.flush();
 				Thread.sleep(1000);
 			}
-			fim = !fim;
 
 			streamSaida.close();
 			portaSerial.close();
