@@ -16,11 +16,14 @@ class ComunicacaoMovel implements IStatusProdutor
 {
 	private String porta;
 	private Status status;
+	private CommPortIdentifier portaComm;
 
 	public ComunicacaoMovel(String porta, Status status)
 	{
 		this.porta = porta;
 		this.status = status;
+
+		portaComm = obterPortaCommSerial();
 	}
 
 	private CommPortIdentifier obterPortaCommSerial()
@@ -41,7 +44,6 @@ class ComunicacaoMovel implements IStatusProdutor
 	public void enviarMensagemSMS(String numeroCelular, String mensagem)
 	{
 		List<String> mensagensSIM = new ArrayList<String>();
-		CommPortIdentifier portaComm;
 
 		mensagensSIM.add("AT" + "\r");
 		mensagensSIM.add("ATE0" + "\r\n");
@@ -51,25 +53,28 @@ class ComunicacaoMovel implements IStatusProdutor
 
 		try
 		{
-			portaComm = obterPortaCommSerial();
-			SerialPort portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
-			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
-
-			OutputStream streamSaida = portaSerial.getOutputStream();
-
-			//Led.acenderLedRoxo();
-			for (int i = 0; i < mensagensSIM.size(); ++i)
+			if (portaComm != null)
 			{
-				streamSaida.write((mensagensSIM.get(i)).getBytes());
-				streamSaida.flush();
-				Thread.sleep(1000);
+				SerialPort portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
+				portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
 
+				OutputStream streamSaida = portaSerial.getOutputStream();
+
+				//Led.acenderLedRoxo();
+				for (int i = 0; i < mensagensSIM.size(); ++i)
+				{
+					streamSaida.write((mensagensSIM.get(i)).getBytes());
+					streamSaida.flush();
+					Thread.sleep(1000);
+				}
+
+				statusMudou(Status.Semaforo.Verde);
 			}
-
-			//streamSaida.close();
-			//portaSerial.close();
-
-			statusMudou(Status.Semaforo.Verde);
+			else
+			{
+				statusMudou(Status.Semaforo.Amarelo);
+				Erro.registrar(new Exception("Porta serial (UART) em uso."));
+			}
 		}
 		catch (PortInUseException excecao)
 		{
