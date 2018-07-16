@@ -16,14 +16,34 @@ class ComunicacaoMovel implements IStatusProdutor
 {
 	private String porta;
 	private Status status;
-	private CommPortIdentifier portaComm;
+	private SerialPort portaSerial;
 
 	public ComunicacaoMovel(String porta, Status status)
 	{
 		this.porta = porta;
 		this.status = status;
+		portaSerial = obterPortaSerial();
+	}
 
-		portaComm = obterPortaCommSerial();
+	private SerialPort obterPortaSerial()
+	{
+		CommPortIdentifier portaComm = obterPortaCommSerial();
+		portaSerial = null;
+
+		try
+		{
+			portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
+			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
+		}
+		catch (PortInUseException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		finally
+		{
+			return (portaSerial);
+		}
 	}
 
 	private CommPortIdentifier obterPortaCommSerial()
@@ -55,9 +75,6 @@ class ComunicacaoMovel implements IStatusProdutor
 		{
 			if (portaComm != null)
 			{
-				SerialPort portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
-				portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
-
 				OutputStream streamSaida = portaSerial.getOutputStream();
 
 				//Led.acenderLedRoxo();
@@ -75,11 +92,6 @@ class ComunicacaoMovel implements IStatusProdutor
 				statusMudou(Status.Semaforo.Amarelo);
 				Erro.registrar(new Exception("Porta serial (UART) em uso."));
 			}
-		}
-		catch (PortInUseException excecao)
-		{
-			statusMudou(Status.Semaforo.Vermelho);
-			Erro.registrar(excecao);
 		}
 		catch (IOException excecao)
 		{

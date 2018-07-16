@@ -185,7 +185,7 @@ class Dado
 		strDado += "Data/Hora: " + util.obterTexto(data) + ". ";
 		strDado += "Latitude: " + latitude + ". ";
 		strDado += "Orientação latitude: " + orientacaoLatitude + ". ";
-		strDado += "Longitude: " + longitude + "\n";
+		strDado += "Longitude: " + longitude + ". ";
 		strDado += "Orientação longitude: " + orientacaoLongitude + ". ";
 		strDado += "Velocidade: " + velocidade + ".";
 
