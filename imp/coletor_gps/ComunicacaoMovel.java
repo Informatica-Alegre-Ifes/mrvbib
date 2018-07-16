@@ -14,12 +14,12 @@ import gnu.io.UnsupportedCommOperationException;
 
 class ComunicacaoMovel implements IStatusProdutor
 {
-	private static final char enter = 13;
-	private static final char ctrlz = 26;
+	private String porta;
 	private Status status;
 
-	public ComunicacaoMovel(Status status)
+	public ComunicacaoMovel(String porta, Status status)
 	{
+		this.porta = porta;
 		this.status = status;
 	}
 
@@ -31,7 +31,7 @@ class ComunicacaoMovel implements IStatusProdutor
 		{
 			CommPortIdentifier portaComm = (CommPortIdentifier) portasComm.nextElement();
 
-			if (portaComm.getPortType() == CommPortIdentifier.PORT_SERIAL && portaComm.getName().equals("/dev/ttyS0"))
+			if (portaComm.getPortType() == CommPortIdentifier.PORT_SERIAL && portaComm.getName().equals(porta))
 				return (portaComm);
 		}
 
@@ -43,29 +43,27 @@ class ComunicacaoMovel implements IStatusProdutor
 		List<String> mensagensSIM = new ArrayList<String>();
 		CommPortIdentifier portaComm;
 
-		mensagensSIM.add("AT");
-		mensagensSIM.add("ATE0");
-		mensagensSIM.add("AT+CMGF=1");
-		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"");
-		mensagensSIM.add(mensagem);
+		mensagensSIM.add("AT" + "\r");
+		mensagensSIM.add("ATE0" + "\r\n");
+		mensagensSIM.add("AT+CMGF=1" + "\r\n");
+		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + ",145\r\n");
+		mensagensSIM.add(mensagem + "\u001a");
 
 		try
 		{
 			portaComm = obterPortaCommSerial();
-			SerialPort portaSerial = (SerialPort) portaComm.open("/dev/ttyS0", 2000);
+			SerialPort portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
 			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
+			//Led.acenderLedRoxo();
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
-				if (i < (mensagensSIM.size() - 1))
-					streamSaida.write((mensagensSIM.get(i) + enter).getBytes());
-				else
-					streamSaida.write((mensagensSIM.get(i) + ctrlz).getBytes());
-				Thread.sleep(1000);
+				streamSaida.write((mensagensSIM.get(i)).getBytes());
 				streamSaida.flush();
-				//Led.acenderLedRoxo();
+				Thread.sleep(1000);
+
 			}
 
 			streamSaida.close();

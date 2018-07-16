@@ -44,7 +44,7 @@ class Coletor
 		Util util = new Util(new Status(gerenteStatus));
 		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
 		ColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
-		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(new Status(gerenteStatus));
+		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(portaSerial, new Status(gerenteStatus));
 		
 		gerenteStatus.adicionar(serial);
 		gerenteStatus.adicionar(persistencia);
