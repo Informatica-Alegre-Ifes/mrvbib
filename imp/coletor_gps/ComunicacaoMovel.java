@@ -99,8 +99,7 @@ class ComunicacaoMovel implements IStatusProdutor
 	}
 
 	public void enviarMensagemHTTP(String mensagem)
-	{
-		
+	{		
 	}
 
 	public Status getStatus()

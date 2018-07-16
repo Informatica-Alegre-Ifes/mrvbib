@@ -181,13 +181,13 @@ class Dado
 	{
 		String strDado;
 
-		strDado = "Dispositivo: " + codigoMACDispositivo + "\n";
-		strDado += "Data/Hora: " + util.obterTexto(data) + "\n";
-		strDado += "Latitude: " + latitude + "\n";
-		strDado += "Orientação latitude: " + orientacaoLatitude + "\n";
+		strDado = "Dispositivo: " + codigoMACDispositivo + ". ";
+		strDado += "Data/Hora: " + util.obterTexto(data) + ". ";
+		strDado += "Latitude: " + latitude + ". ";
+		strDado += "Orientação latitude: " + orientacaoLatitude + ". ";
 		strDado += "Longitude: " + longitude + "\n";
-		strDado += "Orientação longitude: " + orientacaoLongitude + "\n";
-		strDado += "Velocidade: " + velocidade;
+		strDado += "Orientação longitude: " + orientacaoLongitude + ". ";
+		strDado += "Velocidade: " + velocidade + ".";
 
 		return (strDado);
 	}

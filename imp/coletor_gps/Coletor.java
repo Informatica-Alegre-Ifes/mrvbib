@@ -63,7 +63,7 @@ class Coletor
 				{
 					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();
-					comunicacaoMovel.enviarMensagemSMS("+5527999150088", "MRVBIB - Teste");
+					comunicacaoMovel.enviarMensagemSMS("+5527999150088", dado.obterInformacoes());
 				}
 				Thread.sleep(intervaloMedicao);
 			}
