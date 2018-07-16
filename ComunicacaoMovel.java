@@ -56,8 +56,8 @@ class ComunicacaoMovel
 		mensagensSIM.add("AT" + "\r\n");
 		mensagensSIM.add("ATE0" + "\r\n");
 		mensagensSIM.add("AT+CMGF=1" + "\r\n");
-		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + "\r\n");
-		mensagensSIM.add(mensagem + "\r");
+		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + ",145\r\n");
+		mensagensSIM.add(mensagem + "\u001a");
 
 		try
 		{
@@ -94,6 +94,7 @@ class ComunicacaoMovel
 				Thread.sleep(1000);
 			}
 			fim = !fim;
+			Thread.sleep(20000);
 
 			streamSaida.close();
 			portaSerial.close();
