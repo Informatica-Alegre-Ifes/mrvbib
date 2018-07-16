@@ -56,8 +56,7 @@ class ComunicacaoMovel
 		mensagensSIM.add("ATE0" + "\r\n");
 		mensagensSIM.add("AT+CMGF=1" + "\r\n");
 		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + "\r\n");
-		mensagensSIM.add(mensagem + "\r");
-		mensagensSIM.add(String.format("%X", 26));
+		mensagensSIM.add(mensagem + String.format("%X", 26));
 
 		// String mensagem1 = "AT";
 		// String mensagem2 = "ATE0";
@@ -97,8 +96,8 @@ class ComunicacaoMovel
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
 				streamSaida.write((mensagensSIM.get(i)).getBytes());
-				Thread.sleep(1000);
 				streamSaida.flush();
+				Thread.sleep(1000);
 			}
 
 			// streamSaida.write((mensagem1 + enter).getBytes());
