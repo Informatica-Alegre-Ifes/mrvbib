@@ -52,10 +52,10 @@ class ComunicacaoMovel
 	{
 		CommPortIdentifier portaComm = obterPortaCommSerial();
 		List<String> mensagensSIM = new ArrayList<String>();
-		mensagensSIM.add("AT\r\n");
-		mensagensSIM.add("ATE0\r\n");
-		mensagensSIM.add("AT+CMGF=1\r\n");
-		mensagensSIM.add("AT+CMGS=\"+" + numeroCelular + "\"\r\n");
+		mensagensSIM.add("AT" + "\r\n");
+		mensagensSIM.add("ATE0" + "\r\n");
+		mensagensSIM.add("AT+CMGF=1" + "\r\n");
+		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + "\r\n");
 		mensagensSIM.add(mensagem + "\r");
 
 		// String mensagem1 = "AT";
