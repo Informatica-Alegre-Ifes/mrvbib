@@ -73,26 +73,26 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			final Thread threadLeituraStream = new Thread()
-			{
-				@Override
-				public void run()
-				{
-					try
-					{
-						final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
-						String linha = null;
-						while ((linha = leitor.readLine()) != null && !fim)
-							System.out.println(linha);
-						leitor.close();
-					}
-					catch (final Exception excecao)
-					{
-						excecao.printStackTrace();
-					}
-				}
-			};
-			threadLeituraStream.start();
+			// final Thread threadLeituraStream = new Thread()
+			// {
+			// 	@Override
+			// 	public void run()
+			// 	{
+			// 		try
+			// 		{
+			// 			final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
+			// 			String linha = null;
+			// 			while ((linha = leitor.readLine()) != null && !fim)
+			// 				System.out.println(linha);
+			// 			leitor.close();
+			// 		}
+			// 		catch (final Exception excecao)
+			// 		{
+			// 			excecao.printStackTrace();
+			// 		}
+			// 	}
+			// };
+			// threadLeituraStream.start();
 
 			for (int i = 0; i < mensagensSIM.size(); ++i)
 			{
