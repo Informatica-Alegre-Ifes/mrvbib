@@ -1,7 +1,9 @@
 package coletor_gps_new;
 
 import java.util.Enumeration;
+
 import java.io.InputStream;
+import java.io.IOException;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
