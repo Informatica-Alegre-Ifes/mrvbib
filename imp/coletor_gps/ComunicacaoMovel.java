@@ -27,23 +27,23 @@ class ComunicacaoMovel implements IStatusProdutor
 
 	private SerialPort obterPortaSerial()
 	{
-		CommPortIdentifier portaComm = obterPortaCommSerial();
-		portaSerial = null;
+		SerialPort portaSerial = null;
 
 		try
 		{
+			CommPortIdentifier portaComm = obterPortaCommSerial();
 			portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
 			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
 		}
 		catch (PortInUseException excecao)
 		{
-			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
+			statusMudou(Status.Semaforo.Vermelho);
 		}
 		catch (UnsupportedCommOperationException excecao)
 		{
-			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
+			statusMudou(Status.Semaforo.Vermelho);
 		}
 		finally
 		{
