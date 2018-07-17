@@ -181,9 +181,9 @@ class Dado
 	{
 		String strDado;
 
-		strDado = "Dispositivo: " + codigoMACDispositivo + ". ";
-		strDado += "Data/Hora: " + util.obterTexto(data) + ". ";
-		strDado += "Latitude: " + latitude + ". ";
+		// strDado = "Dispositivo: " + codigoMACDispositivo + ". ";
+		// strDado += "Data/Hora: " + util.obterTexto(data) + ". ";
+		strDado = "Latitude: " + latitude + ". ";
 		strDado += "Orientação latitude: " + orientacaoLatitude + ". ";
 		strDado += "Longitude: " + longitude + ". ";
 		strDado += "Orientação longitude: " + orientacaoLongitude + ". ";
