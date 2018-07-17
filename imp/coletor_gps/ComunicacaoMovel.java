@@ -40,6 +40,11 @@ class ComunicacaoMovel implements IStatusProdutor
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
 		}
+		catch (UnsupportedCommOperationException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
 		finally
 		{
 			return (portaSerial);
@@ -94,11 +99,6 @@ class ComunicacaoMovel implements IStatusProdutor
 			}
 		}
 		catch (IOException excecao)
-		{
-			statusMudou(Status.Semaforo.Vermelho);
-			Erro.registrar(excecao);
-		}
-		catch (UnsupportedCommOperationException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
