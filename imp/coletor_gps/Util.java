@@ -96,7 +96,15 @@ class Util implements IStatusProdutor
 
 	public String obterTexto(Date data)
 	{
-		return (formatoData.format(data));
+		try
+		{
+			return (formatoData.format(data));
+		}
+		catch (Exception excecao)
+		{
+			Erro.registrar(excecao);
+			statusMudou(Status.Semaforo.Amarelo);
+		}
 	}
 	
 	public double alterarTipoParaDouble(Object valor)
@@ -117,6 +125,11 @@ class Util implements IStatusProdutor
 			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (NumberFormatException excecao)
+		{
+			statusMudou(Status.Semaforo.Amarelo);
+			Erro.registrar(excecao);
+		}
+		catch (IllegalArgumentException excecao)
 		{
 			statusMudou(Status.Semaforo.Amarelo);
 			Erro.registrar(excecao);

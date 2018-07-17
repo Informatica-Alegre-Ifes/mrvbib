@@ -120,9 +120,6 @@ class ComunicacaoMovel implements IStatusProdutor
 				terminou = true;
 				threadLeituraStream.join();
 
-				Thread.sleep(10000);
-				streamSaida.flush();
-
 				statusMudou(Status.Semaforo.Verde);
 			}
 			else
