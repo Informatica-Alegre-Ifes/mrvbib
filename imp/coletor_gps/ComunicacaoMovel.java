@@ -20,13 +20,11 @@ class ComunicacaoMovel implements IStatusProdutor
 	private String porta;
 	private SerialPort portaSerial;
 	private Status status;
-	private boolean terminou;
 
 	public ComunicacaoMovel(String porta, Status status)
 	{
 		this.porta = porta;
 		this.status = status;
-		terminou = false;
 		portaSerial = obterPortaSerial();
 	}
 
@@ -89,27 +87,6 @@ class ComunicacaoMovel implements IStatusProdutor
 			{
 				OutputStream streamSaida = portaSerial.getOutputStream();
 
-				final Thread threadLeituraStream = new Thread()
-				{
-					@Override
-					public void run()
-					{
-						try
-						{
-							final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
-							String linha = null;
-							while ((linha = leitor.readLine()) != null && !terminou)
-								System.out.println(linha);
-							leitor.close();
-						}
-						catch (final Exception excecao)
-						{
-							excecao.printStackTrace();
-						}
-					}
-				};
-				threadLeituraStream.start();
-
 				//Led.acenderLedRoxo();
 				for (int i = 0; i < mensagensSIM.size(); ++i)
 				{
@@ -117,8 +94,6 @@ class ComunicacaoMovel implements IStatusProdutor
 					streamSaida.flush();
 					Thread.sleep(1000);
 				}
-				terminou = true;
-				threadLeituraStream.join();
 
 				statusMudou(Status.Semaforo.Verde);
 			}
