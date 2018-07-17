@@ -39,7 +39,7 @@ class Coletor
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 		
-		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(portaSerial, new Status(gerenteStatus));
+		//ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(portaSerial, new Status(gerenteStatus));
 		Serial serial = new Serial(portaSerial, sentencaNMEA, new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
@@ -63,7 +63,7 @@ class Coletor
 				{
 					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();
-					comunicacaoMovel.enviarMensagemSMS("+5527999150088", dado.obterInformacoes());
+					//comunicacaoMovel.enviarMensagemSMS("+5527999150088", dado.obterInformacoes());
 				}
 				Thread.sleep(intervaloMedicao);
 			}
