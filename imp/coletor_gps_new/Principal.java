@@ -6,7 +6,7 @@ import java.util.ArrayList;
 class Principal
 {
 	private static List<Conexao> conexoes;
-	private static String portaSerial;
+	private static String porta;
 	private static String sentencaNMEA;
 	private static int intervaloMedicao;
 	private static int minimaDistanciaCoordenadas;
@@ -43,15 +43,17 @@ class Principal
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
 		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
+		ColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
 		ColetorGPS coletorGPS = new ColetorGPS(serial, sentencaNMEA, new Status(gerenteStatus));
-		ColetorWebClient coletorWebClient = new ColetorWebClient(serial, new Status(gerenteStatus));
+		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(serial, new Status(gerenteStatus));
 		
 		gerenteStatus.adicionar(serial);
 		gerenteStatus.adicionar(persistencia);
 		gerenteStatus.adicionar(util);
 		gerenteStatus.adicionar(rede);
-		gerenteStatus.adicionar(coletorGPS);
 		gerenteStatus.adicionar(coletorWebClient);
+		gerenteStatus.adicionar(coletorGPS);
+		gerenteStatus.adicionar(comunicacaoMovel);
 	
 		while (true)
 		{
