@@ -90,6 +90,7 @@ class ComunicacaoMovel implements IStatusProdutor
 					Thread.sleep(1000);
 				}
 				Thread.sleep(10000);
+				streamSaida.flush();
 
 				statusMudou(Status.Semaforo.Verde);
 			}
