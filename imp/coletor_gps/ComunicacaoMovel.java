@@ -78,7 +78,7 @@ class ComunicacaoMovel implements IStatusProdutor
 		mensagensSIM.add("AT+CMGF=1" + "\r\n");
 		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + ",145\r\n");
 		mensagensSIM.add(mensagem + "\u001a");
-		
+
 		try
 		{
 			if (portaSerial != null)
@@ -92,6 +92,7 @@ class ComunicacaoMovel implements IStatusProdutor
 					streamSaida.flush();
 					Thread.sleep(1000);
 				}
+				streamSaida.close();
 
 				statusMudou(Status.Semaforo.Verde);
 			}
