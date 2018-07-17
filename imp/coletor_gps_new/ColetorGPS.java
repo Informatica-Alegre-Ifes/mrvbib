@@ -64,6 +64,11 @@ class ColetorGPS implements IStatusProdutor
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
 		}
+		catch (IOException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
 	}
 
 	private void finalizar()
