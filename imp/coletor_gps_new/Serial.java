@@ -1,6 +1,7 @@
 package coletor_gps_new;
 
 import java.util.Enumeration;
+import java.io.InputStream;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -33,6 +34,25 @@ class Serial implements IStatusProdutor
 		if (portaSerial == null)
 			configurarPortaSerial();
 		return (portaSerial);
+	}
+
+	public void limparBuffer()
+	{
+		byte[] dadosBuffer = new byte[1024];
+		int tamanho = -1;
+
+		try
+		{
+			InputStream streamEntrada = portaSerial.getInputStream();
+
+			while ((tamanho = streamEntrada.read(dadosBuffer)) > -1 )
+				continue;
+		}
+		catch (IOException excecao)
+		{
+			Erro.registrar(excecao);
+			statusMudou(Status.Semaforo.Vermelho);
+		}
 	}
 
 	private void configurarPortaSerial()
