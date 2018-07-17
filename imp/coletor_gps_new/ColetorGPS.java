@@ -1,4 +1,4 @@
-package coletor_gps;
+package coletor_gps_new;
 
 import java.io.InputStreamReader;
 import java.io.BufferedReader;

@@ -1,4 +1,4 @@
-package coletor_gps;
+package coletor_gps_new;
 
 interface IStatusProdutor
 {

@@ -1,4 +1,4 @@
-package coletor_gps;
+package coletor_gps_new;
 
 import java.util.logging.Logger;
 import java.util.logging.FileHandler;

@@ -1,4 +1,4 @@
-package coletor_gps;
+package coletor_gps_new;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
