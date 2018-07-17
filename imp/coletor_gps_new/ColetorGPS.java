@@ -55,7 +55,7 @@ class ColetorGPS implements IStatusProdutor
 		try
 		{
 			monitor = new Monitor(this);
-			leitor = new BufferedReader(new InputStreamReader(serial.obterPortaSerial().getIntputStream()));
+			leitor = new BufferedReader(new InputStreamReader(serial.obterPortaSerial().getInputStream()));
 
 			monitor.monitorar();
 		}

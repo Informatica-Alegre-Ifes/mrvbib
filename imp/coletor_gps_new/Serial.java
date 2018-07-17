@@ -24,7 +24,7 @@ class Serial implements IStatusProdutor
 	public static Serial obterInstancia(String porta, Status status)
 	{
 		if (serial == null)
-			return (new Serial(String porta, Status status));
+			return (new Serial(porta, status));
 		return (serial);
 	}
 
