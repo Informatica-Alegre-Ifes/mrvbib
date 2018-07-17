@@ -73,7 +73,7 @@ class ComunicacaoMovel implements IStatusProdutor
 
 		try
 		{
-			if (portaComm != null)
+			if (portaSerial != null)
 			{
 				OutputStream streamSaida = portaSerial.getOutputStream();
 
