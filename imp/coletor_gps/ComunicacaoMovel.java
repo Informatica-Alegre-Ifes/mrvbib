@@ -78,9 +78,7 @@ class ComunicacaoMovel implements IStatusProdutor
 		mensagensSIM.add("AT+CMGF=1" + "\r\n");
 		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + ",145\r\n");
 		mensagensSIM.add(mensagem + "\u001a");
-
-		terminou = false;
-
+		
 		try
 		{
 			if (portaSerial != null)
