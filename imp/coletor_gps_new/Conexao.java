@@ -1,4 +1,3 @@
-
 package coletor_gps;
 
 import java.util.List;
