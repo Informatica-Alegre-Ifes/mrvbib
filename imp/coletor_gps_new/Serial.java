@@ -48,7 +48,7 @@ class Serial implements IStatusProdutor
 			InputStream streamEntrada = obterPortaSerial().getInputStream();
 
 			while ((tamanho = streamEntrada.read(dadosBuffer)) > 0)
-				continue;
+				System.out.print(new String(dadosBuffer, 0, tamanho));
 			streamEntrada.close();
 		}
 		catch (IOException excecao)
