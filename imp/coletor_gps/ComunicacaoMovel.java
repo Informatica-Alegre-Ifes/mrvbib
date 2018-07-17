@@ -20,11 +20,13 @@ class ComunicacaoMovel implements IStatusProdutor
 	private String porta;
 	private SerialPort portaSerial;
 	private Status status;
+	private boolean terminou;
 
 	public ComunicacaoMovel(String porta, Status status)
 	{
 		this.porta = porta;
 		this.status = status;
+		terminou = false;
 		portaSerial = obterPortaSerial();
 	}
 
@@ -79,6 +81,8 @@ class ComunicacaoMovel implements IStatusProdutor
 		mensagensSIM.add("AT+CMGS=\"" + numeroCelular + "\"" + ",145\r\n");
 		mensagensSIM.add(mensagem + "\u001a");
 
+		terminou = false;
+
 		try
 		{
 			if (portaSerial != null)
@@ -94,7 +98,7 @@ class ComunicacaoMovel implements IStatusProdutor
 						{
 							final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
 							String linha = null;
-							while ((linha = leitor.readLine()) != null)
+							while ((linha = leitor.readLine()) != null && !terminou)
 								System.out.println(linha);
 							leitor.close();
 						}
@@ -113,7 +117,7 @@ class ComunicacaoMovel implements IStatusProdutor
 					streamSaida.flush();
 					Thread.sleep(1000);
 				}
-				
+				terminou = true;
 				threadLeituraStream.join();
 
 				Thread.sleep(10000);
