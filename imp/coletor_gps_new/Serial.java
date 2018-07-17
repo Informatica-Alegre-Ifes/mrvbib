@@ -49,6 +49,7 @@ class Serial implements IStatusProdutor
 
 			while ((tamanho = streamEntrada.read(dadosBuffer)) > -1 )
 				continue;
+			streamEntrada.close();
 		}
 		catch (IOException excecao)
 		{
