@@ -39,7 +39,7 @@ class Coletor
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 		
-		//ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(portaSerial, new Status(gerenteStatus));
+		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(portaSerial, new Status(gerenteStatus));
 		Serial serial = new Serial(portaSerial, sentencaNMEA, new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
