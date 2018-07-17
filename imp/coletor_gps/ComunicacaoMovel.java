@@ -15,8 +15,8 @@ import gnu.io.UnsupportedCommOperationException;
 class ComunicacaoMovel implements IStatusProdutor
 {
 	private String porta;
-	private Status status;
 	private SerialPort portaSerial;
+	private Status status;
 
 	public ComunicacaoMovel(String porta, Status status)
 	{
@@ -82,6 +82,27 @@ class ComunicacaoMovel implements IStatusProdutor
 			{
 				OutputStream streamSaida = portaSerial.getOutputStream();
 
+				final Thread threadLeituraStream = new Thread()
+				{
+					@Override
+					public void run()
+					{
+						try
+						{
+							final BufferedReader leitor = new BufferedReader(new InputStreamReader(portaSerial.getInputStream()));
+							String linha = null;
+							while ((linha = leitor.readLine()) != null)
+								System.out.println(linha);
+							leitor.close();
+						}
+						catch (final Exception excecao)
+						{
+							excecao.printStackTrace();
+						}
+					}
+				};
+				threadLeituraStream.start();
+
 				//Led.acenderLedRoxo();
 				for (int i = 0; i < mensagensSIM.size(); ++i)
 				{
@@ -89,6 +110,9 @@ class ComunicacaoMovel implements IStatusProdutor
 					streamSaida.flush();
 					Thread.sleep(1000);
 				}
+				
+				threadLeituraStream.join();
+
 				Thread.sleep(10000);
 				streamSaida.flush();
 
