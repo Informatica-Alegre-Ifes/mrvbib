@@ -3,6 +3,9 @@ package coletor_gps;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ArrayList;
