@@ -100,6 +100,7 @@ class Util implements IStatusProdutor
 
 		try
 		{
+			SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			strData = formatoData.format(data);
 		}
 		catch (Exception excecao)
