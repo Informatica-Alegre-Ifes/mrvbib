@@ -182,7 +182,7 @@ class Dado
 		String strDado;
 
 		strDado = "Dispositivo: " + codigoMACDispositivo + ". ";
-		// strDado += "Data/Hora: " + util.obterTexto(data) + ". ";
+		strDado += "Data-Hora: " + util.obterTexto(data) + ". ";
 		strDado += "Latitude: " + latitude + ". ";
 		strDado += "Orientacao latitude: " + orientacaoLatitude + ". ";
 		strDado += "Longitude: " + longitude + ". ";
