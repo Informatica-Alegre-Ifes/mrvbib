@@ -188,6 +188,7 @@ class Dado
 		strDado += "Longitude: " + longitude + ". ";
 		strDado += "Orientacao longitude: " + orientacaoLongitude + ". ";
 		strDado += "Velocidade: " + velocidade + ".";
+		System.out.println(strDado);
 
 		return (strDado);
 	}
