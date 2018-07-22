@@ -182,13 +182,13 @@ class Dado
 		String strDado;
 
 		strDado = "Dispositivo: " + codigoMACDispositivo + ".\n";
-		strDado += "Data-Hora: " + "22/07/2018.\n";
 		// strDado += "Data-Hora: " + util.obterTexto(data) + ".\n";
 		strDado += "Latitude: " + latitude + ".\n";
 		strDado += "Orientacao latitude: " + orientacaoLatitude + ".\n";
 		strDado += "Longitude: " + longitude + ".\n";
 		strDado += "Orientacao longitude: " + orientacaoLongitude + ".\n";
-		strDado += "Velocidade: " + velocidade * 1.852 + " km/h.";
+		DecimalFormat formatoDecimal = new DecimalFormat("#.##"); 
+		strDado += "Velocidade: " + Double.valueOf(formatoDecimal.format(velocidade * 1.852)) + " km/h.";
 		System.out.println(strDado);
 
 		return (strDado);
