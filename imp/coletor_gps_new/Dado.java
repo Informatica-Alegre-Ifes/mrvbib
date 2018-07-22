@@ -182,11 +182,12 @@ class Dado
 		String strDado;
 
 		strDado = "Dispositivo: " + codigoMACDispositivo + ".\n";
-		// strDado += "Data-Hora: " + util.obterTexto(data) + ". ";
-		strDado += "Latitude: " + latitude + ". ";
-		strDado += "Orientacao latitude: " + orientacaoLatitude + ". ";
-		strDado += "Longitude: " + longitude + ". ";
-		strDado += "Orientacao longitude: " + orientacaoLongitude + ". ";
+		strDado += "Data-Hora: " + "22/07/2018 15:19" + ".\n";
+		// strDado += "Data-Hora: " + util.obterTexto(data) + ".\n";
+		strDado += "Latitude: " + latitude + ".\n";
+		strDado += "Orientacao latitude: " + orientacaoLatitude + ".\n";
+		strDado += "Longitude: " + longitude + ".\n";
+		strDado += "Orientacao longitude: " + orientacaoLongitude + ".\n";
 		strDado += "Velocidade: " + velocidade + ".";
 		System.out.println(strDado);
 
