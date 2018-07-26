@@ -28,7 +28,7 @@ print rcv
 time.sleep(5)
 
 port.write('AT+CIFSR'+'\r\n')
-rcv = port.read(10)
+rcv = port.read(40)
 print rcv
 time.sleep(1)
 
