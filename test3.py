@@ -20,17 +20,17 @@ time.sleep(5)
 port.write('AT+CGATT=1'+'\r\n')
 rcv = port.read(10)
 print rcv
-time.sleep(5)
+time.sleep(10)
 
 port.write('AT+CIICR'+'\r\n')
 rcv = port.read(10)
 print rcv
-time.sleep(5)
+time.sleep(10)
 
 port.write('AT+CIFSR'+'\r\n')
 rcv = port.read(40)
 print rcv
-time.sleep(1)
+time.sleep(5)
 
 # port.write('AT'+'\r\n')
 # rcv = port.read(10)
@@ -42,15 +42,15 @@ time.sleep(1)
 # print rcv
 # time.sleep(1)
 
-# port.write('AT+SAPBR=3,1,"CONTYPE","GPRS"'+'\r\n')
-# rcv = port.read(10)
-# print rcv
-# time.sleep(1)
+port.write('AT+SAPBR=3,1,"CONTYPE","GPRS"'+'\r\n')
+rcv = port.read(10)
+print rcv
+time.sleep(5)
 
-# port.write('AT+SAPBR=3,1,"APN","zap.vivo.com.br"'+'\r\n')
-# rcv = port.read(10)
-# print rcv
-# time.sleep(1)
+port.write('AT+SAPBR=3,1,"APN","zap.vivo.com.br"'+'\r\n')
+rcv = port.read(10)
+print rcv
+time.sleep(10)
 
 # # port.write('AT+SAPBR=3,1,"USER","vivo"'+'\r\n')
 # # rcv = port.read(10)
@@ -67,10 +67,10 @@ time.sleep(1)
 # print rcv
 # time.sleep(1)
 
-# port.write('AT+HTTPINIT'+'\r\n')
-# rcv = port.read(10)
-# print rcv
-# time.sleep(1)
+port.write('AT+HTTPINIT'+'\r\n')
+rcv = port.read(10)
+print rcv
+time.sleep(1)
 
 # port.write('AT+HTTPPARA="CID",1'+'\r\n')
 # rcv = port.read(10)
