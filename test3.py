@@ -27,15 +27,15 @@ rcv = port.read(10)
 print rcv
 time.sleep(1)
 
-port.write('AT+SAPBR=3,1,"USER","vivo"'+'\r\n')
-rcv = port.read(10)
-print rcv
-time.sleep(1)
+# port.write('AT+SAPBR=3,1,"USER","vivo"'+'\r\n')
+# rcv = port.read(10)
+# print rcv
+# time.sleep(1)
 
-port.write('AT+SAPBR=3,1,"PWD","vivo"'+'\r\n')
-rcv = port.read(10)
-print rcv
-time.sleep(1)
+# port.write('AT+SAPBR=3,1,"PWD","vivo"'+'\r\n')
+# rcv = port.read(10)
+# print rcv
+# time.sleep(1)
 
 port.write('AT+SAPBR=1,1'+'\r\n')
 rcv = port.read(10)
