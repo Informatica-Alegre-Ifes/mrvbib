@@ -1,50 +1,57 @@
 import serial
-import time
+import RPi.GPIO as GPIO      
+import os, time
 
-phone = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
+GPIO.setmode(GPIO.BOARD)    
 
-def sim800_responde():
-    while True:
-        response = phone.readline()    
-        print  response
-        if "OK" in response:
-            break
-     
+# Enable Serial Communication
+port = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
 
-def web():
-	phone.write('AT+SAPBR=1,1\r')
-	sim800_responde()
+port.write('AT+SAPBR=3,1,"Contype","GPRS"'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+SAPBR=3,1,"CONTYPE","GPRS"\r')
-	sim800_responde()
+port.write('AT+SAPBR=3,1,"APN","zap.vivo.com.br"'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+SAPBR=3,1,"APN",""\r')
-	sim800_responde()
+port.write('AT+SAPBR=1,1'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+SAPBR=1,1\r')
-	sim800_responde()
+port.write('AT+SAPBR=2,1'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+HTTPINIT\r')
-	sim800_responde()
+port.write('AT+HTTPINIT'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+HTTPPARA="CID",1\r')
-	sim800_responde()
+port.write('AT+HTTPPARA="CID",1'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+HTTPPARA="URL","http://sandro.awardspace.info/php/hola.php?Tu_nombre=Renzo"\r')
-	sim800_responde()
+port.write('AT+HTTPPARA="URL","http://date.jsontest.com\"'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+HTTPACTION=0\r')
-	sim800_responde()
+port.write('AT+HTTPACTION=0'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	time.sleep(3)
+port.write('AT+HTTPTERM'+'\r\n')
+rcv = port.read(20)
+print rcv
+time.sleep(10)
 
-	phone.write('AT+HTTPREAD\r')
-	sim800_responde()
-
-	phone.write('AT+HTTPTERM\r')
-	sim800_responde()
-
-	phone.write('AT+SAPBR=0,1\r')
-	sim800_responde()
-	
-web()
+port.write('AT+SAPBR=0,1'+'\r')
+rcv = port.read(20)
+print rcv
