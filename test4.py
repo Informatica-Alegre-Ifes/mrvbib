@@ -27,17 +27,17 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('AT+CGATT=1,1'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(2)
+# port.write('AT+CGATT=1,1'+'\r\n')
+# rcv = port.read(200)
+# print rcv
+# time.sleep(2)
 
 port.write('AT+CIPSTATUS'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","http://date.jsontest.com",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","date.jsontest.com",80'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
@@ -57,7 +57,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('HOST: http://date.jsontest.com'+'\r\n')
+port.write('HOST: date.jsontest.com'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
