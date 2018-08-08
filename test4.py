@@ -12,20 +12,25 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
+port.write('AT+CMEE=1'+'\r\n')
+rcv = port.read(200)
+print rcv
+time.sleep(2)
+
 port.write('AT+CGATT=1'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
 
 port.write('AT+CGDCONT=1,"IP","zap.vivo.com.br"'+'\r\n')
-rcv = port.read(20)
+rcv = port.read(200)
 print rcv
-time.sleep(20)
+time.sleep(2)
 
 port.write('AT+CGATT=1,1'+'\r\n')
-rcv = port.read(20)
+rcv = port.read(200)
 print rcv
-time.sleep(20)
+time.sleep(2)
 
 port.write('AT+CIPSTATUS'+'\r\n')
 rcv = port.read(200)
