@@ -37,7 +37,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","date.jsontest.com",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","172.217.30.83",80'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
