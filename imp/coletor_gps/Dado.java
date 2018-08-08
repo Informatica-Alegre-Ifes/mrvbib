@@ -1,4 +1,4 @@
-package coletor_gps_new;
+package coletor_gps;
 
 import java.util.Date;
 import java.util.List;

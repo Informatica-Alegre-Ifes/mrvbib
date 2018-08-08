@@ -50,11 +50,11 @@ Coletor de dados GPS:
 
 	2. COMPILAR
 
-		javac coletor_gps/Coletor.java -classpath .:/classes:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar
+		javac coletor_gps/Principal.java -classpath .:/classes:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar
 
 	3. EXECUTAR
 		
- 		java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar:/usr/share/java/mysql.jar coletor_gps.Coletor
+ 		java -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar:/usr/share/java/mysql.jar coletor_gps.Principal
 
  	4. CONFIGURAR EXECUÇÃO AUTOMÁTICA
 
@@ -63,7 +63,7 @@ Coletor de dados GPS:
  		b) Acrescente, ao final do arquivo, as seguintes linhas:
  			- # Inicialização do módulo Coletor GPS (MRVBIB)
  			- cd mrvbib/imp/
- 			- sudo java -Djava.library.path=/usr/lib/jni -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar:/usr/share/java/mysql.jar coletor_gps.Coletor
+ 			- sudo java -Djava.library.path=/usr/lib/jni -Dpi4j.linking=dynamic -cp .:/opt/pi4j/lib/'*':/usr/share/java/RXTXcomm.jar:/usr/share/java/mysql.jar coletor_gps.Principal
 
  		c) Salve as alterações no arquivo ./bashrc
 

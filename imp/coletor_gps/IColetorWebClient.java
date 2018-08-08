@@ -1,4 +1,4 @@
-package coletor_gps_new;
+package coletor_gps;
 
 import javax.jws.WebService;
 import javax.jws.WebMethod;
