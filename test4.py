@@ -47,7 +47,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('AT+CIPSEND'+'\r\n')
+port.write('AT+CIPSEND'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
