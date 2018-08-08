@@ -8,29 +8,29 @@ GPIO.setmode(GPIO.BOARD)
 port = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
 
 port.write('AT+CIPMUX=1'+'\r\n')
-rcv = port.read(10)
+rcv = port.read(20)
 print rcv
-time.sleep(1)
+time.sleep(20)
 
 port.write('AT+CSTT="zap.vivo.com.br","vivo","vivo"'+'\r\n')
-rcv = port.read(10)
+rcv = port.read(20)
 print rcv
-time.sleep(5)
+time.sleep(20)
 
 port.write('AT+CGATT=1'+'\r\n')
-rcv = port.read(10)
+rcv = port.read(20)
 print rcv
-time.sleep(10)
+time.sleep(20)
 
 port.write('AT+CIICR'+'\r\n')
 rcv = port.read(10)
 print rcv
-time.sleep(10)
+time.sleep(20)
 
 port.write('AT+CIFSR'+'\r\n')
 rcv = port.read(40)
 print rcv
-time.sleep(5)
+time.sleep(20)
 
 # port.write('AT'+'\r\n')
 # rcv = port.read(10)
@@ -43,14 +43,14 @@ time.sleep(5)
 # time.sleep(1)
 
 port.write('AT+SAPBR=3,1,"CONTYPE","GPRS"'+'\r\n')
-rcv = port.read(10)
+rcv = port.read(20)
 print rcv
-time.sleep(5)
+time.sleep(20)
 
 port.write('AT+SAPBR=3,1,"APN","zap.vivo.com.br"'+'\r\n')
-rcv = port.read(10)
+rcv = port.read(20)
 print rcv
-time.sleep(10)
+time.sleep(20)
 
 # # port.write('AT+SAPBR=3,1,"USER","vivo"'+'\r\n')
 # # rcv = port.read(10)
