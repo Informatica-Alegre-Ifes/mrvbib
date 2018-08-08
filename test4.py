@@ -12,7 +12,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('AT+CMEE=1'+'\r\n')
+port.write('AT+CMEE=2'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
