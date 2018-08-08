@@ -3,6 +3,7 @@
 <%@ page import = "java.sql.Statement"%>
 <%@ page import = "java.sql.SQLException"%>
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Cadastro de Medicao GPS</title>
