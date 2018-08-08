@@ -27,12 +27,12 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-# port.write('AT+CGATT=1,1'+'\r\n')
-# rcv = port.read(200)
-# print rcv
-# time.sleep(2)
-
 port.write('AT+CIPSTATUS'+'\r\n')
+rcv = port.read(200)
+print rcv
+time.sleep(2)
+
+port.write('AT+CIPSENDBUF=0,242'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
