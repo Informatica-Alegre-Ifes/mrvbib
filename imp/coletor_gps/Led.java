@@ -20,6 +20,7 @@ final class Led
 		controlador = GpioFactory.getInstance();
 		ledAzul = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_03);
 		ledBranco = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_02);
+		ledRoxo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_07);
 		ledVerde = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_04);
 		ledAmarelo = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_01);
 		ledVermelho = controlador.provisionDigitalOutputPin(RaspiPin.GPIO_00);
@@ -65,12 +66,26 @@ final class Led
 		ledBranco.low();
 	}
 
+	// Método temporário utilizado para notificar conexão 3G
+	public static void acenderLedRoxo()
+	{
+		ledBranco.high();
+	}
+	
+	// Método temporário utilizado para notificar desconexão 3G
+	public static void apagarLedRoxo()
+	{
+		ledBranco.low();
+	}
+
 	public static void pararTodos()
 	{
 		ledAzul.blink(0);
 		ledAzul.low();
 		ledBranco.blink(0);
 		ledBranco.low();
+		ledRoxo.blink(0);
+		ledRoxo.low();
 		ledVerde.blink(0);
 		ledVerde.low();
 		ledAmarelo.blink(0);
