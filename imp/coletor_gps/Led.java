@@ -11,6 +11,7 @@ final class Led
 	private static GpioController controlador;
 	private static GpioPinDigitalOutput ledAzul;
 	private static GpioPinDigitalOutput ledBranco;
+	private static GpioPinDigitalOutput ledRoxo;
 	private static GpioPinDigitalOutput ledVerde;
 	private static GpioPinDigitalOutput ledAmarelo;
 	private static GpioPinDigitalOutput ledVermelho;
