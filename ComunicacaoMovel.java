@@ -103,12 +103,11 @@ class ComunicacaoMovel
 
 			OutputStream streamSaida = portaSerial.getOutputStream();
 
-			for (int i = 0; i < mensagensSIM.size(); ++i)
+			for (InstrucaoAT instrucaoAT : mensagensSIM)
 			{
-				// streamSaida.write(mensagensSIM.get(i).getInstrucao().getBytes());
-				// streamSaida.flush();
-				System.out.println(mensagensSIM.get(i).getInstrucao());
-				Thread.sleep(mensagensSIM.get(i).getPeriodo());
+				streamSaida.write(instrucaoAT.getInstrucao().getBytes());
+				streamSaida.flush();
+				Thread.sleep(instrucaoAT.getPeriodo());
 			}
 
 			streamSaida.close();
