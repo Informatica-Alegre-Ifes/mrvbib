@@ -81,9 +81,83 @@ class ComunicacaoMovel
 		}
 	}
 
+	public void enviarMensagemHTTP(String apn, String endereco, int porta, String documento, String parametros)
+	{
+		CommPortIdentifier portaComm = obterPortaCommSerial();
+		List<InstrucaoAT> mensagensSIM = new ArrayList<InstrucaoAT>();
+
+		mensagensSIM.add(new InstrucaoAT("AT+CGATT=1" + "\r\n", 1000));
+		mensagensSIM.add(new InstrucaoAT("AT+CGDCONT=1,\"IP\",\"" + apn + "\"" + "\r\n", 1000));
+		mensagensSIM.add(new InstrucaoAT("AT+CIPSTART=\"TCP\",\"" + endereco + "\"," + porta + "\r\n", 5000));
+		mensagensSIM.add(new InstrucaoAT("AT+CIPSEND" + "\r", 2000));
+		mensagensSIM.add(new InstrucaoAT("GET " + documento + "?" + parametros + " HTTP/1.1" + "\r\n", 1000));
+		mensagensSIM.add(new InstrucaoAT("HOST: " + endereco + "\r\n", 2000));
+		mensagensSIM.add(new InstrucaoAT("\u001a", 3000));
+		mensagensSIM.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 2000));
+		mensagensSIM.add(new InstrucaoAT("AT+CIPSHUT" + "\r\n", 1000));
+
+		try
+		{
+			SerialPort portaSerial = (SerialPort) portaComm.open(getClass().getName(), 2000);
+			portaSerial.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE); 
+
+			OutputStream streamSaida = portaSerial.getOutputStream();
+
+			for (int i = 0; i < mensagensSIM.size(); ++i)
+			{
+				// streamSaida.write(mensagensSIM.get(i).getInstrucao().getBytes());
+				// streamSaida.flush();
+				System.out.println(mensagensSIM.get(i).getInstrucao());
+				Thread.sleep(mensagensSIM.get(i).getPeriodo());
+			}
+
+			streamSaida.close();
+			portaSerial.close();
+		}
+		catch (PortInUseException excecao)
+		{
+			excecao.printStackTrace();
+		}
+		catch (IOException excecao)
+		{
+			excecao.printStackTrace();
+		}
+		catch (UnsupportedCommOperationException excecao)
+		{
+			excecao.printStackTrace();
+		}
+		catch (InterruptedException excecao)
+		{
+			excecao.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args)
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel("/dev/ttyS0");
-		comunicacaoMovel.enviarMensagemSMS("+5527999150088", "MRVBIB Test");
+		//comunicacaoMovel.enviarMensagemSMS("+5527999150088", "MRVBIB Test");
+		comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "date.jsontest.com", 80, "/index.html", "teste");
+	}
+
+	private class InstrucaoAT
+	{
+		private String instrucao;
+		private int periodo;
+
+		public InstrucaoAT(String instrucao, int periodo)
+		{
+			this.instrucao = instrucao;
+			this.periodo = periodo;
+		}
+
+		public String getInstrucao()
+		{
+			return (instrucao);
+		}
+
+		public int getPeriodo()
+		{
+			return (periodo);
+		}
 	}
 }
