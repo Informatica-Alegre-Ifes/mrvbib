@@ -42,17 +42,17 @@ time.sleep(5)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSEND=43'+'\r')
+port.write('AT+CIPSEND=83'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('GET /cadastrodeteccao.php?distancia_media=98.2 HTTP/1.1'+'\r\n')
+port.write('GET /cadastrodeteccao.php?distancia_media=98.2 HTTP/1.0'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('HOST: mrvbib.byethost17.com'+'\r\n\r\n')
+port.write('HOST: mrvbib.byethost17.com'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
