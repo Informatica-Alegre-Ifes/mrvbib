@@ -42,7 +42,7 @@ time.sleep(5)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSEND'+'\r')
+port.write('AT+CIPSEND=43'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
@@ -52,7 +52,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('HOST: mrvbib.byethost17.com'+'\r\n')
+port.write('HOST: mrvbib.byethost17.com'+'\r\n\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
