@@ -32,7 +32,7 @@ time.sleep(1)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","172.217.30.83",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","179.109.9.113",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
@@ -47,12 +47,12 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('GET /index.html HTTP/1.1'+'\r\n')
+port.write('GET /cadastrodeteccao.php:8080?distancia_media=79.7 HTTP/1.1'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('HOST: date.jsontest.com'+'\r\n')
+port.write('HOST: 179.109.9.113'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
