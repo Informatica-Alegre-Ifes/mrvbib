@@ -7,15 +7,15 @@ GPIO.setmode(GPIO.BOARD)
 # Enable Serial Communication
 port = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
 
-port.write('AT+CSQ'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(2)
+# port.write('AT+CSQ'+'\r\n')
+# rcv = port.read(200)
+# print rcv
+# time.sleep(2)
 
-port.write('AT+CMEE=2'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(2)
+# port.write('AT+CMEE=2'+'\r\n')
+# rcv = port.read(200)
+# print rcv
+# time.sleep(2)
 
 port.write('AT+CGATT=1'+'\r\n')
 rcv = port.read(200)
@@ -27,32 +27,32 @@ rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('AT+CIPSTATUS'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(2)
+# port.write('AT+CIPSTATUS'+'\r\n')
+# rcv = port.read(200)
+# print rcv
+# time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","172.217.30.83",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","mrvbib.byethost17.com",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
 
-port.write('AT+CIPSTATUS'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(2)
+# port.write('AT+CIPSTATUS'+'\r\n')
+# rcv = port.read(200)
+# print rcv
+# time.sleep(2)
 
 port.write('AT+CIPSEND'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('GET /index.html HTTP/1.1'+'\r\n')
+port.write('GET /cadastrodeteccao.php?distancia_media=98.2 HTTP/1.1'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('HOST: date.jsontest.com'+'\r\n')
+port.write('HOST: mrvbib.byethost17.com'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
@@ -62,10 +62,10 @@ rcv = port.read(300)
 print rcv
 time.sleep(3)
 
-port.write('AT+CIPSTATUS'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(2)
+# port.write('AT+CIPSTATUS'+'\r\n')
+# rcv = port.read(200)
+# print rcv
+# time.sleep(2)
 
 port.write('AT+CIPCLOSE'+'\r\n')
 rcv = port.read(200)
