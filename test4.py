@@ -42,7 +42,7 @@ time.sleep(5)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSEND=83'+'\r')
+port.write('AT+CIPSEND=41'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
