@@ -32,7 +32,7 @@ time.sleep(1)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","185.27.134.151",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","199.59.242.151",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
@@ -42,7 +42,7 @@ time.sleep(5)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSEND=115'+'\r')
+port.write('AT+CIPSEND'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
