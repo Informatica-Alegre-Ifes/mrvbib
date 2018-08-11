@@ -7,11 +7,6 @@ GPIO.setmode(GPIO.BOARD)
 # Enable Serial Communication
 port = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=1)
 
-port.write('AT&F'+'\r\n')
-rcv = port.read(200)
-print rcv
-time.sleep(10)
-
 port.write('AT+CSQ'+'\r\n')
 rcv = port.read(200)
 print rcv
