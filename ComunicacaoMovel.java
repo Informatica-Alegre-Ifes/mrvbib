@@ -90,8 +90,8 @@ class ComunicacaoMovel
 		mensagensSIM.add(new InstrucaoAT("AT+CGDCONT=1,\"IP\",\"" + apn + "\"" + "\r\n", 1000));
 		mensagensSIM.add(new InstrucaoAT("AT+CIPSTART=\"TCP\",\"" + endereco + "\"," + porta + "\r\n", 5000));
 		mensagensSIM.add(new InstrucaoAT("AT+CIPSEND" + "\r", 2000));
-		mensagensSIM.add(new InstrucaoAT("GET " + documento + "?" + parametros + " HTTP/1.1" + "\r\n", 1000));
-		mensagensSIM.add(new InstrucaoAT("HOST: " + endereco + "\r\n", 2000));
+		mensagensSIM.add(new InstrucaoAT("GET /" + documento + "?" + parametros + " HTTP/1.0" + "\r\n", 1000));
+		mensagensSIM.add(new InstrucaoAT("HOST: " + endereco + "\r\n\r\n", 2000));
 		mensagensSIM.add(new InstrucaoAT("\u001a", 3000));
 		mensagensSIM.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 2000));
 		mensagensSIM.add(new InstrucaoAT("AT+CIPSHUT" + "\r\n", 1000));
@@ -135,7 +135,7 @@ class ComunicacaoMovel
 	{
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel("/dev/ttyS0");
 		//comunicacaoMovel.enviarMensagemSMS("+5527999150088", "MRVBIB Test");
-		comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "date.jsontest.com", 80, "/index.html", "teste");
+		comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "185.27.134.3", 80, "cadastrodeteccao.php", "distancia_media=98");
 	}
 
 	private class InstrucaoAT
