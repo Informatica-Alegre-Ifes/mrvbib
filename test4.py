@@ -32,7 +32,7 @@ time.sleep(1)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","199.59.242.151",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","185.27.134.232",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
@@ -47,7 +47,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('GET /cadastrodeteccao.php?distancia_media=98 HTTP/1.1'+'\r\n')
+port.write('GET /cadastrodeteccao.php?distancia_media=98 HTTP/1.0'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(1)
