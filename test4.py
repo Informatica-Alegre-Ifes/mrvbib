@@ -52,7 +52,7 @@ rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('HOST: mrvbib.byethost17.com'+'\r\n')
+port.write('HOST: mrvbib.byethost17.com'+'\r')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
