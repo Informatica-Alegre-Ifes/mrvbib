@@ -32,7 +32,7 @@ time.sleep(1)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","185.27.134.3",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","phpinfo.byethost11.com",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
