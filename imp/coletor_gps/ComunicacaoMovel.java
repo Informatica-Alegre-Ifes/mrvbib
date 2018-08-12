@@ -64,8 +64,8 @@ class ComunicacaoMovel implements IStatusProdutor
 		instrucoesAT.add(new InstrucaoAT("AT+CGDCONT=1,\"IP\",\"" + apn + "\"" + "\r\n", 1000));
 		instrucoesAT.add(new InstrucaoAT("AT+CIPSTART=\"TCP\",\"" + endereco + "\"," + porta + "\r\n", 5000));
 		instrucoesAT.add(new InstrucaoAT("AT+CIPSEND" + "\r", 2000));
-		instrucoesAT.add(new InstrucaoAT("GET " + documento + "?" + parametros + " HTTP/1.1" + "\r\n", 1000));
-		instrucoesAT.add(new InstrucaoAT("HOST: " + endereco + "\r\n", 2000));
+		instrucoesAT.add(new InstrucaoAT("GET /" + documento + "?" + parametros + " HTTP/1.1" + "\r\n", 1000));
+		instrucoesAT.add(new InstrucaoAT("HOST: " + endereco + "\r\n\r\n", 2000));
 		instrucoesAT.add(new InstrucaoAT("\u001a", 3000));
 		instrucoesAT.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 2000));
 		instrucoesAT.add(new InstrucaoAT("AT+CIPSHUT" + "\r\n", 1000));
