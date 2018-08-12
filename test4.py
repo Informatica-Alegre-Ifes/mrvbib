@@ -32,7 +32,7 @@ time.sleep(1)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","phpinfo.byethost11.com",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","185.27.134.3",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
@@ -47,12 +47,12 @@ rcv = port.read(200)
 print rcv
 time.sleep(2)
 
-port.write('GET cadastrodeteccao.php?distancia_media=98 HTTP/1.0'+'\r\n')
+port.write('GET /home/vol3_4/byethost11.com/b11_193238/phpinfo.byethost11.com/htdocs/cadastrodeteccao.php?distancia_media=98 HTTP/1.0'+'\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(1)
 
-port.write('HOST: mrvbib.byethost17.com'+'\r\n\r\n')
+port.write('HOST: phpinfo.byethost11.com'+'\r\n\r\n')
 rcv = port.read(200)
 print rcv
 time.sleep(2)
