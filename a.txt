@@ -1,0 +1,35 @@
+AT+CGATT=1
+
++CGATT:1
+
+OK
+
+AT+CGDCONT=1,"IP","zap.vivo.com.br"
+
+OK
+
+AT+CIPSTART="TCP","199.59.242.151",80
+
+
+CONNECT OK
+
+OK
+AT+CIPSEND
+> 
+GET /cadastrodeteccao.php?distancia_media=98 HTTP/1.1
+
+HOST: mrvbib.byethost17.com
+
+
+
+
+OK
++CIPRCV:1424,HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 12 Aug 2018 00:22:10 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encodin
+g
+X-Adblock-Key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBANDrp2lz7AOmADaN8tA50LsWcjLFyQFcb/P2Txc58oYOeILb3vBw7J6f4pamkAQVSQuqYsKx3YzdUHCvbVZvFUsCAwEAAQ==_peEJIiEWQlLpSrXpkGjm86Xq7htwsq46B0XbmSRJ65iiCu28AsOcb
