@@ -25,7 +25,7 @@ time.sleep(1)
 port.write('AT+CGDCONT=1,"IP","zap.vivo.com.br"'+'\r\n')
 rcv = port.read(200)
 print rcv
-time.sleep(1)
+time.sleep(5)
 
 # port.write('AT+CIPSTATUS'+'\r\n')
 # rcv = port.read(200)
@@ -53,12 +53,12 @@ print rcv
 time.sleep(1)
 
 port.write('HOST: mrvbib.byethost17.com'+'\r\n\r\n')
-rcv = port.read(500)
+rcv = port.read(1024)
 print rcv
 time.sleep(2)
 
 port.write("\x1A")
-rcv = port.read(600)
+rcv = port.read(1024)
 print rcv
 time.sleep(3)
 
@@ -68,12 +68,12 @@ time.sleep(3)
 # time.sleep(2)
 
 port.write('AT+CIPCLOSE'+'\r\n')
-rcv = port.read(500)
+rcv = port.read(1024)
 print rcv
 time.sleep(2)
 
 port.write('AT+CIPSHUT'+'\r\n')
-rcv = port.read(500)
+rcv = port.read(1024)
 print rcv
 time.sleep(1)
 
