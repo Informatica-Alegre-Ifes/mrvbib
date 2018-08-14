@@ -53,12 +53,12 @@ print rcv
 time.sleep(1)
 
 port.write('HOST: mrvbib.byethost17.com'+'\r\n\r\n')
-rcv = port.read(1024)
+rcv = port.read(2048)
 print rcv
 time.sleep(2)
 
 port.write("\x1A")
-rcv = port.read(1024)
+rcv = port.read(2048)
 print rcv
 time.sleep(3)
 
