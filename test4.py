@@ -53,7 +53,7 @@ print rcv
 time.sleep(1)
 
 port.write('HOST: mrvbib.byethost17.com'+'\r\n\r\n')
-rcv = port.read(200)
+rcv = port.read(500)
 print rcv
 time.sleep(2)
 
@@ -68,12 +68,12 @@ time.sleep(3)
 # time.sleep(2)
 
 port.write('AT+CIPCLOSE'+'\r\n')
-rcv = port.read(200)
+rcv = port.read(500)
 print rcv
 time.sleep(2)
 
 port.write('AT+CIPSHUT'+'\r\n')
-rcv = port.read(200)
+rcv = port.read(500)
 print rcv
 time.sleep(1)
 
