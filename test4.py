@@ -32,7 +32,7 @@ time.sleep(5)
 # print rcv
 # time.sleep(2)
 
-port.write('AT+CIPSTART="TCP","www.google.com",80'+'\r\n')
+port.write('AT+CIPSTART="TCP","172.217.29.196",80'+'\r\n')
 rcv = port.read(100)
 print rcv
 time.sleep(5)
