@@ -58,7 +58,7 @@ print rcv
 time.sleep(2)
 
 port.write("\x1A")
-rcv = port.read(300)
+rcv = port.read(600)
 print rcv
 time.sleep(3)
 
