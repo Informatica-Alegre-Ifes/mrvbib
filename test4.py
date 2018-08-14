@@ -45,7 +45,7 @@ time.sleep(5)
 port.write('AT+CIPSEND'+'\r')
 rcv = port.read(200)
 print rcv
-time.sleep(2)
+time.sleep(5)
 
 port.write('GET /index.html HTTP/1.0'+'\r\n')
 rcv = port.read(200)
@@ -55,12 +55,12 @@ time.sleep(1)
 port.write('HOST: www.google.com'+'\r\n\r\n')
 rcv = port.read(12228)
 print rcv
-time.sleep(2)
+time.sleep(5)
 
 port.write("\x1A")
 rcv = port.read(12228)
 print rcv
-time.sleep(3)
+time.sleep(5)
 
 # port.write('AT+CIPSTATUS'+'\r\n')
 # rcv = port.read(200)
