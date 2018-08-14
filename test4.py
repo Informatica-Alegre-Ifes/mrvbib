@@ -53,12 +53,12 @@ print rcv
 time.sleep(1)
 
 port.write('HOST: www.google.com'+'\r\n\r\n')
-rcv = port.read(6020)
+rcv = port.read(12228)
 print rcv
 time.sleep(2)
 
 port.write("\x1A")
-rcv = port.read(6020)
+rcv = port.read(12228)
 print rcv
 time.sleep(3)
 
@@ -68,12 +68,12 @@ time.sleep(3)
 # time.sleep(2)
 
 port.write('AT+CIPCLOSE'+'\r\n')
-rcv = port.read(6020)
+rcv = port.read(12228)
 print rcv
 time.sleep(2)
 
 port.write('AT+CIPSHUT'+'\r\n')
-rcv = port.read(6020)
+rcv = port.read(12228)
 print rcv
 time.sleep(1)
 
