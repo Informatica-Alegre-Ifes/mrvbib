@@ -8,6 +8,6 @@ public class ColetorWebService
 	{
 		IColetorWebService coletorWebService = new ColetorWebServiceImp();
 
-		Endpoint.publish("http://192.168.0.102:3128/servidor_estatisticas", coletorWebService);
+		Endpoint.publish("http://192.168.0.104:3128/servidor_estatisticas", coletorWebService);
 	}
 }
