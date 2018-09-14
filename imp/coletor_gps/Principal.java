@@ -64,7 +64,7 @@ class Principal
 				rede.setDadoReferencia(dado);
 				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < minimaDistanciaCoordenadas && rede.conectar())
 				{
-					//coletorWebClient.carregar(dado.listar());
+					coletorWebClient.carregar(dado.listar());
 					rede.desconectar();
 					comunicacaoMovel.enviarMensagemSMS("+5527999150088", dado.obterInformacoes());
 				}
