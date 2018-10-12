@@ -55,12 +55,12 @@ time.sleep(1)
 port.write('HOST: 201.140.234.76'+'\r\n\r\n')
 rcv = port.read(12228)
 print rcv
-time.sleep(20)
+time.sleep(5)
 
 port.write("\x1A")
 rcv = port.read(12228)
 print rcv
-time.sleep(20)
+time.sleep(5)
 
 port.write('AT+CIPSTATUS'+'\r\n')
 rcv = port.read(200)
