@@ -208,6 +208,7 @@ class Dado
 		httpQueryString += "olo=" + orientacaoLongitude + "&";
 		DecimalFormat formatoDecimal = new DecimalFormat("#.##");
 		httpQueryString += "vel=" + Double.valueOf(formatoDecimal.format(velocidade * 1.852));
+		System.out.println(httpQueryString);
 
 		return (httpQueryString);
 	}
