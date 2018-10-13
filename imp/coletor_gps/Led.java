@@ -70,13 +70,13 @@ final class Led
 	// Método temporário utilizado para notificar conexão 3G
 	public static void acenderLedRoxo()
 	{
-		ledBranco.high();
+		ledRoxo.high();
 	}
 	
 	// Método temporário utilizado para notificar desconexão 3G
 	public static void apagarLedRoxo()
 	{
-		ledBranco.low();
+		ledRoxo.low();
 	}
 
 	public static void pararTodos()
