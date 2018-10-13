@@ -32,7 +32,7 @@ class Principal
 		porta = "/dev/ttyS0";
 		sentencaNMEA = "$GPRMC";
 		intervaloMedicao = 27000;
-		minimaDistanciaCoordenadas = 300;
+		minimaDistanciaCoordenadas = 3;
 	}
 
 	public static void main(String[] args) throws InterruptedException
@@ -62,13 +62,13 @@ class Principal
 			{
 				dado.salvar();
 				rede.setDadoReferencia(dado);
-				comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "201.140.234.76", 8080, "cadastrodadogps.php", dado.gerarHTTPQueryString());
-				// if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < minimaDistanciaCoordenadas && rede.conectar())
-				// {
-				// 	coletorWebClient.carregar(dado.listar());
-				// 	rede.desconectar();
-				// 	// comunicacaoMovel.enviarMensagemSMS("+5527999150088", dado.obterInformacoes());
-				// }
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < minimaDistanciaCoordenadas && rede.conectar())
+				{
+					coletorWebClient.carregar(dado.listar());
+					rede.desconectar();
+				}
+				else
+					comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "201.140.234.76", 8080, "cadastrodadogps.php", dado.gerarHTTPQueryString());
 				Thread.sleep(intervaloMedicao);
 			}
 		}
