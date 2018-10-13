@@ -189,11 +189,27 @@ class Dado
 		strDado += "Orientacao latitude: " + orientacaoLatitude + ".\n";
 		strDado += "Longitude: " + longitude + ".\n";
 		strDado += "Orientacao longitude: " + orientacaoLongitude + ".\n";
-		DecimalFormat formatoDecimal = new DecimalFormat("#.##"); 
+		DecimalFormat formatoDecimal = new DecimalFormat("#.##");
 		strDado += "Velocidade: " + Double.valueOf(formatoDecimal.format(velocidade * 1.852)) + " km/h.";
 		System.out.println(strDado);
 
 		return (strDado);
+	}
+
+	public String gerarHTTPQueryString()
+	{
+		String httpQueryString;
+
+		httpQueryString = "dis=" + dispositivo + "&";
+		httpQueryString += "dth=" + Util.obterTexto(data) + "&";
+		httpQueryString += "lat=" + latitude + "&";
+		httpQueryString += "ola=" + orientacaoLatitude + "&";
+		httpQueryString += "lon=" + longitude + "&";
+		httpQueryString += "olo=" + orientacaoLongitude + "&";
+		DecimalFormat formatoDecimal = new DecimalFormat("#.##");
+		httpQueryString += "vel=" + Double.valueOf(formatoDecimal.format(velocidade * 1.852));
+
+		return (httpQueryString);
 	}
 
 	private void construir(String mensagemGPS)
