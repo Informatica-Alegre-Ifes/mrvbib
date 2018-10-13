@@ -200,8 +200,8 @@ class Dado
 	{
 		String httpQueryString;
 
-		httpQueryString = "dis=" + dispositivo + "&";
-		httpQueryString += "dth=" + Util.obterTexto(data) + "&";
+		httpQueryString = "dis=" + codigoMACDispositivo + "&";
+		httpQueryString += "dth=" + util.obterTexto(data) + "&";
 		httpQueryString += "lat=" + latitude + "&";
 		httpQueryString += "ola=" + orientacaoLatitude + "&";
 		httpQueryString += "lon=" + longitude + "&";
