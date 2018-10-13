@@ -16,13 +16,15 @@ import java.util.Properties;
 
 class Util implements IStatusProdutor
 {
+	private final String FORMATO = "yyyy-MM-dd HH:mm:ss";
+
 	private SimpleDateFormat formatoData;
 	private Status status;
 
 	public Util(Status status)
 	{
 		this.status = status;
-		formatoData = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		formatoData = new SimpleDateFormat(FORMATO);
 	}
 
 	public Date construirData(String strData, String strHora)
@@ -94,12 +96,13 @@ class Util implements IStatusProdutor
 		}
 	}
 
-	public String obterTexto(Date data)
+	public String obterTexto(Date data, String formato)
 	{
 		String strData = "";
 
 		try
 		{
+			formatoData.applyPattern(formato);
 			strData = formatoData.format(data);
 		}
 		catch (Exception excecao)
@@ -109,6 +112,7 @@ class Util implements IStatusProdutor
 		}
 		finally
 		{
+			formatoData.applyPattern(FORMATO);
 			return (strData);
 		}
 	}
