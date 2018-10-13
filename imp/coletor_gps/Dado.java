@@ -191,7 +191,6 @@ class Dado
 		strDado += "Orientacao longitude: " + orientacaoLongitude + ".\n";
 		DecimalFormat formatoDecimal = new DecimalFormat("#.##");
 		strDado += "Velocidade: " + Double.valueOf(formatoDecimal.format(velocidade * 1.852)) + " km/h.";
-		System.out.println(strDado);
 
 		return (strDado);
 	}
@@ -208,7 +207,6 @@ class Dado
 		httpQueryString += "olo=" + orientacaoLongitude + "&";
 		DecimalFormat formatoDecimal = new DecimalFormat("#.##");
 		httpQueryString += "vel=" + Double.valueOf(formatoDecimal.format(velocidade * 1.852));
-		System.out.println(httpQueryString);
 
 		return (httpQueryString);
 	}
