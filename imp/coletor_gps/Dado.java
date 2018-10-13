@@ -89,7 +89,7 @@ class Dado
 		strTransacao += ", ";
 		strTransacao += velocidade;
 		strTransacao += ", ";
-		strTransacao += "'" + util.obterTexto(data) + "'";
+		strTransacao += "'" + util.obterTexto(data, "yyyy-MM-dd HH:mm:ss") + "'";
 		strTransacao += ", ";
 		strTransacao += "NOW()";
 		strTransacao += ")";
@@ -184,7 +184,7 @@ class Dado
 		String strDado;
 
 		strDado = "Dispositivo: " + codigoMACDispositivo + ".\n";
-		// strDado += "Data-Hora: " + util.obterTexto(data) + ".\n";
+		// strDado += "Data-Hora: " + util.obterTexto(data, "yyyy-MM-dd HH:mm:ss") + ".\n";
 		strDado += "Latitude: " + latitude + ".\n";
 		strDado += "Orientacao latitude: " + orientacaoLatitude + ".\n";
 		strDado += "Longitude: " + longitude + ".\n";
@@ -201,7 +201,7 @@ class Dado
 		String httpQueryString;
 
 		httpQueryString = "dis=" + codigoMACDispositivo + "&";
-		httpQueryString += "dth=" + util.obterTexto(data) + "&";
+		httpQueryString += "dth=" + util.obterTexto(data, "yyyyMMddHHmmss") + "&";
 		httpQueryString += "lat=" + latitude + "&";
 		httpQueryString += "ola=" + orientacaoLatitude + "&";
 		httpQueryString += "lon=" + longitude + "&";
