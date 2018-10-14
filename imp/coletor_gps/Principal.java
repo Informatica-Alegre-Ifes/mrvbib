@@ -72,6 +72,6 @@ class Principal
 		porta = "/dev/ttyS0";
 		sentencaNMEA = "$GPRMC";
 		intervaloMedicao = 27000;
-		minimaDistanciaCoordenadas = 300;
+		minimaDistanciaCoordenadas = 100;
 	}
 }
