@@ -14,12 +14,14 @@ class Rede implements IStatusProdutor
 	private static final String MSG_CRIAR_SUCESSO = "created and activated on device";
 	private static final String MSG_CONECTAR_SUCESSO = "successfully activated";
 	private List<Conexao> conexoes;
+	private Util util;
 	private Status status;
 	private Dado dadoReferencia;
 
-	public Rede(List<Conexao> conexoes, Status status)
+	public Rede(List<Conexao> conexoes, Util util, Status status)
 	{
 		this.conexoes = conexoes;
+		this.util = util;
 		this.status = status;
 	}
 
@@ -41,7 +43,7 @@ class Rede implements IStatusProdutor
 				{
 					for (Conexao conexao : conexoes)
 					{
-						BufferedReader leitorDados = executarInstrucaoConsole("nmcli dev wifi con " + conexao.getSSID() + " password " + conexao.getSenha());
+						BufferedReader leitorDados = util.executarInstrucaoConsole("nmcli dev wifi con " + conexao.getSSID() + " password " + conexao.getSenha());
 
 						String linhaDado;						
 						if (((linhaDado = leitorDados.readLine()) != null) && (linhaDado.contains(MSG_CRIAR_SUCESSO) || linhaDado.contains(MSG_CONECTAR_SUCESSO)))
@@ -76,7 +78,7 @@ class Rede implements IStatusProdutor
 
 	public void desconectar()
 	{
-		BufferedReader leitorDados = executarInstrucaoConsole("nmcli --t --f \"CONNECTION\" dev");
+		BufferedReader leitorDados = util.executarInstrucaoConsole("nmcli --t --f \"CONNECTION\" dev");
 		
 		String linhaDado;
 
@@ -84,7 +86,7 @@ class Rede implements IStatusProdutor
 		{
 			if ((linhaDado = leitorDados.readLine()) != null)
 			{
-				executarInstrucaoConsole("nmcli con down id " + linhaDado);
+				util.executarInstrucaoConsole("nmcli con down id " + linhaDado);
 				statusMudou(Status.Semaforo.Verde);
 			}
 		}
@@ -135,7 +137,7 @@ class Rede implements IStatusProdutor
 	private List<Conexao> listar()
 	{
 		List<Conexao> conexoesAtivas = new ArrayList<Conexao>();
-		BufferedReader leitorDados = executarInstrucaoConsole("nmcli --t --f \"SSID, MODE, CHAN, RATE, SIGNAL, SECURITY, ACTIVE\" dev wifi");
+		BufferedReader leitorDados = util.executarInstrucaoConsole("nmcli --t --f \"SSID, MODE, CHAN, RATE, SIGNAL, SECURITY, ACTIVE\" dev wifi");
 		
 		String linhaDado;
 
@@ -161,32 +163,6 @@ class Rede implements IStatusProdutor
 		}
 
 		return (conexoesAtivas);
-	}
-
-	private BufferedReader executarInstrucaoConsole(String instrucao)	
-	{
-		ProcessBuilder contrutorProcessos = new ProcessBuilder("bash", "-c", instrucao);
-		contrutorProcessos.redirectErrorStream(true);
-		BufferedReader leitorDados = null;
-
-		try
-		{
-			Process processo = contrutorProcessos.start();
-			leitorDados = new BufferedReader(new InputStreamReader(processo.getInputStream()));
-			statusMudou(Status.Semaforo.Verde);
-		}
-		catch (SocketException excecao)
-		{
-			statusMudou(Status.Semaforo.Vermelho);
-			Erro.registrar(excecao);
-		}
-		catch (IOException excecao)
-		{
-			statusMudou(Status.Semaforo.Vermelho);
-			Erro.registrar(excecao);
-		}
-		
-		return (leitorDados);
 	}
 
 	public Status getStatus()
