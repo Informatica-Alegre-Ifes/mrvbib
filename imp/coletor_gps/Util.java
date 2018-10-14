@@ -206,7 +206,7 @@ class Util implements IStatusProdutor
 		return (radianos * 180 / Math.PI);
 	}
 
-	private BufferedReader executarInstrucaoConsole(String instrucao)	
+	public BufferedReader executarInstrucaoConsole(String instrucao)	
 	{
 		ProcessBuilder contrutorProcessos = new ProcessBuilder("bash", "-c", instrucao);
 		contrutorProcessos.redirectErrorStream(true);
@@ -234,7 +234,7 @@ class Util implements IStatusProdutor
 
 	public String obterEnderecoMAC()
 	{
-		String enderecoMAC;
+		String enderecoMAC = null;
 		BufferedReader leitorDados = executarInstrucaoConsole("/sbin/ifconfig | grep HWaddr | awk '$1 ~ /^wl/ {print $5}'");		
 
 		try
