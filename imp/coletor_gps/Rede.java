@@ -6,7 +6,6 @@ import java.util.Enumeration;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
 
 class Rede implements IStatusProdutor
