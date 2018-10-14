@@ -241,7 +241,7 @@ class Util implements IStatusProdutor
 		{
 			if ((enderecoMAC = leitorDados.readLine()) != null)
 			{
-				enderecoMAC.toUpperCase().replace(":", "-");
+				enderecoMAC = enderecoMAC.toUpperCase().replace(":", "-");
 				statusMudou(Status.Semaforo.Verde);
 			}
 			else
