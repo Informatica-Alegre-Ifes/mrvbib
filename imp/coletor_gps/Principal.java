@@ -23,18 +23,6 @@ class Principal
 		inicializar();
 	}
 
-	private static void inicializar()
-	{
-		conexoes = new ArrayList<Conexao>();
-		conexoes.add(new Conexao("NUCLEO", "nucleo#123."));
-		conexoes.add(new Conexao("CAYO", "abc@123."));
-
-		porta = "/dev/ttyS0";
-		sentencaNMEA = "$GPRMC";
-		intervaloMedicao = 27000;
-		minimaDistanciaCoordenadas = 3;
-	}
-
 	public static void main(String[] args) throws InterruptedException
 	{
 		GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
@@ -42,7 +30,7 @@ class Principal
 		Serial serial = Serial.obterInstancia(porta, new Status(gerenteStatus));
 		Persistencia persistencia = new Persistencia(new Status(gerenteStatus));
 		Util util = new Util(new Status(gerenteStatus));
-		Rede rede = new Rede(conexoes, new Status(gerenteStatus));
+		Rede rede = new Rede(conexoes, util, new Status(gerenteStatus));
 		ColetorWebClient coletorWebClient = new ColetorWebClient(new Status(gerenteStatus));
 		ColetorGPS coletorGPS = new ColetorGPS(serial, sentencaNMEA, new Status(gerenteStatus));
 		ComunicacaoMovel comunicacaoMovel = new ComunicacaoMovel(serial, new Status(gerenteStatus));
@@ -69,8 +57,21 @@ class Principal
 				}
 				else
 					comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "201.140.234.76", 8080, "cadastrodadogps.php", dado.gerarHTTPQueryString());
+				
 				Thread.sleep(intervaloMedicao);
 			}
 		}
+	}
+
+	private static void inicializar()
+	{
+		conexoes = new ArrayList<Conexao>();
+		conexoes.add(new Conexao("NUCLEO", "nucleo#123."));
+		conexoes.add(new Conexao("CAYO", "abc@123."));
+
+		porta = "/dev/ttyS0";
+		sentencaNMEA = "$GPRMC";
+		intervaloMedicao = 27000;
+		minimaDistanciaCoordenadas = 300;
 	}
 }
