@@ -67,6 +67,7 @@ class ComunicacaoMovel implements IStatusProdutor
 		instrucoesAT.add(new InstrucaoAT("GET /" + documento + "?" + parametros + " HTTP/1.0" + "\r\n", 1000));
 		instrucoesAT.add(new InstrucaoAT("HOST: " + endereco + "\r\n\r\n", 2000));
 		instrucoesAT.add(new InstrucaoAT("\u001a", 3000));
+		instrucoesAT.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 2000));
 
 		try
 		{
