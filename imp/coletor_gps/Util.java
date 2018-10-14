@@ -251,7 +251,7 @@ class Util implements IStatusProdutor
 		}
 		finally
 		{
-			return (enderecoMAC.replace(':', '-'));
+			return (enderecoMAC.replace(":", "-"));
 		}
 	}
 
