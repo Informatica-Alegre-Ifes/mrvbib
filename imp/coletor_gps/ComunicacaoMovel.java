@@ -68,7 +68,6 @@ class ComunicacaoMovel implements IStatusProdutor
 		instrucoesAT.add(new InstrucaoAT("HOST: " + endereco + "\r\n\r\n", 5000));
 		instrucoesAT.add(new InstrucaoAT("\u001a", 5000));
 		instrucoesAT.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 2000));
-		instrucoesAT.add(new InstrucaoAT("AT+CIPSHUT" + "\r\n", 1000));
 
 		try
 		{
