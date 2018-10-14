@@ -67,7 +67,8 @@ class ComunicacaoMovel implements IStatusProdutor
 		instrucoesAT.add(new InstrucaoAT("GET /" + documento + "?" + parametros + " HTTP/1.0" + "\r\n", 1000));
 		instrucoesAT.add(new InstrucaoAT("HOST: " + endereco + "\r\n\r\n", 5000));
 		instrucoesAT.add(new InstrucaoAT("\u001a", 5000));
-		instrucoesAT.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 1000));
+		instrucoesAT.add(new InstrucaoAT("AT+CIPCLOSE" + "\r\n", 2000));
+		instrucoesAT.add(new InstrucaoAT("AT+CIPSHUT" + "\r\n", 1000));
 
 		try
 		{
@@ -76,7 +77,6 @@ class ComunicacaoMovel implements IStatusProdutor
 			Led.acenderLedRoxo();
 			for (InstrucaoAT instrucaoAT : instrucoesAT)
 			{
-				System.out.println(instrucaoAT.getInstrucao());
 				streamSaida.write(instrucaoAT.getInstrucao().getBytes());
 				streamSaida.flush();
 				Thread.sleep(instrucaoAT.getPeriodo());
