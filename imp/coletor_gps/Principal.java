@@ -50,12 +50,12 @@ class Principal
 			{
 				dado.salvar();
 				rede.setDadoReferencia(dado);
-				// if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < minimaDistanciaCoordenadas && rede.conectar())
-				// {
-				// 	coletorWebClient.carregar(dado.listar());
-				// 	rede.desconectar();
-				// }
-				// else
+				if (dado.calcularDistanciaGeografica2D(rede.getDadoReferencia()) < minimaDistanciaCoordenadas && rede.conectar())
+				{
+					coletorWebClient.carregar(dado.listar());
+					rede.desconectar();
+				}
+				else
 					comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "201.140.234.76", 8080, "cadastrodadogps.php", dado.gerarHTTPQueryString());
 				
 				Thread.sleep(intervaloMedicao);
@@ -72,6 +72,6 @@ class Principal
 		porta = "/dev/ttyS0";
 		sentencaNMEA = "$GPRMC";
 		intervaloMedicao = 27000;
-		minimaDistanciaCoordenadas = 100;
+		minimaDistanciaCoordenadas = 200;
 	}
 }
