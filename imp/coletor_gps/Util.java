@@ -235,7 +235,7 @@ class Util implements IStatusProdutor
 	public String obterEnderecoMAC()
 	{
 		String enderecoMAC = null;
-		BufferedReader leitorDados = executarInstrucaoConsole("/sbin/ifconfig | grep ether | awk {print $2}'");		
+		BufferedReader leitorDados = executarInstrucaoConsole("/sbin/ifconfig | grep ether | awk '{print $2}'");		
 
 		try
 		{
@@ -251,7 +251,7 @@ class Util implements IStatusProdutor
 		}
 		finally
 		{
-			return (enderecoMAC);
+			return (enderecoMAC.replace(':', '-'));
 		}
 	}
 
