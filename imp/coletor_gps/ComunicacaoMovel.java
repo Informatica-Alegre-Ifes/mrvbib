@@ -76,6 +76,7 @@ class ComunicacaoMovel implements IStatusProdutor
 			Led.acenderLedRoxo();
 			for (InstrucaoAT instrucaoAT : instrucoesAT)
 			{
+				System.out.println(instrucaoAT.getInstrucao());
 				streamSaida.write(instrucaoAT.getInstrucao().getBytes());
 				streamSaida.flush();
 				Thread.sleep(instrucaoAT.getPeriodo());
