@@ -204,27 +204,45 @@ class Util implements IStatusProdutor
 		return (radianos * 180 / Math.PI);
 	}
 
-	public String obterEnderecoMAC()
+	private BufferedReader executarInstrucaoConsole(String instrucao)	
 	{
-		String enderecoMAC = "";
+		ProcessBuilder contrutorProcessos = new ProcessBuilder("bash", "-c", instrucao);
+		contrutorProcessos.redirectErrorStream(true);
+		BufferedReader leitorDados = null;
 
 		try
 		{
-			Enumeration<NetworkInterface> interfacesRede = NetworkInterface.getNetworkInterfaces();
-
-			while (interfacesRede.hasMoreElements())
-			{
-				NetworkInterface rede = interfacesRede.nextElement();
-				byte[] bytesEnderecoMAC = rede.getHardwareAddress();
-
-				if (bytesEnderecoMAC != null)
-					for (int i = 0; i < bytesEnderecoMAC.length; ++i)
-						enderecoMAC += String.format("%02X%s", bytesEnderecoMAC[i], (i < bytesEnderecoMAC.length - 1) ? "-" : "");
-			}
-
+			Process processo = contrutorProcessos.start();
+			leitorDados = new BufferedReader(new InputStreamReader(processo.getInputStream()));
 			statusMudou(Status.Semaforo.Verde);
 		}
 		catch (SocketException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		catch (IOException excecao)
+		{
+			statusMudou(Status.Semaforo.Vermelho);
+			Erro.registrar(excecao);
+		}
+		
+		return (leitorDados);
+	}
+
+	public String obterEnderecoMAC()
+	{
+		String enderecoMAC;
+		BufferedReader leitorDados = executarInstrucaoConsole("/sbin/ifconfig | grep HWaddr | awk '$1 ~ /^wl/ {print $5}'");		
+
+		try
+		{
+			if ((enderecoMAC = leitorDados.readLine()) != null)
+				statusMudou(Status.Semaforo.Verde);
+			else
+				statusMudou(Status.Semaforo.Amarelo);
+		}
+		catch (IOException excecao)
 		{
 			statusMudou(Status.Semaforo.Vermelho);
 			Erro.registrar(excecao);
