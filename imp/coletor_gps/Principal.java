@@ -56,7 +56,7 @@ class Principal
 					rede.desconectar();
 				}
 				else
-					comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "201.140.234.76", 8080, "cadastrodadogps.php", dado.gerarHTTPQueryString());
+					comunicacaoMovel.enviarMensagemHTTP("zap.vivo.com.br", "201.140.235.94", 8080, "cadastrodadogps.php", dado.gerarHTTPQueryString());
 				
 				Thread.sleep(intervaloMedicao);
 			}
