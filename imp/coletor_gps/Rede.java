@@ -31,7 +31,7 @@ class Rede implements IStatusProdutor
 
 		try
 		{
-			if (existeRedeSSIDs(conexoesAtivas))
+			if (conexoesAtivas != null && existeRedeSSIDs(conexoesAtivas))
 			{
 				if (estahConectado())
 				{
@@ -135,30 +135,34 @@ class Rede implements IStatusProdutor
 
 	private List<Conexao> listar()
 	{
-		List<Conexao> conexoesAtivas = new ArrayList<Conexao>();
+		List<Conexao> conexoesAtivas = null;
 		BufferedReader leitorDados = util.executarInstrucaoConsole("nmcli --t --f \"SSID, MODE, CHAN, RATE, SIGNAL, SECURITY, ACTIVE\" dev wifi");
 		
 		String linhaDado;
 
-		try
+		if (leitorDados != null)
 		{
-			while ((linhaDado = leitorDados.readLine()) != null)
+			conexoesAtivas = new ArrayList<Conexao>();
+			try
 			{
-				Conexao conexaoAtiva = new Conexao();
-				conexaoAtiva.construir(linhaDado);
-				conexoesAtivas.add(conexaoAtiva);
+				while ((linhaDado = leitorDados.readLine()) != null)
+				{
+					Conexao conexaoAtiva = new Conexao();
+					conexaoAtiva.construir(linhaDado);
+					conexoesAtivas.add(conexaoAtiva);
+				}
+				statusMudou(Status.Semaforo.Verde);
 			}
-			statusMudou(Status.Semaforo.Verde);
-		}
-		catch (NumberFormatException excecao)
-		{
-			statusMudou(Status.Semaforo.Amarelo);
-			Erro.registrar(excecao);
-		}
-		catch (IOException excecao)
-		{
-			statusMudou(Status.Semaforo.Vermelho);
-			Erro.registrar(excecao);
+			catch (NumberFormatException excecao)
+			{
+				statusMudou(Status.Semaforo.Amarelo);
+				Erro.registrar(excecao);
+			}
+			catch (IOException excecao)
+			{
+				statusMudou(Status.Semaforo.Vermelho);
+				Erro.registrar(excecao);
+			}
 		}
 
 		return (conexoesAtivas);
