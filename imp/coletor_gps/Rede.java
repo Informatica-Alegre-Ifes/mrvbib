@@ -53,11 +53,13 @@ class Rede implements IStatusProdutor
 							break;
 						}
 					}
-				}	
+					if (!conectou)
+						statusMudou(Status.Semaforo.Amarelo);
+				}
 			}
-
-			if (!conectou)
-				statusMudou(Status.Semaforo.Amarelo);
+			else
+				statusMudou(Status.Semaforo.Verde);
+				
 		}
 		catch (SocketException excecao)
 		{
