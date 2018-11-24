@@ -59,7 +59,6 @@ class Rede implements IStatusProdutor
 			}
 			else
 				statusMudou(Status.Semaforo.Verde);
-				
 		}
 		catch (SocketException excecao)
 		{
