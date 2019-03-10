@@ -8,3 +8,16 @@ Servidor de dados Estatísticos e Probabilísticos:
 
 	Este módulo é serviço web (Web Service) que será responsável por fornecer um conjunto de métodos que fornecerão informações estatísticas e probabilísticas a respeito dos veículos de interesse.
 	Estas informações serão geradas através de modelos de inferências estatísticas e lógicas probabilísticas, com os dados obtidos pelo módulo Coletor de Dados GPS.
+
+	1. INSTALAR
+		
+		Java SDK:
+			- sudo apt-get install oracle-java8-jdk;
+
+	2. COMPILAR
+
+		javac -Xlint --add-modules java.xml.ws servidor_estatisticas/servicos/ColetorWebService.java
+
+	3. EXECUTAR
+		
+ 		java --add-modules java.xml.ws servidor_estatisticas.servicos.ColetorWebService
