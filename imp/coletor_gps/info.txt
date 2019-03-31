@@ -27,13 +27,16 @@ Coletor de dados GPS:
 		d) RXTX Library:
 			- sudo apt-get install librxtx-java
 
-		d) Pi4J:
-			- sudo dpkg -i pi4j-1.1.deb (diretório ~/recursos);
+		d) WiringPI
+			- tar xvf wiringPi_2.46.tgz && sudo ./wiringPi-8d188fa/build && sudo ldconfig (diretório ~/recursos/);
 
-		e) VIM (VIsual iMproved):
+		e) Pi4J:
+			- sudo dpkg -i pi4j-1.1.deb (diretório ~/recursos/);
+
+		f) VIM (VIsual iMproved):
 			- sudo apt-get install vim;
 
-		f) Network Manager
+		g) Network Manager
 			- sudo apt-get install network-manager;
 			- sudo vim /etc/network/interfaces (edite este arquivo, comentando-o exatamente como abaixo):
 				auto lo
