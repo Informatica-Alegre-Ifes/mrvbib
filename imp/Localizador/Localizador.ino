@@ -3,7 +3,7 @@
 #include "Semaforo.h"
 #include "Status.h"
 
-GerenteStatus gerenteStatus;
+GerenteStatus gerenteStatus = GerenteStatus.obterInstancia();
 Persistencia persistencia("dado_gps.txt", 4, Status(gerenteStatus));
 Dado dado(2, 3, Status(gerenteStatus));
 
