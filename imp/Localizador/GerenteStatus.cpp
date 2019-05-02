@@ -8,7 +8,7 @@ GerenteStatus::GerenteStatus() {
 GerenteStatus *
 GerenteStatus::obterInstancia()
 {
-        if (instancia == 0 )
+        if (instancia == 0)
                 instancia = new GerenteStatus();
         return (instancia);
 }
