@@ -14,7 +14,6 @@ public:
         String toHTTPQueryString(void);
         bool estahDisponivel(void);
         SoftwareSerial *getSoftwareSerial(void);
-Status status;
 private:
         SoftwareSerial *softwareSerial;
         TinyGPSPlus gps;
@@ -24,6 +23,7 @@ private:
         double velocidade;
         uint32_t data;
         uint32_t hora;
+        Status status;
         
         bool disponivel;
 

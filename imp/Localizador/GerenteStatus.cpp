@@ -1,14 +1,30 @@
 #include "GerenteStatus.h"
 
+GerenteStatus* GerenteStatus::instancia = 0;
+
 GerenteStatus::GerenteStatus() {
 }
 
-GerenteStatus &
-GerenteStatus::getInstance()
+GerenteStatus *
+GerenteStatus::obterInstancia()
 {
-        if (instancia.get() == 0 )
-        {
-                instancia.reset(new GerenteStatus());
-        }
-        return *instancia;
+        if (instancia == 0 )
+                instancia = new GerenteStatus();
+        return (instancia);
+}
+
+void
+GerenteStatus::atualizarStatusGlobal(IStatusProdutor &produtor) {
+  
+}
+
+void
+GerenteStatus::adicionar(IStatusProdutor &produtor) {
+        produtores.push_back(produtor);
+}
+
+void
+GerenteStatus::notificar(Semaforo semaforo) {
+        for (IStatusProdutor& produtor : produtores)
+                produtor.statusMudou(semaforo);
 }

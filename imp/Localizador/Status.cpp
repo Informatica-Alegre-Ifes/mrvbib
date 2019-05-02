@@ -1,6 +1,6 @@
 #include "Status.h"
 
-Status::Status(GerenteStatus gerenteStatus) {
+Status::Status(GerenteStatus *gerenteStatus) {
         this->gerenteStatus = gerenteStatus;
         semaforo = Semaforo::NORMAL;
         pinMode(5, OUTPUT);

@@ -8,7 +8,7 @@
 class Status
 {
 public:
-        Status(GerenteStatus gerenteStatus);
+        Status(GerenteStatus *gerenteStatus);
 
 //        informar(Semaforo semaforo) {
 //                switch (semaforo)
@@ -30,7 +30,7 @@ public:
         void setSemaforo(Semaforo semaforo);
 
 private:
-        GerenteStatus gerenteStatus;
+        GerenteStatus *gerenteStatus;
         Semaforo semaforo;
 
 };
