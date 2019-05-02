@@ -6,6 +6,8 @@
 #include "IStatusProdutor.h"
 #include "IStatusConsumidor.h"
 
+using namespace std;
+
 class GerenteStatus : public IStatusConsumidor
 {
 public:
@@ -18,7 +20,7 @@ public:
 
 private:
         static GerenteStatus *instancia;
-        std::vector<std::reference_wrapper<IStatusProdutor>> produtores;
+        vector<reference_wrapper<IStatusProdutor>> produtores;
         Semaforo semaforoStatusGlobal;
 };
 
