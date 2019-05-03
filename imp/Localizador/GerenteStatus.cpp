@@ -8,7 +8,6 @@ GerenteStatus::GerenteStatus(int quantidade_produtores) {
         produtores = new IStatusProdutor *[quantidade_produtores];
         semaforoStatusGlobal = Semaforo::ATENCAO;
         notificar(semaforoStatusGlobal);
-        Serial.println("Inicializando o GerenteStatus...");
 }
 
 GerenteStatus::~GerenteStatus() {
