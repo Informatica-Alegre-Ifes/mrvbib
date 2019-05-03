@@ -5,17 +5,21 @@
 #include <SD.h>
 #include "Status.h"
 
-class Persistencia
+class Persistencia : public IStatusProdutor
 {
 public:
-        Persistencia(String nomeArquivo, uint8_t pino, Status status);
+        Persistencia(String nomeArquivo, uint8_t pino, Status *status);
+        ~Persistencia();
+        
         void inicializar(void);
         bool salvar(String strHTTPQueryString);
         void listar(void);
+        virtual Status *getStatus(void) override;
+        virtual void statusMudou(Semaforo) override;
 
 private:
       File arquivo;
-      Status status;
+      Status *status;
       String nomeArquivo;
       uint8_t pino;
 };

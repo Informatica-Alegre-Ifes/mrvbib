@@ -5,15 +5,19 @@
 #include "TinyGPS++.h"
 #include "Status.h"
 
-class Dado
+class Dado : public IStatusProdutor
 {
 public:
-        Dado(uint8_t pinoRX, uint8_t pinoTX, Status status);
+        Dado(uint8_t pinoRX, uint8_t pinoTX, Status *status);
+        ~Dado();
 
         void construir(void);        
         String toHTTPQueryString(void);
         bool estahDisponivel(void);
         SoftwareSerial *getSoftwareSerial(void);
+        virtual Status *getStatus(void) override;
+        virtual void statusMudou(Semaforo) override;
+        
 private:
         SoftwareSerial *softwareSerial;
         TinyGPSPlus gps;
@@ -23,7 +27,7 @@ private:
         double velocidade;
         uint32_t data;
         uint32_t hora;
-        Status status;
+        Status *status;
         
         bool disponivel;
 

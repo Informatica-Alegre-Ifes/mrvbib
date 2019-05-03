@@ -1,9 +1,15 @@
 #include "Dado.h"
 
-Dado::Dado(uint8_t pinoRX, uint8_t pinoTX, Status status) : status(status) {
+Dado::Dado(uint8_t pinoRX, uint8_t pinoTX, Status *status) : status(status) {
         softwareSerial = new SoftwareSerial(pinoRX, pinoTX);
         this->status = status;
         disponivel = false;
+        softwareSerial->begin(9600);
+}
+
+Dado::~Dado() {
+        delete softwareSerial;
+        delete status;
 }
 
 SoftwareSerial *
@@ -19,9 +25,11 @@ Dado::construir(void) {
         if (atualizou()) {
                 preencher();
                 disponivel = true;
+                statusMudou(Semaforo::NORMAL);
         }
         else {
                 disponivel = false;
+                statusMudou(Semaforo::ALERTA);
         }
 }
 
@@ -48,4 +56,15 @@ Dado::preencher(void) {
         velocidade = gps.speed.kmph();
         data = gps.date.value();
         hora = gps.time.value();
+}
+
+Status *
+Dado::getStatus(void) {
+        return (status);
+}
+
+void
+Dado::statusMudou(Semaforo semaforo) {
+        status->setSemaforo(semaforo);
+        status->notificarGerente(dynamic_cast<IStatusProdutor&>(*this));
 }

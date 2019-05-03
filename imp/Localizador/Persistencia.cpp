@@ -1,9 +1,13 @@
 #include "Persistencia.h"
 
-Persistencia::Persistencia(String nomeArquivo, uint8_t pino, Status status) : status(status) {
+Persistencia::Persistencia(String nomeArquivo, uint8_t pino, Status *status) : status(status) {
         this->nomeArquivo = nomeArquivo;
         this->pino = pino;
         this->status = status;
+}
+
+Persistencia::~Persistencia() {
+        delete status;
 }
 
 void
@@ -20,10 +24,11 @@ Persistencia::salvar(String strHTTPQueryString) {
         if (arquivo) {
                 arquivo.println(strHTTPQueryString);
                 arquivo.close();
+                statusMudou(Semaforo::NORMAL);
                 return (true);
         }
         else {
-                // Piscar LED Vermelho
+                statusMudou(Semaforo::ATENCAO);
                 return (false);
         }
 }
@@ -40,4 +45,15 @@ Persistencia::listar(void) {
                         Serial.write(arquivo.read());
                 arquivo.close();
         }
+}
+
+Status *
+Persistencia::getStatus(void) {
+        return (status);
+}
+
+void
+Persistencia::statusMudou(Semaforo semaforo) {
+        status->setSemaforo(semaforo);
+        status->notificarGerente(dynamic_cast<IStatusProdutor&>(*this));
 }
