@@ -2,6 +2,7 @@
 #include "Persistencia.h"
 #include "Semaforo.h"
 #include "Status.h"
+#include "Util.h"
 
 GerenteStatus *gerenteStatus = GerenteStatus::obterInstancia(2);
 Persistencia persistencia("dado_gps.txt", 4, new Status(gerenteStatus));
@@ -22,11 +23,6 @@ void loop() {
                 persistencia.salvar(dado.toHTTPQueryString());
                 persistencia.listar();
                 delay(29000);
-                limparBufferSerial();
+                Util::limparBufferSerial();
         }
-}
-
-void limparBufferSerial() {
-        while (Serial.available())
-                Serial.read();
 }
